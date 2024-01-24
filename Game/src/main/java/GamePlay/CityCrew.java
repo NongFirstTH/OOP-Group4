@@ -6,6 +6,7 @@ public class CityCrew {
     private int currow;
 
     public CityCrew() {
+        //aaa
     }
 
     public int[][] getLocation() {
