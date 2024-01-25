@@ -1,5 +1,4 @@
 package GamePlay;
-
 public class Region {
     private int rows;
     private int cols;
