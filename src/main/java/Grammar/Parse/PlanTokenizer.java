@@ -38,7 +38,7 @@ public class PlanTokenizer implements Tokenizer{
 
     @Override
     public boolean peek(String s) {
-        if (hasNextToken()) return false;
+        if (!hasNextToken()) return false;
         return peek().equals(s);
     }
 
@@ -69,7 +69,7 @@ public class PlanTokenizer implements Tokenizer{
 
         if (isCharacter(c)) {
             s.append(c);
-            for (pos++; pos < src.length() && isCharacter(src.charAt(pos)); pos++)
+            for (pos++; pos < src.length() && isAlphanumericCharacters(src.charAt(pos)); pos++)
                 s.append(src.charAt(pos));
         }
         else if (isDigit(c)) {  // start of number
@@ -86,6 +86,10 @@ public class PlanTokenizer implements Tokenizer{
             pos++;
         }else throw new SyntaxError("unknown character: " + c);
         next = s.toString();
+    }
+
+    private boolean isAlphanumericCharacters(char c) {
+        return isCharacter(c)||isDigit(c);
     }
 
     private boolean isComment(char character) {

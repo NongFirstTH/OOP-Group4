@@ -1,13 +1,15 @@
 package Grammar.Plan;
 
+import GamePlay.Player;
+import GamePlay.Territory;
 import Grammar.Expression.Expression;
 import Grammar.Plan.Plan;
 
-public class WhileStatement extends Plan {
-    private Expression expr
-    private Statement s
+import java.util.HashMap;
 
-    public WhileStatement(Expression expr, Statement s)
-    public void eval(Player p, Territory t)
+public record WhileStatement (Expression expr, Plan s) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        return true;
+    }
 }
-

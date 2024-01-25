@@ -1,7 +1,12 @@
 package Grammar.Expression;
+
+import java.util.Map;
+
 //test
-public record BinaryArithExpr(Expr left, String op, Expr right)
-        implements Expr {
-    public int eval(Map<String, Integer> bindings)
+public record BinaryArithExpr(Expression left, String op, Expression right)
+        implements Expression {
+    public int eval(Map<String, Integer> bindings) {
+        return 0;
+    }
 }
 

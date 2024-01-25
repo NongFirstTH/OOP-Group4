@@ -1,0 +1,16 @@
+package Grammar.Plan;
+
+import GamePlay.Player;
+import GamePlay.Territory;
+
+import java.util.HashMap;
+
+public record BinaryPlan(Plan p1, Plan p2) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        if (p1.eval(bindings, p ,t)) {
+            return p2.eval(bindings, p, t);
+        }
+        return false;
+    }
+}

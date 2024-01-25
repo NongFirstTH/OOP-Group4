@@ -8,16 +8,16 @@ public class Region {
     private double interest;
     private double baseinterest;
 
-    public int getDeposit()
-
-    public int getMaxDeposit()
-
-    public double depositCal()
-
-    public double interestRateCal()
-
-    public int[][] getLocation()
-
-    public Player getOwner()
+//    public int getDeposit()
+//
+//    public int getMaxDeposit()
+//
+//    public double depositCal()
+//
+//    public double interestRateCal()
+//
+//    public int[][] getLocation()
+//
+//    public Player getOwner()
 
 }

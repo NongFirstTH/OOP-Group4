@@ -1,5 +1,9 @@
 package Grammar.Expression;
 
-public record IntLit(int val) implements Expr {
-    public int eval(Map<String, Integer> bindings)
+import java.util.Map;
+
+public record IntLit(int val) implements Expression {
+    public int eval(Map<String, Integer> bindings) {
+        return 0;
+    }
 }

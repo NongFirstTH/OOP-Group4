@@ -1,10 +1,14 @@
 package Grammar.Plan;
 
+import GamePlay.Player;
+import GamePlay.Territory;
 import Grammar.Plan.Plan;
 
-public class MoveCommand extends Plan {
-    private String dir
+import java.util.HashMap;
 
-    public MoveCommand(String dir)
-    public void eval(Player p, Territory t)
+public record MoveCommand (String dir) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        return true;
+    }
 }

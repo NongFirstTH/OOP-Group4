@@ -1,14 +1,13 @@
 package Grammar.Plan;
 
+import GamePlay.Player;
+import GamePlay.Territory;
 import Grammar.Expression.Expression;
-import Grammar.Plan.Plan;
 
-public class AssignmentStatement extends Plan {
-    private String identifier;
-    private String op;
-    private Expression expr;
-
-    public AssignmentStatement(String identifier, String op, Expression expr);
-    public void eval(Player p, Territory t)
+import java.util.HashMap;
+public record AssignmentStatement (String identifier, Expression expr) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        return false;
+    }
 }
-
