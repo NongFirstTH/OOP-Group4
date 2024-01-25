@@ -1,6 +1,10 @@
 package Grammar.Plan;
 
-public class Plan Map<String, Integer> bindings
-public void eval(Player p, Territory t)
-        {
+import GamePlay.Player;
+import GamePlay.Territory;
+
+import java.util.HashMap;
+
+public interface Plan{
+    boolean eval(HashMap<String, Integer> bindings, Player p, Territory t);
 }

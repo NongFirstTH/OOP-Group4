@@ -1,12 +1,14 @@
+
 package Grammar.Plan;
-
+import GamePlay.Player;
+import GamePlay.Territory;
 import Grammar.Expression.Expression;
-import Grammar.Plan.Plan;
 
-public class AttackCommand extends Plan {
-    private String dir;
-    private Expression expr;
+import java.util.HashMap;
 
-    public AttackCommand(String dir, Expression expr)
-    public void eval(Player p, Territory t)
+public record AttackCommand (String dir, Expression expr) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        return true;
+    }
 }

@@ -1,14 +1,15 @@
 package Grammar.Plan;
 
+import GamePlay.Player;
+import GamePlay.Territory;
 import Grammar.Expression.Expression;
 import Grammar.Plan.Plan;
 
-public class IfStatement extends Plan {
-    private Expression expr
-    private Statement s1
-    private Statement s2
+import java.util.HashMap;
 
-    public IfStatement(Expression expr, Statement s1, Statement s2)
-    public void eval(Player p, Territory t)
+public record IfStatement (Expression expr, Plan s1, Plan s2) implements Plan {
+    @Override
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+        return true;
+    }
 }
-

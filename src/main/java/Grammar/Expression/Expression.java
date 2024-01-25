@@ -1,6 +1,8 @@
 package Grammar.Expression;
 
+import java.util.Map;
+
 public interface Expression {
-    public int eval(Map<String, Integer> bindings);
+    int eval(Map<String, Integer> bindings);
 }
 

@@ -11,13 +11,13 @@ public class Player {
     private Plan plan;
     private String name;
 
-    public List<Region> getRegions()
-
-    public Region getCityCenter()
-
-    public double getBudget()
-
-    public Plan getPlan()
-
-    public String getName()
+//    public List<Region> getRegions()
+//
+//    public Region getCityCenter()
+//
+//    public double getBudget()
+//
+//    public Plan getPlan()
+//
+//    public String getName()
 }
