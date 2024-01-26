@@ -1,8 +1,12 @@
 package Grammar.Expression;
 
-import java.util.Map;
+import GamePlay.Player;
+import GamePlay.Territory;
+
+import java.util.HashMap;
 
 public interface Expression {
-    int eval(Map<String, Integer> bindings);
+    int eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError;
+    void prettyPrint(StringBuilder s);
 }
 
