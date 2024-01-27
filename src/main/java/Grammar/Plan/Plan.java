@@ -7,4 +7,6 @@ import java.util.HashMap;
 
 public interface Plan{
     boolean eval(HashMap<String, Integer> bindings, Player p, Territory t);
+
+    void prettyPrint(StringBuilder s, int tab);
 }

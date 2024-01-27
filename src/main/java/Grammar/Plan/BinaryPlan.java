@@ -13,4 +13,10 @@ public record BinaryPlan(Plan p1, Plan p2) implements Plan {
         }
         return false;
     }
+
+    @Override
+    public void prettyPrint(StringBuilder s, int tab) {
+        p1.prettyPrint(s ,tab);
+        p2.prettyPrint(s ,tab);
+    }
 }

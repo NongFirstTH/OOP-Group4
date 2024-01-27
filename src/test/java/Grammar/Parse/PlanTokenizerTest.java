@@ -67,7 +67,9 @@ public class PlanTokenizerTest {
                 "if (budget - 1) then invest 1 else {}\n" +
         " ");
         assertDoesNotThrow(()->{
-            new PlanParser(p).parse();
+            StringBuilder s = new StringBuilder();
+            new PlanParser(p).parse().prettyPrint(s, 0);
+            System.out.println(s);
 //            while (p.hasNextToken()) {
 //                System.out.println(p.consume());
 //            }
