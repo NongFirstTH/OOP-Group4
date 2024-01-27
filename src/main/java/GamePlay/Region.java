@@ -11,6 +11,8 @@ interface RegionI {
     public void invest(double amount);
     public void collect(double amount);
     public void beShot(String direction, double amount);
+
+    void ownerless();
 }
 public class Region implements RegionI {
     private int rows;
@@ -72,6 +74,11 @@ public class Region implements RegionI {
 
     @Override
     public void beShot(String direction, double amount) {
+
+    }
+
+    @Override
+    public void ownerless() {
 
     }
 }
