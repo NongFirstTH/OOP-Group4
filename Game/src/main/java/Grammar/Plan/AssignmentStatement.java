@@ -8,7 +8,13 @@ public class AssignmentStatement extends Plan {
     private String op;
     private Expression expr;
 
-    public AssignmentStatement(String identifier, String op, Expression expr);
-    public void eval(Player p, Territory t)
+    public AssignmentStatement(String identifier, String op, Expression expr){
+        this.identifier = identifier;
+        this.op = op;
+        this.expr = expr;
+    }
+    public void eval(Player p, Territory t){
+
+    }
 }
 
