@@ -11,6 +11,13 @@ public class Player {
     private Plan plan;
     private String name;
 
+    public int opponent(){
+        return 0;
+    }
+    public int nearby(String direction){
+        return 0;
+    }
+
 //    public List<Region> getRegions()
 //
 //    public Region getCityCenter()

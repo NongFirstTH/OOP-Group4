@@ -15,7 +15,9 @@ public record BinaryArithExpr(Expression left, String op, Expression right) impl
         if (op.equals("*")) return lv * rv;
         if (op.equals("/")) return lv / rv;
         if (op.equals("%")) return lv % rv;
+        if (op.equals("^")) return (int) Math.pow(lv,rv);
         throw new EvalError("unknown op: " + op);
+        //Test
     }
     @Override
     public void prettyPrint(StringBuilder s) {
