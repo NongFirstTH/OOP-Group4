@@ -2,6 +2,7 @@ package Grammar.Plan;
 
 import GamePlay.Player;
 import GamePlay.Territory;
+import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
 import Grammar.Plan.Plan;
 
@@ -9,8 +10,11 @@ import java.util.HashMap;
 
 public record IfStatement (Expression expr, Plan s1, Plan s2) implements Plan {
     @Override
-    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
-        return true;
+    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+        if(expr.eval(bindings, p, t)>0) {
+            return s1.eval(bindings, p, t);
+        }
+        return s2.eval(bindings, p, t);
     }
 
     @Override
