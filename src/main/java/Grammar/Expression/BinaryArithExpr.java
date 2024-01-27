@@ -17,13 +17,14 @@ public record BinaryArithExpr(Expression left, String op, Expression right) impl
         if (op.equals("%")) return lv % rv;
         if (op.equals("^")) return (int) Math.pow(lv,rv);
         throw new EvalError("unknown op: " + op);
-        //Test
     }
     @Override
     public void prettyPrint(StringBuilder s) {
+        s.append('(');
         left.prettyPrint(s);
-        s.append(op);
+        s.append(" ").append(op).append(" ");
         right.prettyPrint(s);
+        s.append(')');
     }
 }
 

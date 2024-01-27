@@ -13,6 +13,6 @@ public record Nearby(String command, String direction) implements Expression {
     }
     @Override
     public void prettyPrint(StringBuilder s) {
-        s.append("nearby ").append(direction).append(" ");
+        s.append("nearby ").append(direction);
     }
 }
