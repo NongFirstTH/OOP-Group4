@@ -1,16 +1,17 @@
 package GamePlay;
 interface RegionI {
-    public int getDeposit();
-    public int getMaxDeposit();
-    public double depositCal();
-    public double interestRateCal();
-    public int getInterest();
-    public int getCol();
-    public int getRow();
-    public Player getOwner();
-    public void invest(double amount);
-    public void collect(double amount);
-    public void beShot(String direction, double amount);
+    int getCol();
+    int getRow();
+    int getDeposit();
+    int getInterest();
+    int getMaxDeposit();
+    void BeRelocated();
+    void beInvested(int amount);
+    void beCollected(int amount);
+    void beShot(String direction, int amount);
+    double depositCal();
+    double interestRateCal();
+    Player getOwner();
 
     void ownerless();
 }
@@ -24,13 +25,48 @@ public class Region implements RegionI {
     private double baseInterest;
 
     @Override
+    public int getCol() {
+        return 0;
+    }
+
+    @Override
+    public int getRow() {
+        return 0;
+    }
+
+    @Override
     public int getDeposit() {
+        return 0;
+    }
+
+    @Override
+    public int getInterest() {
         return 0;
     }
 
     @Override
     public int getMaxDeposit() {
         return 0;
+    }
+
+    @Override
+    public void BeRelocated() {
+
+    }
+
+    @Override
+    public void beInvested(int amount) {
+
+    }
+
+    @Override
+    public void beCollected(int amount) {
+
+    }
+
+    @Override
+    public void beShot(String direction, int amount) {
+
     }
 
     @Override
@@ -44,37 +80,8 @@ public class Region implements RegionI {
     }
 
     @Override
-    public int getInterest() {
-        return 0;
-    }
-
-    @Override
-    public int getCol(){
-        return 0;
-    }
-    @Override
-    public int getRow(){
-        return 0;
-    }
-
-    @Override
     public Player getOwner() {
         return null;
-    }
-
-    @Override
-    public void invest(double amount) {
-
-    }
-
-    @Override
-    public void collect(double amount) {
-
-    }
-
-    @Override
-    public void beShot(String direction, double amount) {
-
     }
 
     @Override
