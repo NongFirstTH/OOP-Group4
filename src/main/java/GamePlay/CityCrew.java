@@ -1,22 +1,15 @@
 package GamePlay;
 
 interface CityCrewI {
-    public int getCurcol();
-    public int getCurrow();
-    public void move(String direction);
-
+    int getCurcol();
+    int getCurrow();
     double getDeposit();
-
     double getInterest();
-
     double getMaxDeposit();
-
-    int opponent();
-
-    int nearby(String direction);
-
+    int opponent(Territory t);
+    int nearby(Territory t, String direction);
     void relocate();
-
+    void move(String direction);
     void invest(int amount);
 
     double collect(int amount);
@@ -32,6 +25,7 @@ public class CityCrew implements CityCrewI {
     public CityCrew() {
     }
 
+
     @Override
     public int getCurcol() {
         return 0;
@@ -40,11 +34,6 @@ public class CityCrew implements CityCrewI {
     @Override
     public int getCurrow() {
         return 0;
-    }
-
-    @Override
-    public void move(String direction) {
-
     }
 
     @Override
@@ -63,17 +52,22 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public int opponent() {
+    public int opponent(Territory t) {
         return 0;
     }
 
     @Override
-    public int nearby(String direction) {
+    public int nearby(Territory t, String direction) {
         return 0;
     }
 
     @Override
     public void relocate() {
+
+    }
+
+    @Override
+    public void move(String direction) {
 
     }
 

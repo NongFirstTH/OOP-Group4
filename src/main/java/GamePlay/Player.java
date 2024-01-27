@@ -19,8 +19,8 @@ interface PlayerI {
 
     double getMaxDeposit();
 
-    int opponent();
-    int nearby(String direction);
+    int opponent(Territory t);
+    int nearby(Territory t, String direction);
     //returns true when relocatable (to end turn)
     boolean relocate();
     //returns true when movable (have enough budget)
@@ -102,13 +102,13 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public int opponent() {
-        return crew.opponent();
+    public int opponent(Territory t) {
+        return crew.opponent(t);
     }
 
     @Override
-    public int nearby(String direction) {
-        return crew.nearby(direction);
+    public int nearby(Territory t, String direction) {
+        return crew.nearby(t, direction);
     }
 
     @Override
@@ -125,6 +125,7 @@ public class Player implements PlayerI {
     @Override
     public boolean move(String direction) {
         if ( budget >= 1 ) {
+            budget -= 1;
             crew.move(direction);
             return true;
         }
@@ -162,7 +163,24 @@ public class Player implements PlayerI {
     }
 
     private int minDistance() {
-        return 0;
+        return minDistance(crew.getCurrow(), crew.getCurcol(), cityCenter.getRow(), cityCenter.getCol());
+    }
+
+    public int minDistance(int i0, int j0, int i1, int j1) {
+        int iDif = Math.abs(i0-i1), jDif = Math.abs(j0-j1);;
+        if (jDif==0) return Math.abs(i0-i1);
+        int max_iDif = jDif/2;
+
+        if (jDif%2!=0) {
+            if (j0%2==0 && i1>i0)
+                max_iDif+=1;
+            else if (j0%2==1 && i1<i0)
+                max_iDif+=1;
+        }
+        System.out.println(i1+","+j1+" = "+ max_iDif);
+        if (max_iDif>=iDif) return jDif;
+
+        return jDif+iDif-max_iDif;
     }
 
     @Override
