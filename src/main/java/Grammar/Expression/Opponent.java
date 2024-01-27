@@ -13,6 +13,6 @@ public record Opponent(String command) implements Expression {
     }
     @Override
     public void prettyPrint(StringBuilder s) {
-        s.append("opponent ");
+        s.append("opponent");
     }
 }
