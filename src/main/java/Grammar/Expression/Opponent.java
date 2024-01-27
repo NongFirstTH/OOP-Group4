@@ -9,10 +9,10 @@ import java.util.Map;
 public record Opponent(String command) implements Expression {
     @Override
     public int eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
-        return 0;
+        return p.opponent();
     }
     @Override
     public void prettyPrint(StringBuilder s) {
-
+        s.append("opponent ");
     }
 }

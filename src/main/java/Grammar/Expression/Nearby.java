@@ -9,15 +9,10 @@ import java.util.Map;
 public record Nearby(String command, String direction) implements Expression {
     @Override
     public int eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
-//        int x = distance enemy from citycrew
-//       int y = digit deposit that region
-//        if(){
-//
-//        }
-        return  0;
+        return  p.nearby(direction);
     }
     @Override
     public void prettyPrint(StringBuilder s) {
-
+        s.append("nearby ").append(direction).append(" ");
     }
 }
