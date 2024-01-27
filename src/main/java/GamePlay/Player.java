@@ -170,16 +170,13 @@ public class Player implements PlayerI {
         int iDif = Math.abs(i0-i1), jDif = Math.abs(j0-j1);;
         if (jDif==0) return Math.abs(i0-i1);
         int max_iDif = jDif/2;
-
         if (jDif%2!=0) {
-            if (j0%2==0 && i1>i0)
+            if (j0%2==0 && i1<i0)
                 max_iDif+=1;
-            else if (j0%2==1 && i1<i0)
+            else if (j0%2==1 && i1>i0)
                 max_iDif+=1;
         }
-        System.out.println(i1+","+j1+" = "+ max_iDif);
         if (max_iDif>=iDif) return jDif;
-
         return jDif+iDif-max_iDif;
     }
 
