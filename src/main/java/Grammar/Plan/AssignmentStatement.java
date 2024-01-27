@@ -10,4 +10,11 @@ public record AssignmentStatement (String identifier, Expression expr) implement
     public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
         return false;
     }
+
+    @Override
+    public void prettyPrint(StringBuilder s, int tab) {
+        s.append("\t".repeat(Math.max(0, tab))).append(identifier).append(" = ");
+        expr.prettyPrint(s);
+        s.append("\n");
+    }
 }

@@ -11,4 +11,9 @@ public record MoveCommand (String dir) implements Plan {
     public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
         return true;
     }
+
+    @Override
+    public void prettyPrint(StringBuilder s, int tab) {
+        s.append("\t".repeat(Math.max(0, tab))).append("move ").append(dir).append("\n");
+    }
 }

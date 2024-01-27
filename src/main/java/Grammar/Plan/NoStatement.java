@@ -10,4 +10,8 @@ public record NoStatement() implements Plan {
     public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
         return true;
     }
+
+    @Override
+    public void prettyPrint(StringBuilder s, int tab) {
+    }
 }
