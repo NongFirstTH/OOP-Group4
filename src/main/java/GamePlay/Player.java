@@ -5,23 +5,32 @@ import Grammar.Plan.Plan;
 import java.util.List;
 
 interface PlayerI {
-    public List<Region> getRegions();
-    public Region getCityCenter();
-    public Plan getPlan();
-    public String getName();
-    public int getCurcol();
-    public int getCurrow();
-    public double getBudget();
-    public int opponent();
-    public int nearby(String direction);
+    List<Region> getRegions();
+    Region getCityCenter();
+    Plan getPlan();
+    String getName();
+    int getCol();
+    int getRow();
+    int getCurcol();
+    int getCurrow();
+    double getBudget();
+    double getDeposit();
+    double getInterest();
+
+    double getMaxDeposit();
+
+    int opponent();
+    int nearby(String direction);
     //returns true when relocatable (to end turn)
-    public boolean relocate();
-    //returns true when not have enough budget
-    public boolean move();
-    public void invest(double amount);
-    //returns true when not have enough budget
-    public boolean collect(double amount);
-    public void shoot(String direction, double  amount);
+    boolean relocate();
+    //returns true when movable (have enough budget)
+    boolean move(String direction);
+    void invest(int amount);
+    //returns true when collectable (have enough budget)
+    boolean collect(int amount);
+    void shoot(String direction, int  amount);
+    //returns true if lost region is the city center
+    void lostRegion(Region region);
 }
 
 public class Player implements PlayerI {
@@ -53,6 +62,16 @@ public class Player implements PlayerI {
     }
 
     @Override
+    public int getCol() {
+        return cityCenter.getCol();
+    }
+
+    @Override
+    public int getRow() {
+        return cityCenter.getRow();
+    }
+
+    @Override
     public int getCurcol() {
         return crew.getCurcol();
     }
@@ -68,38 +87,91 @@ public class Player implements PlayerI {
     }
 
     @Override
+    public double getDeposit() {
+        return crew.getDeposit();
+    }
+
+    @Override
+    public double getInterest() {
+        return crew.getInterest();
+    }
+
+    @Override
+    public double getMaxDeposit() {
+        return crew.getMaxDeposit();
+    }
+
+    @Override
     public int opponent() {
-        return 0;
+        return crew.opponent();
     }
 
     @Override
     public int nearby(String direction) {
-
-        return 0;
+        return crew.nearby(direction);
     }
 
     @Override
     public boolean relocate() {
+        int cost = 5 * minDistance() + 10;
+        if ( budget >= cost ) {
+            budget-=cost;
+            crew.relocate();
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean move() {
+    public boolean move(String direction) {
+        if ( budget >= 1 ) {
+            crew.move(direction);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public void invest(double amount) {
-
+    public void invest(int amount) {
+        int cost = amount + 1;
+        if ( budget >= cost ) {
+            budget -= cost;
+            crew.invest(amount);
+        } else {
+            budget = (budget >= 1) ? (budget - 1) : 0;
+        }
     }
 
     @Override
-    public boolean collect(double amount) {
-        return false;
+    public boolean collect(int amount) {
+        if (budget<1) return false;
+        budget -= 1;
+        budget += crew.collect(amount);
+        // If the deposit becomes zero after the collection, the player loses the possession of that region.
+        return true;
     }
 
     @Override
-    public void shoot(String direction, double amount) {
+    public void shoot(String direction, int amount) {
+        int cost = amount + 1;
+        if (budget >= cost) {
+            crew.shoot(direction, amount);
+        }
+        //If the deposit becomes less than one, the opponent loses ownership of that region.
+        //if the target region is a city center, and the attack reduces its deposit to zero, the attacked player loses the game.
+    }
 
+    private int minDistance() {
+        return 0;
+    }
+
+    @Override
+    public void lostRegion(Region region) {
+        regions.remove(region);
+        if (region == cityCenter) {
+            for (Region r:regions) {
+                r.ownerless();
+            }
+        }
     }
 }

@@ -4,6 +4,24 @@ interface CityCrewI {
     public int getCurcol();
     public int getCurrow();
     public void move(String direction);
+
+    double getDeposit();
+
+    double getInterest();
+
+    double getMaxDeposit();
+
+    int opponent();
+
+    int nearby(String direction);
+
+    void relocate();
+
+    void invest(int amount);
+
+    double collect(int amount);
+
+    void shoot(String direction, int amount);
 }
 
 public class CityCrew implements CityCrewI {
@@ -26,6 +44,51 @@ public class CityCrew implements CityCrewI {
 
     @Override
     public void move(String direction) {
+
+    }
+
+    @Override
+    public double getDeposit() {
+        return 0;
+    }
+
+    @Override
+    public double getInterest() {
+        return 0;
+    }
+
+    @Override
+    public double getMaxDeposit() {
+        return 0;
+    }
+
+    @Override
+    public int opponent() {
+        return 0;
+    }
+
+    @Override
+    public int nearby(String direction) {
+        return 0;
+    }
+
+    @Override
+    public void relocate() {
+
+    }
+
+    @Override
+    public void invest(int amount) {
+
+    }
+
+    @Override
+    public double collect(int amount) {
+        return 0;
+    }
+
+    @Override
+    public void shoot(String direction, int amount) {
 
     }
 }
