@@ -19,7 +19,7 @@ public class BinaryArithExprTest {
         HashMap<String,Integer> m = new HashMap<>();
         Player p1 = new Player();
         Territory t = new Territory();
-        int result = e.parse().eval(m,p1,t);
+        double result = e.parse().eval(m,p1,t);
         assertEquals(513,result);
     }
 
