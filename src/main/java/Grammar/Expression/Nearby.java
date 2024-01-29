@@ -4,11 +4,10 @@ import GamePlay.Player;
 import GamePlay.Territory;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public record Nearby(String command, String direction) implements Expression {
     @Override
-    public int eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public double eval(HashMap<String, Integer> bindings, Player p, Territory t){
         return  p.nearby(t, direction);
     }
     @Override
