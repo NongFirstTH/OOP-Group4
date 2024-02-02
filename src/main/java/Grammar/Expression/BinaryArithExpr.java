@@ -3,11 +3,11 @@ package Grammar.Expression;
 import GamePlay.Player;
 import GamePlay.Territory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record BinaryArithExpr(Expression left, String op, Expression right) implements Expression {
     @Override
-    public double eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public double eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
         double lv = left.eval(bindings,p,t);
         double rv = right.eval(bindings,p,t);
         switch (op) {

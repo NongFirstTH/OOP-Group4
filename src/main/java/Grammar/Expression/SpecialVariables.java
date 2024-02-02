@@ -1,12 +1,12 @@
 package Grammar.Expression;
 import GamePlay.Player;
 import GamePlay.Territory;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 record SpecialVariables(String var) implements Expression {
     @Override
-    public double eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public double eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
         switch (var){
             case "rows" -> {
                 return p.getRow();

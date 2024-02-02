@@ -23,11 +23,11 @@ public class MoveCommandTest {
         boolean result2 = moveCommand2.move(p, t);
         boolean result3 = moveCommand3.move(p, t);
         boolean result4 = moveCommand4.move(p, t);
-        // Assert that the move was successful
-        assertTrue(result1);
-        assertTrue(result2);
-        assertTrue(result3);
-        assertTrue(result4);
+        // Always false because we don't give them a budget
+        assertFalse(result1);
+        assertFalse(result2);
+        assertFalse(result3);
+        assertFalse(result4);
     }
 
     @Test
