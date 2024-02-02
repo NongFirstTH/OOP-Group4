@@ -24,7 +24,7 @@ interface PlayerI {
     //returns true when relocatable (to end turn)
     boolean relocate();
     //returns true when movable (have enough budget)
-    boolean move(String direction);
+    boolean move(String direction, Territory t);
     void invest(int amount);
     //returns true when collectable (have enough budget)
     boolean collect(int amount);
@@ -123,10 +123,12 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean move(String direction) {
+    public boolean move(String direction, Territory t) {
+        if (crew.ownerMoveTo(direction, t)!=this)
+            return true;
         if ( budget >= 1 ) {
             budget -= 1;
-            crew.move(direction);
+            crew.move(direction, t);
             return true;
         }
         return false;

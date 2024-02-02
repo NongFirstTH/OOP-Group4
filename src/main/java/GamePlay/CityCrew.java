@@ -9,7 +9,9 @@ interface CityCrewI {
     int opponent(Territory t);
     int nearby(Territory t, String direction);
     void relocate();
-    void move(String direction);
+    Player ownerMoveTo(String direction, Territory t);
+
+    void move(String direction, Territory t);
     void invest(int amount);
 
     double collect(int amount);
@@ -67,7 +69,12 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void move(String direction) {
+    public Player ownerMoveTo(String direction, Territory t) {
+        return null;
+    }
+
+    @Override
+    public void move(String direction, Territory t) {
 
     }
 
