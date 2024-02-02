@@ -1,5 +1,7 @@
 package GamePlay;
 
+import Grammar.Plan.Direction;
+
 interface CityCrewI {
     int getCurcol();
     int getCurrow();
@@ -7,33 +9,33 @@ interface CityCrewI {
     double getInterest();
     double getMaxDeposit();
     int opponent(Territory t);
-    int nearby(Territory t, String direction);
+    int nearby(Territory t, Direction direction);
     void relocate();
-    void move(String direction);
+    void move(Direction direction);
     void invest(int amount);
 
     double collect(int amount);
 
-    void shoot(String direction, int amount);
+    void shoot(Direction direction, int amount);
 }
 
 public class CityCrew implements CityCrewI {
-    private int curcol;
-    //return current column of crew
     private int currow;
+    private int curcol;
 
-    public CityCrew() {
+    public CityCrew(int currow, int curcol) {
+        this.currow = currow;
+        this.curcol = curcol;
     }
-
 
     @Override
     public int getCurcol() {
-        return 0;
+        return curcol;
     }
 
     @Override
     public int getCurrow() {
-        return 0;
+        return currow;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public int nearby(Territory t, String direction) {
+    public int nearby(Territory t, Direction direction) {
         return 0;
     }
 
@@ -67,7 +69,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void move(String direction) {
+    public void move(Direction direction) {
 
     }
 
@@ -82,7 +84,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void shoot(String direction, int amount) {
+    public void shoot(Direction direction, int amount) {
 
     }
 }

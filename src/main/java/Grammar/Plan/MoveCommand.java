@@ -5,7 +5,7 @@ import GamePlay.Territory;
 
 import java.util.HashMap;
 
-public record MoveCommand (String dir) implements Plan {
+public record MoveCommand (Direction dir) implements Plan {
     @Override
     public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
         return true;

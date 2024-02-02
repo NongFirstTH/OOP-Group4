@@ -1,4 +1,7 @@
 package GamePlay;
+
+import Grammar.Plan.Direction;
+
 interface RegionI {
     int getCol();
     int getRow();
@@ -8,7 +11,7 @@ interface RegionI {
     void BeRelocated();
     void beInvested(int amount);
     void beCollected(int amount);
-    void beShot(String direction, int amount);
+    void beShot(Direction direction, int amount);
     double depositCal();
     double interestRateCal();
     Player getOwner();
@@ -65,7 +68,7 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void beShot(String direction, int amount) {
+    public void beShot(Direction direction, int amount) {
 
     }
 
