@@ -3,11 +3,12 @@ package Grammar.Plan;
 import GamePlay.Player;
 import GamePlay.Territory;
 
-import java.util.HashMap;
+import java.util.Map;
+
 
 public record MoveCommand (Direction dir) implements Plan {
     @Override
-    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) {
         return true;
     }
 
@@ -17,7 +18,6 @@ public record MoveCommand (Direction dir) implements Plan {
     }
 
     public boolean move(Player player, Territory territory) {
-        String direction = dir.toLowerCase();
-        return player.move(direction);
+        return player.move(dir);
     }
 }
