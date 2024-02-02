@@ -18,6 +18,6 @@ public record MoveCommand (Direction dir) implements Plan {
     }
 
     public boolean move(Player player, Territory territory) {
-        return player.move(dir);
+        return player.move(dir,territory);
     }
 }
