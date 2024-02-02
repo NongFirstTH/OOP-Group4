@@ -3,11 +3,11 @@ package Grammar.Plan;
 import GamePlay.Player;
 import GamePlay.Territory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record NoStatement() implements Plan {
     @Override
-    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) {
         return true;
     }
 

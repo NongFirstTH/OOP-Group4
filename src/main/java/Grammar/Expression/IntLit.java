@@ -3,11 +3,11 @@ package Grammar.Expression;
 import GamePlay.Player;
 import GamePlay.Territory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record IntLit(int val) implements Expression {
     @Override
-    public double eval(HashMap<String, Integer> bindings, Player p, Territory t) {
+    public double eval(Map<String, Integer> bindings, Player p, Territory t) {
         return val;
     }
     @Override

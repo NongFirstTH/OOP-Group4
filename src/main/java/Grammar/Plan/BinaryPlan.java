@@ -4,11 +4,11 @@ import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record BinaryPlan(Plan p1, Plan p2) implements Plan {
     @Override
-    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
         if (p1.eval(bindings, p ,t)) {
             return p2.eval(bindings, p, t);
         }

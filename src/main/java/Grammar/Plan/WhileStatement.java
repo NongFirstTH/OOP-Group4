@@ -6,11 +6,11 @@ import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
 import Grammar.Plan.Plan;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public record WhileStatement (Expression expr, Plan s1) implements Plan {
     @Override
-    public boolean eval(HashMap<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
         while( expr.eval(bindings, p, t)>0 ) {
             if(!s1.eval(bindings, p, t)) {
                 return false;
