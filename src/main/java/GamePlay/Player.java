@@ -1,5 +1,6 @@
 package GamePlay;
 
+import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
 import java.util.List;
@@ -20,15 +21,15 @@ interface PlayerI {
     double getMaxDeposit();
 
     int opponent(Territory t);
-    int nearby(Territory t, String direction);
+    int nearby(Territory t, Direction direction);
     //returns true when relocatable (to end turn)
     boolean relocate();
     //returns true when movable (have enough budget)
-    boolean move(String direction);
+    boolean move(Direction direction);
     void invest(int amount);
     //returns true when collectable (have enough budget)
     boolean collect(int amount);
-    void shoot(String direction, int  amount);
+    void shoot(Direction direction, int  amount);
     //returns true if lost region is the city center
     void lostRegion(Region region);
 }
@@ -107,7 +108,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public int nearby(Territory t, String direction) {
+    public int nearby(Territory t, Direction direction) {
         return crew.nearby(t, direction);
     }
 
@@ -123,7 +124,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean move(String direction) {
+    public boolean move(Direction direction) {
         if ( budget >= 1 ) {
             budget -= 1;
             crew.move(direction);
@@ -153,7 +154,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void shoot(String direction, int amount) {
+    public void shoot(Direction direction, int amount) {
         int cost = amount + 1;
         if (budget >= cost) {
             crew.shoot(direction, amount);
