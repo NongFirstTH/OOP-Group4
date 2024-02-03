@@ -7,28 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 interface PlayerI {
-    List<Region> getRegions();
     Region getCityCenter(Territory t);
     Plan getPlan();
+    void setPlan(Plan p);
     String getName();
-    int getCol();
     int getRow();
-    int getCurcol();
+    int getCol();
     int getCurrow();
+    int getCurcol();
     long getBudget();
     double getDeposit();
     long getInterest();
-
     long getMaxDeposit();
-
-    int opponent(Territory t);
-    int nearby(Territory t, Direction direction);
+    long opponent(Territory t);
+    long nearby(Territory t, Direction direction);
     //returns true when relocatable (to end turn)
     boolean relocate();
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t);
   
-    void invest(int amount);
+    void invest(long amount);
     //returns true when collectable (have enough budget)
     boolean collect(long amount);
     void shoot(Direction direction, int  amount);
@@ -38,7 +36,6 @@ interface PlayerI {
 
 public class Player implements PlayerI {
     private String name;
-    private final List<Region> regions = new ArrayList<>();
     private final int[] cityCenter = new int[2];
     private final CityCrew crew;
     private long budget;
@@ -49,12 +46,6 @@ public class Player implements PlayerI {
         cityCenter[0] = row;
         cityCenter[1] = col;
         this.budget = budget;
-        regions.add(t.getRegions(row, col));
-    }
-
-    @Override
-    public List<Region> getRegions() {
-        return regions;
     }
 
     @Override
@@ -68,17 +59,22 @@ public class Player implements PlayerI {
     }
 
     @Override
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
     @Override
-    public int getCol() {
+    public int getRow() {
         return cityCenter[0];
     }
 
     @Override
-    public int getRow() {
+    public int getCol() {
         return cityCenter[1];
     }
 
@@ -113,18 +109,18 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public int opponent(Territory t) {
+    public long opponent(Territory t) {
         return crew.opponent(t);
     }
 
     @Override
-    public int nearby(Territory t, Direction direction) {
+    public long nearby(Territory t, Direction direction) {
         return crew.nearby(t, direction);
     }
 
     @Override
     public boolean relocate() {
-        int cost = 5 * minDistance() + 10;
+        long cost = 5 * minDistance() + 10;
         if ( budget >= cost ) {
             budget-=cost;
             crew.relocate();
@@ -135,10 +131,12 @@ public class Player implements PlayerI {
 
     @Override
     public boolean move(Direction direction, Territory t) {
-        if (crew.ownerMoveTo(direction, t)==null&&crew.ownerMoveTo(direction, t)!=this)
-            return true;
-        if ( budget >= 1 ) {
-            budget -= 1;
+        long cost = 1;
+        Player owner = crew.ownerMoveTo(direction, t);
+        if ( budget >= cost ) {
+            budget -= cost;
+            if (owner!=null && owner!=this)
+                return true;
             crew.move(direction, t);
             return true;
         }
@@ -146,40 +144,44 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void invest(int amount) {
-        int cost = amount + 1;
+    public void invest(long amount) {
+        long cost = amount + 1;
         if ( budget >= cost ) {
             budget -= cost;
             crew.invest(amount);
         } else {
-            budget = (budget >= 1) ? (budget - 1) : 0;
+            budget = Math.max(budget - 1, 0);
         }
     }
 
     @Override
     public boolean collect(long amount) {
-        if (budget<1) return false;
-        budget -= 1;
-        budget += crew.collect(amount);
-        // If the deposit becomes zero after the collection, the player loses the possession of that region.
-        return true;
+         long cost = 1;
+         if (budget>=cost) {
+             budget -= cost;
+             budget += crew.collect(amount);
+             // If the deposit becomes zero after the collection, the player loses the possession of that region.
+             return true;
+         }
+        return false;
     }
 
     @Override
     public void shoot(Direction direction, int amount) {
-        int cost = amount + 1;
+        long cost = amount + 1;
         if (budget >= cost) {
+            budget -= cost;
             crew.shoot(direction, amount);
         }
         //If the deposit becomes less than one, the opponent loses ownership of that region.
         //if the target region is a city center, and the attack reduces its deposit to zero, the attacked player loses the game.
     }
 
-    private int minDistance() {
+    private long minDistance() {
         return minDistance(crew.getCurrow(), crew.getCurcol(), cityCenter[0], cityCenter[1]);
     }
 
-    public int minDistance(int i0, int j0, int i1, int j1) {
+    public long minDistance(int i0, int j0, int i1, int j1) {
         int iDif = Math.abs(i0-i1), jDif = Math.abs(j0-j1);;
         if (jDif==0) return Math.abs(i0-i1);
         int max_iDif = jDif/2;
@@ -195,11 +197,7 @@ public class Player implements PlayerI {
 
     @Override
     public void lostRegion(Region region, Territory t) {
-        regions.remove(region);
         if (region == getCityCenter(t)) {
-            for (Region r:regions) {
-                r.ownerless();
-            }
         }
     }
 }

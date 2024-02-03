@@ -8,19 +8,19 @@ interface CityCrewI {
     double getDeposit();
     long getInterest();
     long getMaxDeposit();
-    int opponent(Territory t);
-    int nearby(Territory t, Direction direction);
+    long opponent(Territory t);
+    long nearby(Territory t, Direction direction);
     void relocate();
   
     Player ownerMoveTo(Direction direction, Territory t);
 
     void move(Direction direction, Territory t);
   
-    void invest(int amount);
+    void invest(long amount);
 
     long collect(long amount);
 
-    void shoot(Direction direction, int amount);
+    void shoot(Direction direction, long amount);
 }
 
 public class CityCrew implements CityCrewI {
@@ -58,12 +58,12 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public int opponent(Territory t) {
+    public long opponent(Territory t) {
         return 0;
     }
 
     @Override
-    public int nearby(Territory t, Direction direction) {
+    public long nearby(Territory t, Direction direction) {
         return 0;
     }
 
@@ -83,7 +83,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void invest(int amount) {
+    public void invest(long amount) {
 
     }
 
@@ -93,7 +93,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void shoot(Direction direction, int amount) {
+    public void shoot(Direction direction, long amount) {
 
     }
 }
