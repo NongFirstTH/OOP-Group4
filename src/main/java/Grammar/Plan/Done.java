@@ -7,7 +7,7 @@ import java.util.Map;
 
 public record Done () implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
+    public boolean eval(Player p, Territory t) {
         return false;
     }
 

@@ -7,7 +7,7 @@ import Grammar.Expression.Expression;
 import java.util.Map;
 public record AssignmentStatement (String identifier, Expression expr) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
+    public boolean eval(Player p, Territory t) {
         return false;
     }
 

@@ -2,9 +2,6 @@ package Grammar.Expression;
 
 import GamePlay.Player;
 import GamePlay.Territory;
-import Grammar.Parse.ExpressionParser;
-import Grammar.Parse.PlanTokenizer;
-import Grammar.Parse.SyntaxError;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -12,7 +9,8 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpecialVariablesTest {
+class VariableTest {
+
     long evalResult(String src) throws EvalError {
         Variable v = new Variable(src);
         Territory t = new Territory(20,20);

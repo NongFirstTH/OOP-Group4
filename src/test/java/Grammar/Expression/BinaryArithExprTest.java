@@ -16,10 +16,9 @@ public class BinaryArithExprTest {
     public double result(String src) throws SyntaxError, EvalError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
-        Map<String,Long> m = new HashMap<>();
         Territory t = new Territory(20,20);
         Player p1 = new Player(10,1,2,t);
-        return e.parse().eval(m,p1,t);
+        return e.parse().eval(p1,t);
     }
     @Test
     public void TestOperators() throws SyntaxError, EvalError {
@@ -33,7 +32,7 @@ public class BinaryArithExprTest {
     }
 
     @Test
-    public void TestThrowsEvalError() throws SyntaxError{
+    public void TestThrows() throws SyntaxError{
         assertThrows(SyntaxError.class,()->result("1@2"));
         assertThrows(EvalError.class,()->result("1//3"));
     }

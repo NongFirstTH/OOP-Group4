@@ -8,7 +8,7 @@ import java.util.Map;
 
 public record Nearby(String command, Direction direction) implements Expression {
     @Override
-    public long eval(Map<String, Long> bindings, Player p, Territory t){
+    public long eval(Player p, Territory t){
         return  p.nearby(t, direction);
     }
     @Override

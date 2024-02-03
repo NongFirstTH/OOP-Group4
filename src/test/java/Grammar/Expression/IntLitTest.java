@@ -15,10 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IntLitTest {
     public long result(long num) throws SyntaxError, EvalError {
         IntLit a = new IntLit(num);
-        Map<String,Long> m = new HashMap<>();
         Territory t = new Territory(20,20);
         Player p1 = new Player(10,1,2,t);
-        return a.eval(m,p1,t);
+        return a.eval(p1,t);
     }
     @Test
     public void TestEval() throws SyntaxError, EvalError {
@@ -27,4 +26,17 @@ public class IntLitTest {
         assertEquals(100000000,result(100000000));
     }
 
+    public String resultPrettyPrint(long num){
+        IntLit a = new IntLit(num);
+        StringBuilder s = new StringBuilder();
+        a.prettyPrint(s);
+        return s.toString();
+    }
+    @Test
+    public  void TestPrettyPrint(){
+        assertEquals("2",resultPrettyPrint(2));
+        assertEquals("-2",resultPrettyPrint(-2));
+        assertEquals("6541232",resultPrettyPrint(6541232));
+        assertEquals("-6541232",resultPrettyPrint(-6541232));
+    }
 }

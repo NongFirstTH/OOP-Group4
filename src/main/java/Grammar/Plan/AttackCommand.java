@@ -9,8 +9,8 @@ import java.util.Map;
 
 public record AttackCommand (Direction dir, Expression expr) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
-        p.shoot(dir, expr.eval(bindings, p, t));
+    public boolean eval(Player p, Territory t) throws EvalError {
+        p.shoot(dir, expr.eval(p, t));
         return true;
     }
 
