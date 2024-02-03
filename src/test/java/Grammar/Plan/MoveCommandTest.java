@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
+import static Grammar.Plan.Direction.*;
 import static org.junit.Assert.*;
 
 public class MoveCommandTest {
@@ -16,19 +17,20 @@ public class MoveCommandTest {
         Territory t = new Territory(20,20);
         Player p = new Player(100,1,1,t);
         // Create a MoveCommand instance with a valid direction
-        MoveCommand moveCommand1 = new MoveCommand(Direction.down);
-        MoveCommand moveCommand2 = new MoveCommand(Direction.up);
-        MoveCommand moveCommand3 = new MoveCommand(Direction.downright);
-        MoveCommand moveCommand4 = new MoveCommand(Direction.upright);
-        MoveCommand moveCommand5 = new MoveCommand(Direction.upleft);
-        MoveCommand moveCommand6 = new MoveCommand(Direction.downleft);
+        MoveCommand moveCommand1 = new MoveCommand(down);
+        MoveCommand moveCommand2 = new MoveCommand(up);
+        MoveCommand moveCommand3 = new MoveCommand(downright);
+        MoveCommand moveCommand4 = new MoveCommand(upright);
+        MoveCommand moveCommand5 = new MoveCommand(upleft);
+        MoveCommand moveCommand6 = new MoveCommand(downleft);
         // Perform the move
-//        boolean result1 = moveCommand1.eval(new HashMap<>(), p, t);
-//        boolean result2 = moveCommand2.eval(new HashMap<>(),p, t);
-//        boolean result3 = moveCommand3.eval(new HashMap<>(), p, t);
-//        boolean result4 = moveCommand4.eval(new HashMap<>(), p, t);
-//        boolean result5 = moveCommand5.eval(new HashMap<>(), p, t);
-//        boolean result6 = moveCommand6.eval(new HashMap<>(), p, t);
+
+        boolean result1 = moveCommand1.eval(p, t);
+        boolean result2 = moveCommand2.eval(p, t);
+        boolean result3 = moveCommand3.eval(p, t);
+        boolean result4 = moveCommand4.eval(p, t);
+        boolean result5 = moveCommand5.eval(p, t);
+        boolean result6 = moveCommand6.eval(p, t);
         // Always false because we don't give them a budget
 //        assertTrue(result1);
 //        assertTrue(result2);

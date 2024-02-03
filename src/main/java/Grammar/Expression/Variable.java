@@ -40,7 +40,7 @@ public record Variable(String name) implements Expression {
         }
         if (p.bindings().containsKey(name))
             return p.bindings().get(name);
-        throw new EvalError("undefined variable: " + name);
+        return 0;
     }
     @Override
     public void prettyPrint(StringBuilder s) {

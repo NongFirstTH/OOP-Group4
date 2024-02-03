@@ -5,7 +5,7 @@ import GamePlay.Territory;
 
 import java.util.Map;
 
-public record Opponent(String command) implements Expression {
+public record Opponent() implements Expression {
     @Override
     public long eval(Player p, Territory t){
         return p.opponent(t);
