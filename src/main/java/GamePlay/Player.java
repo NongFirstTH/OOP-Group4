@@ -8,7 +8,7 @@ import java.util.List;
 
 interface PlayerI {
     List<Region> getRegions();
-    Region getCityCenter();
+    Region getCityCenter(Territory t);
     Plan getPlan();
     String getName();
     int getCol();
@@ -30,25 +30,26 @@ interface PlayerI {
   
     void invest(int amount);
     //returns true when collectable (have enough budget)
-    boolean collect(int amount);
+    boolean collect(long amount);
     void shoot(Direction direction, int  amount);
     //returns true if lost region is the city center
-    void lostRegion(Region region);
+    void lostRegion(Region region, Territory t);
 }
 
 public class Player implements PlayerI {
     private String name;
-    private List<Region> regions = new ArrayList<>();
-    private final Region cityCenter;
+    private final List<Region> regions = new ArrayList<>();
+    private final int[] cityCenter = new int[2];
     private final CityCrew crew;
     private long budget;
     private Plan plan;
 
      public Player(long budget, int row, int col, Territory t) {
         crew = new CityCrew(row, col);
-        cityCenter = t.getRegions(row, col);
+        cityCenter[0] = row;
+        cityCenter[1] = col;
         this.budget = budget;
-        regions.add(cityCenter);
+        regions.add(t.getRegions(row, col));
     }
 
     @Override
@@ -57,8 +58,8 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public Region getCityCenter() {
-        return cityCenter;
+    public Region getCityCenter(Territory t) {
+        return t.getRegions(cityCenter[0], cityCenter[1]);
     }
 
     @Override
@@ -73,12 +74,12 @@ public class Player implements PlayerI {
 
     @Override
     public int getCol() {
-        return cityCenter.getCol();
+        return cityCenter[0];
     }
 
     @Override
     public int getRow() {
-        return cityCenter.getRow();
+        return cityCenter[1];
     }
 
     @Override
@@ -156,7 +157,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean collect(int amount) {
+    public boolean collect(long amount) {
         if (budget<1) return false;
         budget -= 1;
         budget += crew.collect(amount);
@@ -175,7 +176,7 @@ public class Player implements PlayerI {
     }
 
     private int minDistance() {
-        return minDistance(crew.getCurrow(), crew.getCurcol(), cityCenter.getRow(), cityCenter.getCol());
+        return minDistance(crew.getCurrow(), crew.getCurcol(), cityCenter[0], cityCenter[1]);
     }
 
     public int minDistance(int i0, int j0, int i1, int j1) {
@@ -193,9 +194,9 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void lostRegion(Region region) {
+    public void lostRegion(Region region, Territory t) {
         regions.remove(region);
-        if (region == cityCenter) {
+        if (region == getCityCenter(t)) {
             for (Region r:regions) {
                 r.ownerless();
             }

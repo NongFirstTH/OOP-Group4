@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlanTokenizerTest {
+public class ParsePlanTest {
     @Test
     public void test() throws SyntaxError {
         PlanTokenizer p = new PlanTokenizer(
@@ -66,13 +66,10 @@ public class PlanTokenizerTest {
                 "# city crew on a region belonging to nobody, so claim it\n" +
                 "if (budget - 1) then invest 1 else {}\n" +
         " ");
+        StringBuilder s = new StringBuilder();
         assertDoesNotThrow(()->{
-            StringBuilder s = new StringBuilder();
             new PlanParser(p).parse().prettyPrint(s, 0);
             System.out.println(s);
-//            while (p.hasNextToken()) {
-//                System.out.println(p.consume());
-//            }
         }
         );
     }
