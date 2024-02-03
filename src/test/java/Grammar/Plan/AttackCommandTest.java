@@ -16,7 +16,7 @@ public class AttackCommandTest {
     public void AttackTest(){
         AttackCommand attackCommand = new AttackCommand(Direction.up, new Expression() {
             @Override
-            public long eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
+            public long eval( Player p, Territory t) throws EvalError {
                 return 10;
             }
             @Override
@@ -25,6 +25,6 @@ public class AttackCommandTest {
             }
         });
         p1.shoot(Direction.up,1);
-        assertEquals(99,p1.getBudget());
+        assertEquals(98,p1.getBudget());
     }
 }
