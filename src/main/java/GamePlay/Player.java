@@ -38,10 +38,17 @@ interface PlayerI {
 public class Player implements PlayerI {
     private String name;
     private List<Region> regions;
-    private Region cityCenter;
-    private CityCrew crew;
+    private final Region cityCenter;
+    private final CityCrew crew;
     private double budget;
     private Plan plan;
+
+    Player(double budget, int row, int col, Territory t) {
+        crew = new CityCrew(row, col);
+        cityCenter = t.getRegions(row, col);
+        this.budget = budget;
+        regions.add(cityCenter);
+    }
 
     @Override
     public List<Region> getRegions() {
