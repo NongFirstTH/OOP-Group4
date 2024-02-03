@@ -40,9 +40,7 @@ public class BinaryArithExprTest {
     String printResult(String src) throws SyntaxError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
-        Map<String,Long> m = new HashMap<>();
         Territory t = new Territory(20,20);
-        Player p1 = new Player(10,1,2,t);
         StringBuilder s = new StringBuilder();
         e.parse().prettyPrint(s);
         return s.toString();
