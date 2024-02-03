@@ -6,7 +6,7 @@ import Grammar.Expression.EvalError;
 
 import java.util.Map;
 
-public record BinaryPlan(Plan p1, Plan p2) implements Plan {
+public record StatementPair(Plan p1, Plan p2) implements Plan {
     @Override
     public boolean eval(Player p, Territory t) throws EvalError {
         if (p1.eval(p ,t)) {
