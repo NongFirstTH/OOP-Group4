@@ -13,32 +13,41 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpecialVariablesTest {
-    public double result(String var) throws SyntaxError, EvalError {
-        PlanTokenizer p = new PlanTokenizer(var);
-        ExpressionParser e = new ExpressionParser(p);
-        Map<String,Integer> m = new HashMap<>();
-//        m.put(var,0);
+    long evalResult(String src) throws EvalError {
+        Variable v = new Variable(src);
+        Map<String,Long> m = new HashMap<>();
         Territory t = new Territory(20,20);
-        Player p1 = new Player(10,1,1,t);
-        return e.parse().eval(m,p1,t);
+        Player p1 = new Player(10,2,3,t);
+        return v.eval(m,p1,t);
     }
     @Test
-    public void TestThrowsEvalError() throws SyntaxError, EvalError {
-        Variable v = new Variable("rows");
-        Map<String,Integer> m = new HashMap<>();
-        Territory t = new Territory(20,20);
-        Player p1 = new Player(10,2,1,t);
-        assertEquals(2,v.eval(m,p1,t));
+    public void TestReadVar() throws EvalError {
+        assertEquals(2,evalResult("rows"));
+        assertEquals(3,evalResult("cols"));
+        assertEquals(2,evalResult("currow"));
+        assertEquals(3,evalResult("curcol"));
+        assertEquals(10,evalResult("budget"));
+        assertEquals(0,evalResult("deposit"));
+        assertEquals(0,evalResult("interest"));
+        assertEquals(0,evalResult("maxdeposit"));
     }
-//    @Test
-//    public void TestEvalRandom() throws EvalError {
-//        SpecialVariables s = new SpecialVariables("random");
-//        HashMap<String,Integer> m = new HashMap<>();
-//        Player p = new Player();
-//        Territory t = new Territory();
-//        double result = s.eval(m,p,t);
-//        for(int i = 0;i<1000;i++){
-//            assertTrue(result >= 0 && result<=1000);
-//        }
-//    }
+    @Test
+    public void TestEvalRandom() throws EvalError {
+        Variable s = new Variable("random");
+        HashMap<String,Long> m = new HashMap<>();
+        Territory t = new Territory(20,20);
+        Player p1 = new Player(10,1,1,t);
+        double result = s.eval(m,p1,t);
+        for(int i = 0;i<1000;i++){
+            assertTrue(result >= 0 && result<=1000);
+        }
+    }
+
+    @Test
+    public  void TestPrettyPrint(){
+        Variable v = new Variable("random");
+        StringBuilder s = new StringBuilder();
+        v.prettyPrint(s);
+        assertEquals("random",s.toString());
+    }
 }

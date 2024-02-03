@@ -16,7 +16,7 @@ public class AttackCommandTest {
     public void AttackTest(){
         AttackCommand attackCommand = new AttackCommand(Direction.up, new Expression() {
             @Override
-            public long eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
+            public long eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
                 return 10;
             }
             @Override

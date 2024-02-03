@@ -7,7 +7,7 @@ import java.util.Random;
 
 public record Variable(String name) implements Expression {
     @Override
-    public long eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public long eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
         switch (name){
             case "rows" -> {
                 return p.getRow();
