@@ -10,8 +10,14 @@ import java.util.Map;
 
 public record RegionCommand (String command, Expression expr) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
-        return true;
+    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
+        if(command.equals("invest")){
+            p.invest(expr.eval(bindings, p, t));
+            return true;
+        }else if(command.equals("collect")){
+            return p.collect(expr.eval(bindings, p, t));
+        }
+        throw new EvalError("Undefined Region Command: " + command);
     }
 
     @Override
@@ -19,16 +25,6 @@ public record RegionCommand (String command, Expression expr) implements Plan {
         s.append("\t".repeat(Math.max(0, tab))).append(command).append(" ");
         expr.prettyPrint(s);
         s.append("\n");
-    }
-    public void executeCommand(Map<String, Long> bindings, Player player, Territory territory) throws EvalError {
-        switch(command){
-            case "invest" ->{
-                player.invest((int)expr.eval(bindings, player, territory));
-            }
-            case "collect" -> {
-                player.collect(expr.eval(bindings, player, territory));
-            }
-        }
     }
 }
 
