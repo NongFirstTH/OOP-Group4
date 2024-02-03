@@ -40,7 +40,6 @@ public class BinaryArithExprTest {
     String printResult(String src) throws SyntaxError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
-        Territory t = new Territory(20,20);
         StringBuilder s = new StringBuilder();
         e.parse().prettyPrint(s);
         return s.toString();
