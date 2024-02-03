@@ -3,38 +3,28 @@ package GamePlay;
 import Grammar.Plan.Direction;
 
 interface RegionI {
-    int getDeposit();
-    int getInterest();
-    int getMaxDeposit();
+    double deposit();
+    long getInterest();
     void BeRelocated();
-    void beInvested(int amount);
-    void beCollected(int amount);
-    void beShot(Direction direction, int amount);
+    void beInvested(long amount);
+    void beCollected(long amount);
+    void beShot(Direction direction, long amount);
     double depositCal();
     double interestRateCal();
     Player getOwner();
-
-    void ownerless();
 }
 public class Region implements RegionI {
     private Player owner;
-    private double maxDeposit;
     private double deposit;
     private double interest;
-    private double baseInterest;
 
     @Override
-    public int getDeposit() {
+    public double deposit() {
         return 0;
     }
 
     @Override
-    public int getInterest() {
-        return 0;
-    }
-
-    @Override
-    public int getMaxDeposit() {
+    public long getInterest() {
         return 0;
     }
 
@@ -44,17 +34,17 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void beInvested(int amount) {
+    public void beInvested(long amount) {
 
     }
 
     @Override
-    public void beCollected(int amount) {
+    public void beCollected(long amount) {
 
     }
 
     @Override
-    public void beShot(Direction direction, int amount) {
+    public void beShot(Direction direction, long amount) {
 
     }
 
@@ -73,8 +63,4 @@ public class Region implements RegionI {
         return null;
     }
 
-    @Override
-    public void ownerless() {
-
-    }
 }
