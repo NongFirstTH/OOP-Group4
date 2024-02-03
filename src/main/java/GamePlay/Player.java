@@ -4,7 +4,9 @@ import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 interface PlayerI {
     Region getCityCenter(Territory t);
@@ -19,6 +21,7 @@ interface PlayerI {
     double getDeposit();
     long getInterest();
     long getMaxDeposit();
+    Map<String, Long> bindings();
     long opponent(Territory t);
     long nearby(Territory t, Direction direction);
     //returns true when relocatable (to end turn)
@@ -40,6 +43,7 @@ public class Player implements PlayerI {
     private final CityCrew crew;
     private long budget;
     private Plan plan;
+    private final Map<String, Long> bindings = new HashMap<>();
 
      public Player(long budget, int row, int col, Territory t) {
         crew = new CityCrew(row, col);
@@ -106,6 +110,11 @@ public class Player implements PlayerI {
     @Override
     public long getMaxDeposit() {
         return crew.getMaxDeposit();
+    }
+
+    @Override
+    public Map<String, Long> bindings() {
+        return bindings;
     }
 
     @Override
