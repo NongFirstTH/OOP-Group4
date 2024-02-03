@@ -7,7 +7,7 @@ import java.util.Map;
 
 public record Opponent(String command) implements Expression {
     @Override
-    public double eval(Map<String, Integer> bindings, Player p, Territory t){
+    public long eval(Map<String, Integer> bindings, Player p, Territory t){
         return p.opponent(t);
     }
     @Override

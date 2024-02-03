@@ -6,8 +6,8 @@ interface CityCrewI {
     int getCurcol();
     int getCurrow();
     double getDeposit();
-    double getInterest();
-    double getMaxDeposit();
+    long getInterest();
+    long getMaxDeposit();
     int opponent(Territory t);
     int nearby(Territory t, Direction direction);
     void relocate();
@@ -48,12 +48,12 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public double getInterest() {
+    public long getInterest() {
         return 0;
     }
 
     @Override
-    public double getMaxDeposit() {
+    public long getMaxDeposit() {
         return 0;
     }
 
