@@ -10,7 +10,6 @@ interface CityCrewI {
     long getMaxDeposit();
     long opponent(Territory t);
     long nearby(Territory t, Direction direction);
-    void relocate();
   
     Player ownerMoveTo(Direction direction, Territory t);
 
@@ -65,11 +64,6 @@ public class CityCrew implements CityCrewI {
     @Override
     public long nearby(Territory t, Direction direction) {
         return 0;
-    }
-
-    @Override
-    public void relocate() {
-
     }
 
     @Override
