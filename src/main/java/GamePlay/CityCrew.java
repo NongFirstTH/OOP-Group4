@@ -18,7 +18,7 @@ interface CityCrewI {
   
     void invest(int amount);
 
-    double collect(int amount);
+    long collect(long amount);
 
     void shoot(Direction direction, int amount);
 }
@@ -88,7 +88,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public double collect(int amount) {
+    public long collect(long amount) {
         return 0;
     }
 

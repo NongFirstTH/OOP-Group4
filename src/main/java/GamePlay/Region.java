@@ -3,8 +3,6 @@ package GamePlay;
 import Grammar.Plan.Direction;
 
 interface RegionI {
-    int getCol();
-    int getRow();
     int getDeposit();
     int getInterest();
     int getMaxDeposit();
@@ -19,23 +17,11 @@ interface RegionI {
     void ownerless();
 }
 public class Region implements RegionI {
-    private int rows;
-    private int cols;
     private Player owner;
     private double maxDeposit;
     private double deposit;
     private double interest;
     private double baseInterest;
-
-    @Override
-    public int getCol() {
-        return 0;
-    }
-
-    @Override
-    public int getRow() {
-        return 0;
-    }
 
     @Override
     public int getDeposit() {
