@@ -22,7 +22,7 @@ public class PlanParser implements Parser<Plan> {
     private Plan parsePlan() throws SyntaxError {
         Plan p = parseStatement();
         while (tkz.hasNextToken()) {
-            p = new BinaryPlan(p, parseStatement());
+            p = new StatementPair(p, parseStatement());
         }
         return p;
     }
@@ -77,7 +77,7 @@ public class PlanParser implements Parser<Plan> {
         tkz.consume("{");
         Plan p = new NoStatement();
         while (tkz.hasNextToken()&&!tkz.peek().equals("}")) {
-            p = new BinaryPlan(p, parseStatement());
+            p = new StatementPair(p, parseStatement());
         }
         tkz.consume("}");
         return p;
