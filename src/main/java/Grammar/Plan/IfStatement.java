@@ -10,7 +10,7 @@ import java.util.Map;
 
 public record IfStatement (Expression expr, Plan s1, Plan s2) implements Plan {
     @Override
-    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
         if(expr.eval(bindings, p, t)>0) {
             return s1.eval(bindings, p, t);
         }

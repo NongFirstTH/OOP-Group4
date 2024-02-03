@@ -10,7 +10,7 @@ import java.util.Map;
 
 public record RegionCommand (String command, Expression expr) implements Plan {
     @Override
-    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) {
+    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
         return true;
     }
 
