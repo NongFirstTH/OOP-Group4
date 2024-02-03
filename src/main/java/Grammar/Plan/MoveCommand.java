@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import Grammar.Plan.Direction;
 import GamePlay.Player;
 import GamePlay.Territory;
 
