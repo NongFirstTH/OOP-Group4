@@ -4,21 +4,19 @@ import GamePlay.Player;
 import GamePlay.Territory;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class VariableTest {
-
     long evalResult(String src) throws EvalError {
         Variable v = new Variable(src);
         Territory t = new Territory(20,20);
         Player p1 = new Player(10,2,3,t);
+        p1.bindings().put("a", 220L);
+        p1.bindings().put("b", 290L);
         return v.eval(p1,t);
     }
     @Test
-    public void TestReadVar() throws EvalError {
+    public void TestReadSpecialVar() throws EvalError {
         assertEquals(2,evalResult("rows"));
         assertEquals(3,evalResult("cols"));
         assertEquals(2,evalResult("currow"));
@@ -28,6 +26,13 @@ class VariableTest {
         assertEquals(0,evalResult("interest"));
         assertEquals(0,evalResult("maxdeposit"));
     }
+    @Test
+    public void TestReadVar() throws EvalError {
+        assertEquals(220,evalResult("a"));
+        assertEquals(290,evalResult("b"));
+        assertEquals(0,evalResult("c"));
+    }
+
     @Test
     public void TestEvalRandom() throws EvalError {
         Variable s = new Variable("random");
@@ -40,7 +45,7 @@ class VariableTest {
     }
 
     @Test
-    public  void TestPrettyPrint(){
+    public void TestPrettyPrint(){
         Variable v = new Variable("random");
         StringBuilder s = new StringBuilder();
         v.prettyPrint(s);
