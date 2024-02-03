@@ -7,7 +7,7 @@ import java.util.Map;
 
 public record IntLit(long val) implements Expression {
     @Override
-    public long eval(Map<String, Integer> bindings, Player p, Territory t) {
+    public long eval(Map<String, Long> bindings, Player p, Territory t) {
         return val;
     }
     @Override

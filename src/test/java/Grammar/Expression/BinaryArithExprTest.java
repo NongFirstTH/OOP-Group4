@@ -16,8 +16,8 @@ public class BinaryArithExprTest {
     public double result(String src) throws SyntaxError, EvalError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
-        Map<String,Integer> m = new HashMap<>();
-        Territory t = new Territory(1,2);
+        Map<String,Long> m = new HashMap<>();
+        Territory t = new Territory(20,20);
         Player p1 = new Player(10,1,2,t);
         return e.parse().eval(m,p1,t);
     }
@@ -33,20 +33,25 @@ public class BinaryArithExprTest {
     }
 
     @Test
-    public void TestThrowsEvalError() throws SyntaxError, EvalError {
-        assertThrows(EvalError.class,()->result("1@2"));
+    public void TestThrowsEvalError() throws SyntaxError{
+        assertThrows(SyntaxError.class,()->result("1@2"));
+        assertThrows(EvalError.class,()->result("1//3"));
     }
 
-//    @Test
-//    public void prettyPrint() throws SyntaxError {
-//        PlanTokenizer p = new PlanTokenizer("1+2^3^2");
-//        ExpressionParser e = new ExpressionParser(p);
-//        HashMap<String,Integer> m = new HashMap<>();
-//        Player p1 = new Player();
-//        Territory t = new Territory();
-//        StringBuilder s = new StringBuilder();
-//        e.parse().prettyPrint(s);
-//        assertEquals("(1 + (2 ^ (3 ^ 2)))",s.toString());
-//    }
+    String printResult(String src) throws SyntaxError {
+        PlanTokenizer p = new PlanTokenizer(src);
+        ExpressionParser e = new ExpressionParser(p);
+        Map<String,Long> m = new HashMap<>();
+        Territory t = new Territory(20,20);
+        Player p1 = new Player(10,1,2,t);
+        StringBuilder s = new StringBuilder();
+        e.parse().prettyPrint(s);
+        return s.toString();
+    }
+    @Test
+    public void prettyPrint() throws SyntaxError {
+        assertEquals("(7 - (2 * 7))",printResult("7-2*7"));
+        assertEquals("((((7 * 8) % (11 ^ 2)) - 9) + 6)",printResult("7*8%11^2-9+6"));
+    }
 
 }
