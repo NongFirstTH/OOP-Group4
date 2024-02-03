@@ -3,7 +3,6 @@ package Grammar.Parse;
 import Grammar.Plan.Direction;
 
 import static Grammar.Plan.Direction.*;
-import static Grammar.Plan.Direction.downright;
 
 public class DirectionParser implements Parser<Direction>{
 

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RegionCommandTest {
     @Test
     public void investCommand_over(){
+
         RegionCommand regionCommand = new RegionCommand("invest", new Expression() {
             @Override
             public long eval(Player p, Territory t) throws EvalError {
@@ -31,6 +32,7 @@ public class RegionCommandTest {
 
     @Test
     public void investCommand_lesser(){
+
         RegionCommand regionCommand = new RegionCommand("invest", new Expression() {
             @Override
             public long eval(Player p, Territory t) throws EvalError {
@@ -45,10 +47,12 @@ public class RegionCommandTest {
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
         assertDoesNotThrow(() -> regionCommand.eval(p, t));
         assertEquals(99, p.getBudget());
+
     }
 
     @Test
     public void collectCommand(){
+
         RegionCommand regionCommand = new RegionCommand("collect", new Expression() {
             @Override
             public long eval(Player p, Territory t) throws EvalError {
@@ -63,10 +67,12 @@ public class RegionCommandTest {
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
         assertDoesNotThrow(() -> regionCommand.eval(p, t));
         assertEquals(99,p.getBudget());
+
     }
 
     @Test
     public void collectCommand_0() throws EvalError {
+
         RegionCommand regionCommand = new RegionCommand("collect", new Expression() {
             @Override
             public long eval(Player p, Territory t) throws EvalError {
@@ -81,5 +87,6 @@ public class RegionCommandTest {
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
         assertDoesNotThrow(() -> regionCommand.eval(p, t));
         assertFalse(regionCommand.eval(p, t));
+
     }
 }
