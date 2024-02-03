@@ -3,9 +3,7 @@ package GamePlay;
 import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 interface PlayerI {
