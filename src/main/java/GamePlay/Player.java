@@ -29,7 +29,7 @@ interface PlayerI {
     void invest(long amount);
     //returns true when collectable (have enough budget)
     boolean collect(long amount);
-    void shoot(Direction direction, int  amount);
+    void shoot(Direction direction, long  amount);
     //returns true if lost region is the city center
     void lostRegion(Region region, Territory t);
 }
@@ -167,7 +167,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void shoot(Direction direction, int amount) {
+    public void shoot(Direction direction, long amount) {
         long cost = amount + 1;
         if (budget >= cost) {
             budget -= cost;

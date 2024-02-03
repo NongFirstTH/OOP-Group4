@@ -20,7 +20,7 @@ public record RegionCommand (String command, Expression expr) implements Plan {
         expr.prettyPrint(s);
         s.append("\n");
     }
-    public void executeCommand(Map<String, Integer> bindings, Player player, Territory territory) throws EvalError {
+    public void executeCommand(Map<String, Long> bindings, Player player, Territory territory) throws EvalError {
         switch(command){
             case "invest" ->{
                 player.invest((int)expr.eval(bindings, player, territory));

@@ -20,7 +20,7 @@ public record AttackCommand (Direction dir, Expression expr) implements Plan {
         s.append("\n");
     }
 
-    public void shoot(Map<String, Integer> bindings, Player player, Territory territory) throws EvalError{
-        player.shoot(dir, (int)expr.eval(bindings, player, territory));
+    public void shoot(Map<String, Long> bindings, Player player, Territory territory) throws EvalError{
+        player.shoot(dir, expr.eval(bindings, player, territory));
     }
 }
