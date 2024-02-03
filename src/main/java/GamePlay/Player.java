@@ -126,7 +126,7 @@ public class Player implements PlayerI {
 
     @Override
     public boolean move(Direction direction, Territory t) {
-        if (crew.ownerMoveTo(direction, t)!=this)
+        if (crew.ownerMoveTo(direction, t)==null&&crew.ownerMoveTo(direction, t)!=this)
             return true;
         if ( budget >= 1 ) {
             budget -= 1;
