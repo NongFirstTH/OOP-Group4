@@ -29,7 +29,7 @@ public class Game {
     private Territory t;
 
     public Game(String s) throws SyntaxError, EvalError {
-        Map<String, Integer> bindings = new HashMap<>();
+        Map<String, Long> bindings = new HashMap<>();
         new PlanParser(new PlanTokenizer(s)).parse().eval(bindings, null, null);
         row = bindings.get("m");
         col = bindings.get("n");

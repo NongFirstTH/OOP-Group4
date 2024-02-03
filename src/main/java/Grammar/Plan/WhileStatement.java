@@ -10,7 +10,7 @@ import java.util.Map;
 
 public record WhileStatement (Expression expr, Plan s1) implements Plan {
     @Override
-    public boolean eval(Map<String, Integer> bindings, Player p, Territory t) throws EvalError {
+    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
         for (int counter = 0; counter < 10000 && expr.eval(bindings, p, t)>0; counter++) {
             if(!s1.eval(bindings, p, t)) {
                 return false;
