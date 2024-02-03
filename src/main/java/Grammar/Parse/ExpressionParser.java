@@ -63,10 +63,10 @@ public class ExpressionParser implements Parser<Expression> {
     }
 
     private Expression parseInfoExpression() throws SyntaxError {
-        if(tkz.peek().equals("opponent")){
-            return new Opponent(tkz.consume());
+        if(tkz.consume().equals("opponent")){
+            return new Opponent();
         } else {
-            return new Nearby(tkz.consume(), new DirectionParser(tkz).parse());
+            return new Nearby(new DirectionParser(tkz).parse());
         }
     }
     private boolean isNumber(String s) {

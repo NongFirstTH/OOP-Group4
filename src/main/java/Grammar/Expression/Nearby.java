@@ -6,7 +6,7 @@ import Grammar.Plan.Direction;
 
 import java.util.Map;
 
-public record Nearby(String command, Direction direction) implements Expression {
+public record Nearby(Direction direction) implements Expression {
     @Override
     public long eval(Player p, Territory t){
         return  p.nearby(t, direction);
