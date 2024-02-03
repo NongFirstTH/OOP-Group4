@@ -18,20 +18,42 @@ public class ParsePlanTest {
     }
 
     @Test
-    public void oneCommandTest() throws SyntaxError {
+    public void assignmentStatementTest() throws SyntaxError {
         assertParseThenPrettyPrint("x = 10\n", "x = 10");
+        assertParseThenPrettyPrint("f2p = (deposit / 10)\n", "f2p = deposit/10");
+    }
+
+    @Test
+    public void doneRelocateCommandTest() throws SyntaxError {
         assertParseThenPrettyPrint("done\n", "done");
         assertParseThenPrettyPrint("relocate\n", "relocate");
+    }
+
+    @Test
+    public void moveCommandTest() throws SyntaxError {
         assertParseThenPrettyPrint("move up\n", "move up");
         assertParseThenPrettyPrint("move down\n", "move down");
         assertParseThenPrettyPrint("move upleft\n", "move upleft");
         assertParseThenPrettyPrint("move upright\n", "move upright");
         assertParseThenPrettyPrint("move downleft\n", "move downleft");
         assertParseThenPrettyPrint("move downright\n", "move downright");
+    }
+
+    @Test
+    public void regionCommandTest() throws SyntaxError {
         assertParseThenPrettyPrint("invest 10\n", "invest 10");
         assertParseThenPrettyPrint("collect (deposit / 2)\n", "collect deposit/2");
-        assertParseThenPrettyPrint("shoot upleft ((x ^ 2) - (2 * x))\n", "shoot upleft x^2-2*x");
+    }
 
+    @Test
+    public void attackCommandTest() throws SyntaxError {
+        assertParseThenPrettyPrint("shoot up 1\n", "shoot up 1");
+        assertParseThenPrettyPrint("shoot upleft budget\n", "shoot upleft budget");
+        assertParseThenPrettyPrint("shoot downright ((x ^ 2) - (2 * x))\n", "shoot downright x^2-2*x");
+    }
+
+    @Test
+    public void commentTest() throws SyntaxError {
         assertParseThenPrettyPrint("invest 10\n", "invest 10 # blah");
         assertParseThenPrettyPrint("collect (deposit / 2)\n", "collect deposit/2 # blah blah");
         assertParseThenPrettyPrint("shoot upleft ((x ^ 2) - (2 * x))\n", "shoot upleft x^2-2*x # blah blah blah");
@@ -39,11 +61,22 @@ public class ParsePlanTest {
 
     @Test
     public void blockStatementTest() throws SyntaxError {
+        assertParseThenPrettyPrint("","{}");
         assertParseThenPrettyPrint("done\ndone\ndone\n","{done done done}");
     }
 
     @Test
     public void ifStatementTest() throws SyntaxError {
+        assertParseThenPrettyPrint(
+            """
+                    if (0) then {
+                    } else {
+                    }
+                    """,
+
+            "if (0) then {} else {}"
+        );
+
         assertParseThenPrettyPrint(
                 """
                         if ((budget - cost)) then {
@@ -60,6 +93,15 @@ public class ParsePlanTest {
     public void WhileStatementTest() throws SyntaxError {
         assertParseThenPrettyPrint(
                 """
+                        while (1) {
+                        }
+                        """,
+
+                "while (1) {}"
+        );
+
+        assertParseThenPrettyPrint(
+                """
                         while ((budget - cost)) {
                         \tshoot downright cost
                         }
@@ -71,12 +113,13 @@ public class ParsePlanTest {
 
     @Test
     public void throwTest() {
-        assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("done = 10"));
+        assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("cols = 10"));
+        assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("if = 5"));
         assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("relocate 20"));
         assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("move left"));
         assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("invest (0"));
         assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("{done"));
-        assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("{done"));
+        assertThrows(SyntaxError.class, ()->parseThenPrettyPrint("if 0 else{}"));
     }
 
     @Test

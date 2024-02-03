@@ -46,9 +46,20 @@ public class PlanParser implements Parser<Plan> {
     }
 
     private Plan parseAssignmentStatement() throws SyntaxError {
-        String identifier = tkz.consume();
+        String peek = tkz.consume();
+        boolean isSpecialVariable =
+        peek.equals("rows") ||
+                peek.equals("cols") ||
+                peek.equals("currow") ||
+                peek.equals("curcol") ||
+                peek.equals("budget") ||
+                peek.equals("deposit") ||
+                peek.equals("int") ||
+                peek.equals("maxdeposit") ||
+                peek.equals("random");
+        if(isSpecialVariable) throw new SyntaxError(peek+" is special variable");
         tkz.consume("=");
-        return new AssignmentStatement(identifier, parseExpression());
+        return new AssignmentStatement(peek, parseExpression());
     }
 
     private Plan parseActionCommand() throws SyntaxError {
