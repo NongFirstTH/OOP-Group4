@@ -9,7 +9,7 @@ import java.util.Map;
 
 public record MoveCommand (Direction dir) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
+    public boolean eval(Player p, Territory t) {
         return p.move(dir,t);
     }
 

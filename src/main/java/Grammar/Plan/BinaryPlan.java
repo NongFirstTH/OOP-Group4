@@ -8,9 +8,9 @@ import java.util.Map;
 
 public record BinaryPlan(Plan p1, Plan p2) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
-        if (p1.eval(bindings, p ,t)) {
-            return p2.eval(bindings, p, t);
+    public boolean eval(Player p, Territory t) throws EvalError {
+        if (p1.eval(p ,t)) {
+            return p2.eval( p, t);
         }
         return false;
     }

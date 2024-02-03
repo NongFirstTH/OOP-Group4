@@ -7,7 +7,7 @@ import java.util.Random;
 
 public record Variable(String name) implements Expression {
     @Override
-    public long eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
+    public long eval(Player p, Territory t) throws EvalError {
         switch (name){
             case "rows" -> {
                 return p.getRow();
@@ -38,8 +38,8 @@ public record Variable(String name) implements Expression {
                 return random.nextInt(1000);
             }
         }
-        if (bindings.containsKey(name))
-            return bindings.get(name);
+        if (p.bindings().containsKey(name))
+            return p.bindings().get(name);
         throw new EvalError("undefined variable: " + name);
     }
     @Override
