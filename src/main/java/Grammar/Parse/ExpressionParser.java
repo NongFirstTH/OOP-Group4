@@ -66,7 +66,7 @@ public class ExpressionParser implements Parser<Expression> {
         if(tkz.peek().equals("opponent")){
             return new Opponent(tkz.consume());
         } else {
-            return new Nearby(tkz.consume(), tkz.consume());
+            return new Nearby(tkz.consume(), new DirectionParser(tkz).parse());
         }
     }
     private boolean isNumber(String s) {

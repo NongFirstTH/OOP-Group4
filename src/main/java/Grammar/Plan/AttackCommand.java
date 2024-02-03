@@ -6,7 +6,7 @@ import Grammar.Expression.Expression;
 
 import java.util.Map;
 
-public record AttackCommand (String dir, Expression expr) implements Plan {
+public record AttackCommand (Direction dir, Expression expr) implements Plan {
     @Override
     public boolean eval(Map<String, Integer> bindings, Player p, Territory t) {
         return true;
