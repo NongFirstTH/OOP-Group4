@@ -3,6 +3,7 @@ package GamePlay;
 import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 interface PlayerI {
@@ -14,11 +15,11 @@ interface PlayerI {
     int getRow();
     int getCurcol();
     int getCurrow();
-    double getBudget();
+    long getBudget();
     double getDeposit();
-    double getInterest();
+    long getInterest();
 
-    double getMaxDeposit();
+    long getMaxDeposit();
 
     int opponent(Territory t);
     int nearby(Territory t, Direction direction);
@@ -37,13 +38,13 @@ interface PlayerI {
 
 public class Player implements PlayerI {
     private String name;
-    private List<Region> regions;
+    private List<Region> regions = new ArrayList<>();
     private final Region cityCenter;
     private final CityCrew crew;
-    private double budget;
+    private long budget;
     private Plan plan;
 
-    Player(double budget, int row, int col, Territory t) {
+     public Player(long budget, int row, int col, Territory t) {
         crew = new CityCrew(row, col);
         cityCenter = t.getRegions(row, col);
         this.budget = budget;
@@ -91,7 +92,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public double getBudget() {
+    public long getBudget() {
         return budget;
     }
 
@@ -101,12 +102,12 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public double getInterest() {
+    public long getInterest() {
         return crew.getInterest();
     }
 
     @Override
-    public double getMaxDeposit() {
+    public long getMaxDeposit() {
         return crew.getMaxDeposit();
     }
 
