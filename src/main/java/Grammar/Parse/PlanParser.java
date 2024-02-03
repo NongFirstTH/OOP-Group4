@@ -56,8 +56,8 @@ public class PlanParser implements Parser<Plan> {
         return switch (peek) {
             case "done" -> new Done();
             case "relocate" -> new Relocate();
-            case "move" -> new MoveCommand(tkz.consume());
-            case "shoot" -> new AttackCommand(tkz.consume(), parseExpression());
+            case "move" -> new MoveCommand(new DirectionParser(tkz).parse());
+            case "shoot" -> new AttackCommand(new DirectionParser(tkz).parse(), parseExpression());
             default -> new RegionCommand(peek, parseExpression());
         };
     }
