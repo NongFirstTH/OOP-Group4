@@ -9,7 +9,8 @@ import java.util.Map;
 
 public record AttackCommand (Direction dir, Expression expr) implements Plan {
     @Override
-    public boolean eval(Map<String, Long> bindings, Player p, Territory t) {
+    public boolean eval(Map<String, Long> bindings, Player p, Territory t) throws EvalError {
+        p.shoot(dir, expr.eval(bindings, p, t));
         return true;
     }
 
@@ -18,9 +19,5 @@ public record AttackCommand (Direction dir, Expression expr) implements Plan {
         s.append("\t".repeat(Math.max(0, tab))).append("shoot ").append(dir);
         expr.prettyPrint(s);
         s.append("\n");
-    }
-
-    public void shoot(Map<String, Long> bindings, Player player, Territory territory) throws EvalError{
-        player.shoot(dir, expr.eval(bindings, player, territory));
     }
 }

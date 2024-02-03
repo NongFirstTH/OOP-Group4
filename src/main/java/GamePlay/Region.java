@@ -9,23 +9,23 @@ interface RegionI {
     void beInvested(long amount);
     void beCollected(long amount);
     void beShot(Direction direction, long amount);
-    double depositCal();
-    double interestRateCal();
+    double depositCal(double baseInterestRate, int currentTurn);
+    double interestRateCal(double baseInterestRate, int currentTurn);
     Player getOwner();
 }
 public class Region implements RegionI {
     private Player owner;
     private double deposit;
-    private double interest;
+    private long interest;
 
     @Override
     public double deposit() {
-        return 0;
+        return deposit;
     }
 
     @Override
     public long getInterest() {
-        return 0;
+        return interest;
     }
 
     @Override
@@ -49,18 +49,19 @@ public class Region implements RegionI {
     }
 
     @Override
-    public double depositCal() {
-        return 0;
+    public double depositCal(double baseInterestRate, int currentTurn) {
+        deposit += deposit * interestRateCal(baseInterestRate, currentTurn) / 100.0;
+        return deposit;
     }
 
     @Override
-    public double interestRateCal() {
-        return 0;
+    public double interestRateCal(double baseInterestRate, int currentTurn) {
+        return baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
     }
 
     @Override
     public Player getOwner() {
-        return null;
+        return owner;
     }
 
 }
