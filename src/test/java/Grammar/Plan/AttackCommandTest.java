@@ -9,23 +9,24 @@ import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static Grammar.Plan.Direction.*;
 import java.util.Map;
 
 public class AttackCommandTest {
     Territory t = new Territory(20,20);
     Player p1 = new Player(100,1,1,t);
-    Player p2 = new Player(100,1,1,t);
+    Player p2 = new Player(100,1,2,t);
     PlanTokenizer pt1 = new PlanTokenizer("10");
     ExpressionParser e1 = new ExpressionParser(pt1);
 
     public AttackCommandTest() throws SyntaxError {
     }
 
-
     @Test
-    public void AttackTest() throws SyntaxError {
+    public void AttackTest() throws SyntaxError, EvalError {
         AttackCommand attackCommand = new AttackCommand(Direction.up, e1.parse());
-        p1.shoot(Direction.up,1);
-        assertEquals(98,p1.getBudget());
+        p1.shoot(upright,10);
+        assertEquals(89,p1.getBudget());
+        assertEquals(100, p2.getBudget());
     }
 }
