@@ -4,6 +4,9 @@ import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
+import Grammar.Parse.ExpressionParser;
+import Grammar.Parse.PlanTokenizer;
+import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 
 import java.util.Map;
@@ -11,18 +14,15 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegionCommandTest {
-    @Test
-    public void investCommand_over(){
+    public RegionCommandTest() throws SyntaxError {
+    }
 
-        RegionCommand regionCommand = new RegionCommand("invest", new Expression() {
-            @Override
-            public long eval(Player p, Territory t) throws EvalError {
-                return 50;
-            }
-            @Override
-            public void prettyPrint(StringBuilder s) {
-            }
-        });
+    PlanTokenizer pt1 = new PlanTokenizer("50");
+    ExpressionParser e1 = new ExpressionParser(pt1);
+    @Test
+    public void investCommand_over() throws SyntaxError {
+
+        RegionCommand regionCommand = new RegionCommand("invest", e1.parse());
         Territory t = new Territory(100,100);
         Player p = new Player(100,1,1,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
@@ -30,18 +30,12 @@ public class RegionCommandTest {
         assertEquals(49, p.getBudget());
     }
 
+    PlanTokenizer pt2 = new PlanTokenizer("200");
+    ExpressionParser e2 = new ExpressionParser(pt2);
     @Test
-    public void investCommand_lesser(){
+    public void investCommand_lesser() throws SyntaxError {
 
-        RegionCommand regionCommand = new RegionCommand("invest", new Expression() {
-            @Override
-            public long eval(Player p, Territory t) throws EvalError {
-                return 200;
-            }
-            @Override
-            public void prettyPrint(StringBuilder s) {
-            }
-        });
+        RegionCommand regionCommand = new RegionCommand("invest", e2.parse());
         Territory t = new Territory(100,100);
         Player p = new Player(100,1,1,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
@@ -50,18 +44,12 @@ public class RegionCommandTest {
 
     }
 
+    PlanTokenizer pt3 = new PlanTokenizer("10");
+    ExpressionParser e3 = new ExpressionParser(pt3);
     @Test
-    public void collectCommand(){
+    public void collectCommand() throws SyntaxError {
 
-        RegionCommand regionCommand = new RegionCommand("collect", new Expression() {
-            @Override
-            public long eval(Player p, Territory t) throws EvalError {
-                return 10;
-            }
-            @Override
-            public void prettyPrint(StringBuilder s) {
-            }
-        });
+        RegionCommand regionCommand = new RegionCommand("collect",e3.parse());
         Territory t = new Territory(100,100);
         Player p = new Player(100,1,1,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
@@ -69,19 +57,12 @@ public class RegionCommandTest {
         assertEquals(99,p.getBudget());
 
     }
-
+    PlanTokenizer pt4 = new PlanTokenizer("100");
+    ExpressionParser e4 = new ExpressionParser(pt4);
     @Test
-    public void collectCommand_0() throws EvalError {
+    public void collectCommand_0() throws EvalError, SyntaxError {
 
-        RegionCommand regionCommand = new RegionCommand("collect", new Expression() {
-            @Override
-            public long eval(Player p, Territory t) throws EvalError {
-                return 100;
-            }
-            @Override
-            public void prettyPrint(StringBuilder s) {
-            }
-        });
+        RegionCommand regionCommand = new RegionCommand("collect", e4.parse());
         Territory t = new Territory(100,100);
         Player p = new Player(0,1,1,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature

@@ -16,13 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AssignmentStatementTest {
     Territory t = new Territory(100,100);
     Player p = new Player(100,1,1,t);
-    PlanTokenizer pt1 = new PlanTokenizer("123");
-    PlanTokenizer pt2 = new PlanTokenizer("234");
-    ExpressionParser e1 = new ExpressionParser(pt1);
-    ExpressionParser e2 = new ExpressionParser(pt2);
-
     public AssignmentStatementTest() throws SyntaxError {
     }
+
+    PlanTokenizer pt1 = new PlanTokenizer("123");
+    ExpressionParser e1 = new ExpressionParser(pt1);
     @Test
     public void assignmentTest_expr() throws SyntaxError, EvalError {
         AssignmentStatement assignmentStatement1 = new AssignmentStatement("A", e1.parse());
@@ -31,6 +29,8 @@ public class AssignmentStatementTest {
         assertEquals(234, assignmentStatement2.expr().eval(p, t));
     }
 
+    PlanTokenizer pt2 = new PlanTokenizer("234");
+    ExpressionParser e2 = new ExpressionParser(pt2);
     @Test
     public void assignmentTest_identifier() throws SyntaxError, EvalError {
         AssignmentStatement assignmentStatement1 = new AssignmentStatement("A", e1.parse());

@@ -8,7 +8,7 @@ import java.util.Map;
 public record Relocate () implements Plan {
     @Override
     public boolean eval(Player p, Territory t) {
-        return true;
+        return p.relocate();
     }
 
     @Override
