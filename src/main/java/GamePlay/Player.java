@@ -130,7 +130,8 @@ public class Player implements PlayerI {
         long cost = 5 * minDistance() + 10;
         if ( budget >= cost ) {
             budget-=cost;
-            crew.relocate();
+            cityCenter[0] = crew.getCurrow();
+            cityCenter[1] = crew.getCurcol();
             return true;
         }
         return false;
