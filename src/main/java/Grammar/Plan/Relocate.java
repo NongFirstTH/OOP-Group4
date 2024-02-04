@@ -9,7 +9,8 @@ import java.util.Map;
 public record Relocate () implements Plan {
     @Override
     public boolean eval(Game g) {
-        return g.getPlayer().relocate();
+        g.getPlayer().relocate(g.getTerritory());
+        return false;
     }
 
     @Override
