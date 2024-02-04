@@ -40,11 +40,15 @@ public record Variable(String name) implements Expression {
         }
         if (p.bindings().containsKey(name))
             return p.bindings().get(name);
-        return 0;
+        if(isIdentifier(name)) return 0;
+        throw new EvalError(name);
     }
     @Override
     public void prettyPrint(StringBuilder s) {
         s.append(name);
+    }
+    private boolean isIdentifier(String name) {
+        return name.matches("[a-zA-Z][a-zA-Z0-9]*+");
     }
 }
 
