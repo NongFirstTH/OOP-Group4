@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -10,9 +11,9 @@ import java.util.Map;
 
 public record WhileStatement (Expression expr, Plan p1) implements Plan {
     @Override
-    public boolean eval(Player p, Territory t) throws EvalError {
-        for (int counter = 0; counter < 10000 && expr.eval(p, t)>0; counter++) {
-            if(!p1.eval(p, t)) {
+    public boolean eval(Game g) throws EvalError {
+        for (int counter = 0; counter < 10000 && expr.eval(g)>0; counter++) {
+            if(!p1.eval(g)) {
                 return false;
             }
         }

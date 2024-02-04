@@ -45,4 +45,6 @@ public class Game {
         interest_pct = bindings.get("interest_pct");
         t = new Territory((int) row, (int) col);
     }
+    public Player getPlayer(){return playerturn;}
+    public Territory getTerritory(){return t;}
 }

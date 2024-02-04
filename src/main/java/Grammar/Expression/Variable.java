@@ -1,4 +1,5 @@
 package Grammar.Expression;
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 
@@ -7,44 +8,48 @@ import java.util.Random;
 
 public record Variable(String name) implements Expression {
     @Override
-    public long eval(Player p, Territory t) throws EvalError {
+    public long eval(Game g) throws EvalError {
         switch (name){
             case "rows" -> {
-                return p.getRow();
+                return g.getPlayer().getRow();
             }
             case "cols" -> {
-                return p.getCol();
+                return g.getPlayer().getCol();
             }
             case "currow" -> {
-                return p.getCurrow();
+                return g.getPlayer().getCurrow();
             }
             case "curcol" -> {
-                return p.getCurcol();
+                return g.getPlayer().getCurcol();
             }
             case "budget" -> {
-                return p.getBudget();
+                return g.getPlayer().getBudget();
             }
             case "deposit" -> {
-                return (long) p.getDeposit();
+                return (long) g.getPlayer().getDeposit();
             }
             case "interest" -> {
-                return p.getInterest();
+                return g.getPlayer().getInterest();
             }
             case "maxdeposit" -> {
-                return p.getMaxDeposit();
+                return g.getPlayer().getMaxDeposit();
             }
             case "random" -> {
                 Random random = new Random();
                 return random.nextInt(1000);
             }
         }
-        if (p.bindings().containsKey(name))
-            return p.bindings().get(name);
-        return 0;
+        if (g.getPlayer().bindings().containsKey(name))
+            return g.getPlayer().bindings().get(name);
+        if(isIdentifier(name)) return 0;
+        throw new EvalError(name);
     }
     @Override
     public void prettyPrint(StringBuilder s) {
         s.append(name);
+    }
+    private boolean isIdentifier(String name) {
+        return name.matches("[a-zA-Z][a-zA-Z0-9]*+");
     }
 }
 

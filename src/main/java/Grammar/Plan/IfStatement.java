@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -10,11 +11,11 @@ import java.util.Map;
 
 public record IfStatement (Expression expr, Plan s1, Plan s2) implements Plan {
     @Override
-    public boolean eval(Player p, Territory t) throws EvalError {
-        if(expr.eval(p, t)>0) {
-            return s1.eval(p, t);
+    public boolean eval(Game g) throws EvalError {
+        if(expr.eval(g)>0) {
+            return s1.eval(g);
         }
-        return s2.eval(p, t);
+        return s2.eval(g);
     }
 
     @Override

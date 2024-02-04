@@ -68,6 +68,16 @@ public class RegionCommandTest {
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
         assertDoesNotThrow(() -> regionCommand.eval(p, t));
         assertFalse(regionCommand.eval(p, t));
+    }
 
+    PlanTokenizer pt5 = new PlanTokenizer("111");
+    ExpressionParser e5 = new ExpressionParser(pt5);
+    @Test
+    public void unknownCommand() throws SyntaxError {
+
+        RegionCommand regionCommand = new RegionCommand("find", e5.parse());
+        Territory t = new Territory(100,100);
+        Player p = new Player(100,1,1,t);
+        assertThrows(EvalError.class, () -> regionCommand.eval(p, t));
     }
 }
