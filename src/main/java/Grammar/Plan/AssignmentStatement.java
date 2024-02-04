@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -9,8 +10,8 @@ import Grammar.Parse.ExpressionParser;
 import java.util.Map;
 public record AssignmentStatement (String identifier, Expression expr) implements Plan {
     @Override
-    public boolean eval(Player p, Territory t) throws EvalError {
-        p.bindings().put(identifier, expr.eval(p, t));
+    public boolean eval(Game g) throws EvalError {
+        g.getPlayer().bindings().put(identifier, expr.eval(g));
         return true;
     }
 

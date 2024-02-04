@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -10,12 +11,12 @@ import java.util.Map;
 
 public record RegionCommand (String command, Expression expr) implements Plan {
     @Override
-    public boolean eval(Player p, Territory t) throws EvalError {
+    public boolean eval(Game g) throws EvalError {
         if(command.equals("invest")){
-            p.invest(expr.eval(p, t));
+            g.getPlayer().invest(expr.eval(g));
             return true;
         }else if(command.equals("collect")){
-            return p.collect(expr.eval(p, t));
+            return g.getPlayer().collect(expr.eval(g));
         }
         throw new EvalError("Undefined Region Command: " + command);
     }

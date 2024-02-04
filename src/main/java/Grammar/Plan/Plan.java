@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -11,7 +12,7 @@ public interface Plan{
     /**
      * Returns false if turn is ended otherwise true
      */
-    boolean eval(Player p, Territory t) throws EvalError;
+    boolean eval(Game g) throws EvalError;
 
     void prettyPrint(StringBuilder s, int tab);
 }

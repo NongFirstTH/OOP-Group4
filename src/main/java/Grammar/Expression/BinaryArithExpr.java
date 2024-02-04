@@ -1,5 +1,6 @@
 package Grammar.Expression;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 
@@ -7,9 +8,9 @@ import java.util.Map;
 
 public record BinaryArithExpr(Expression left, String op, Expression right) implements Expression {
     @Override
-    public long eval(Player p, Territory t) throws EvalError {
-        long lv = left.eval(p,t);
-        long rv = right.eval(p,t);
+    public long eval(Game g) throws EvalError {
+        long lv = left.eval(g);
+        long rv = right.eval(g);
         switch (op) {
             case "+" -> {
                 return lv + rv;
