@@ -21,14 +21,17 @@ public class Game {
     private final long max_dep;
     private final long interest_pct;
 
-//    private final int numberOfPlayer;
-//    private final List<Player> listOfPlayers;
+    private final List<Player> listOfPlayers;
     private int turnCount;
     private Player playerturn;
     private int time;
     private Territory t;
 
-    public Game(String s) throws SyntaxError, EvalError {
+    public Game(String s, List<Player> listOfPlayers, Territory t) throws SyntaxError, EvalError {
+        this.listOfPlayers = listOfPlayers;
+        playerturn = listOfPlayers.getFirst();
+        this.t = t;
+
         Map<String, Long> bindings = new HashMap<>();
         new PlanParser(new PlanTokenizer(s)).parse().eval(null, null);
         row = bindings.get("m");

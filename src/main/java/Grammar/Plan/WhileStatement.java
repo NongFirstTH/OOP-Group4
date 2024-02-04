@@ -8,11 +8,11 @@ import Grammar.Plan.Plan;
 
 import java.util.Map;
 
-public record WhileStatement (Expression expr, Plan s1) implements Plan {
+public record WhileStatement (Expression expr, Plan p1) implements Plan {
     @Override
     public boolean eval(Player p, Territory t) throws EvalError {
         for (int counter = 0; counter < 10000 && expr.eval(p, t)>0; counter++) {
-            if(!s1.eval(p, t)) {
+            if(!p1.eval(p, t)) {
                 return false;
             }
         }
@@ -24,7 +24,7 @@ public record WhileStatement (Expression expr, Plan s1) implements Plan {
         s.append("\t".repeat(Math.max(0, tab))).append("while (");
         expr.prettyPrint(s);
         s.append(") {\n");
-        s1.prettyPrint(s, tab+1);
+        p1.prettyPrint(s, tab+1);
         s.append("\t".repeat(Math.max(0, tab))).append("}\n");
     }
 }
