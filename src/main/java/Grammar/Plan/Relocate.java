@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 
@@ -7,8 +8,8 @@ import java.util.Map;
 
 public record Relocate () implements Plan {
     @Override
-    public boolean eval(Player p, Territory t) {
-        return p.relocate();
+    public boolean eval(Game g) {
+        return g.getPlayer().relocate();
     }
 
     @Override
