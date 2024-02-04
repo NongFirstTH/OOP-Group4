@@ -4,9 +4,7 @@ import Grammar.Expression.EvalError;
 import Grammar.Parse.PlanParser;
 import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
-import Grammar.Plan.Plan;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +30,8 @@ public class Game {
         playerturn = listOfPlayers.getFirst();
         this.t = t;
 
-        Map<String, Long> bindings = new HashMap<>();
+        Game g = new Game();
+        Map<String, Long> bindings = g.getPlayer().bindings();
         new PlanParser(new PlanTokenizer(s)).parse().eval(null);
         row = bindings.get("m");
         col = bindings.get("n");
@@ -44,6 +43,20 @@ public class Game {
         max_dep = bindings.get("max_dep");
         interest_pct = bindings.get("interest_pct");
         t = new Territory((int) row, (int) col);
+    }
+
+    private Game() {
+        playerturn = new Player(0, 0, 0, null);
+        this.listOfPlayers = null;
+        row = 0;
+        col = 0;
+        init_plan_sec = 0;
+        init_budget = 0;
+        init_center_dep = 0;
+        plan_rev_sec = 0;
+        rev_cost = 0;
+        max_dep = 0;
+        interest_pct = 0;
     }
     public Player getPlayer(){return playerturn;}
     public Territory getTerritory(){return t;}
