@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VariableTest {
+public class VariableTest {
     long evalResult(String src) throws EvalError {
         Variable v = new Variable(src);
         Territory t = new Territory(20,20);

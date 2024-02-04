@@ -7,13 +7,10 @@ import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BinaryArithExprTest {
-    public double result(String src) throws SyntaxError, EvalError {
+    public long result(String src) throws SyntaxError, EvalError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
         Territory t = new Territory(20,20);
@@ -34,7 +31,10 @@ public class BinaryArithExprTest {
     @Test
     public void TestThrows() throws SyntaxError{
         assertThrows(SyntaxError.class,()->result("1@2"));
+        assertThrows(SyntaxError.class,()->result("1+?3"));
         assertThrows(EvalError.class,()->result("1//3"));
+        assertThrows(EvalError.class,()->result("1*+3"));
+        assertThrows(EvalError.class,()->result("1--3"));
     }
 
     String printResult(String src) throws SyntaxError {
