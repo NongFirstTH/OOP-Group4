@@ -23,7 +23,7 @@ interface PlayerI {
     long opponent(Territory t);
     long nearby(Territory t, Direction direction);
     //returns true when relocatable (to end turn)
-    boolean relocate();
+    void relocate(Territory t);
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t);
   
@@ -126,15 +126,13 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean relocate() {
+    public void relocate(Territory t) {
         long cost = 5 * minDistance() + 10;
-        if ( budget >= cost ) {
+        if ( budget >= cost && this == crew.owner(t) ) {
             budget-=cost;
             cityCenter[0] = crew.getCurrow();
             cityCenter[1] = crew.getCurcol();
-            return true;
         }
-        return false;
     }
 
     @Override

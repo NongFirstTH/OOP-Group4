@@ -20,6 +20,7 @@ interface CityCrewI {
     long collect(long amount);
 
     void shoot(Direction direction, long amount);
+    Player owner(Territory t);
 }
 
 public class CityCrew implements CityCrewI {
@@ -89,5 +90,10 @@ public class CityCrew implements CityCrewI {
     @Override
     public void shoot(Direction direction, long amount) {
 
+    }
+
+    @Override
+    public Player owner(Territory t) {
+        return null;
     }
 }
