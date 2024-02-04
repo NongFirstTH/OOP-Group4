@@ -33,7 +33,7 @@ public class Game {
         this.t = t;
 
         Map<String, Long> bindings = new HashMap<>();
-        new PlanParser(new PlanTokenizer(s)).parse().eval(null, null);
+        new PlanParser(new PlanTokenizer(s)).parse().eval(null);
         row = bindings.get("m");
         col = bindings.get("n");
         init_plan_sec = 60L*bindings.get("init_plan_min")+bindings.get("init_plan_sec");
