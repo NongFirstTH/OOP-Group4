@@ -45,6 +45,24 @@ public class Game {
         t = new Territory((int) row, (int) col);
     }
 
+    public Game(List<Player> listOfPlayers, Territory t) throws SyntaxError, EvalError {
+        this.listOfPlayers = listOfPlayers;
+        playerturn = listOfPlayers.getFirst();
+        this.t = t;
+
+        Game g = new Game();
+        row = 20;
+        col = 20;
+        init_plan_sec = 0;
+        init_budget = 0;
+        init_center_dep = 0;
+        plan_rev_sec = 0;
+        rev_cost = 0;
+        max_dep = 0;
+        interest_pct = 0;
+        t = new Territory((int) row, (int) col);
+    }
+
     private Game() {
         playerturn = new Player(0, 0, 0, null);
         this.listOfPlayers = null;
