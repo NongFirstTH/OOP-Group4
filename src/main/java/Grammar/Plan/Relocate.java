@@ -1,10 +1,6 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
-
-import java.util.Map;
 
 public record Relocate () implements Plan {
     @Override

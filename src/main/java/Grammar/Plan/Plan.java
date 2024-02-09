@@ -1,11 +1,7 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
 import Grammar.Expression.EvalError;
-
-import java.util.Map;
 
 public interface Plan{
 

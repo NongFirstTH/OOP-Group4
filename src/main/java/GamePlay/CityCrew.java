@@ -5,9 +5,8 @@ import Grammar.Plan.Direction;
 interface CityCrewI {
     int getCurcol();
     int getCurrow();
-    double getDeposit();
-    long getInterest();
-    long getMaxDeposit();
+    double getDeposit(Territory t);
+    long getInterest(Territory t);
     long opponent(Territory t);
     long nearby(Territory t, Direction direction);
   
@@ -15,11 +14,11 @@ interface CityCrewI {
 
     void move(Direction direction, Territory t);
   
-    void invest(long amount);
+    void invest(long amount, Territory t);
 
-    long collect(long amount);
+    long collect(long amount, Territory t);
 
-    void shoot(Direction direction, long amount);
+    void shoot(Direction direction, long amount, Territory t);
     Player owner(Territory t);
 }
 
@@ -31,7 +30,6 @@ public class CityCrew implements CityCrewI {
         this.currow = currow;
         this.curcol = curcol;
     }
-
     @Override
     public int getCurcol() {
         return curcol;
@@ -43,17 +41,12 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public double getDeposit() {
+    public double getDeposit(Territory t) {
         return 0;
     }
 
     @Override
-    public long getInterest() {
-        return 0;
-    }
-
-    @Override
-    public long getMaxDeposit() {
+    public long getInterest(Territory t) {
         return 0;
     }
 
@@ -78,17 +71,17 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void invest(long amount) {
+    public void invest(long amount,Territory t) {
 
     }
 
     @Override
-    public long collect(long amount) {
+    public long collect(long amount ,Territory t) {
         return 0;
     }
 
     @Override
-    public void shoot(Direction direction, long amount) {
+    public void shoot(Direction direction, long amount,Territory t) {
 
     }
 

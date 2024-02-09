@@ -1,10 +1,6 @@
 package Grammar.Expression;
 
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
-
-import java.util.Map;
 
 public record BinaryArithExpr(Expression left, String op, Expression right) implements Expression {
     @Override
