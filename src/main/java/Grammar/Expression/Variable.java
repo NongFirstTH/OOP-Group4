@@ -1,9 +1,5 @@
 package Grammar.Expression;
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
-
-import java.util.Map;
 import java.util.Random;
 
 public record Variable(String name) implements Expression {
@@ -26,13 +22,13 @@ public record Variable(String name) implements Expression {
                 return g.getPlayer().getBudget();
             }
             case "deposit" -> {
-                return (long) g.getPlayer().getDeposit();
+                return (long) g.getPlayer().getDeposit(g.getTerritory());
             }
             case "interest" -> {
-                return g.getPlayer().getInterest();
+                return g.getPlayer().getInterest(g.getTerritory());
             }
             case "maxdeposit" -> {
-                return g.getPlayer().getMaxDeposit();
+                return g.getMaxDeposit();
             }
             case "random" -> {
                 Random random = new Random();

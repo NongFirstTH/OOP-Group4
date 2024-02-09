@@ -1,11 +1,8 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
-import Grammar.Parse.ExpressionParser;
 
 import java.util.Map;
 public record AssignmentStatement (String identifier, Expression expr) implements Plan {

@@ -1,8 +1,6 @@
 
 package Grammar.Plan;
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
 
@@ -11,7 +9,7 @@ import java.util.Map;
 public record AttackCommand (Direction dir, Expression expr) implements Plan {
     @Override
     public boolean eval(Game g) throws EvalError {
-        g.getPlayer().shoot(dir, expr.eval(g));
+        g.getPlayer().shoot(dir, expr.eval(g),g.getTerritory());
         return true;
     }
 

@@ -78,4 +78,5 @@ public class Game {
     }
     public Player getPlayer(){return playerturn;}
     public Territory getTerritory(){return t;}
+    public long getMaxDeposit(){return max_dep;}
 }

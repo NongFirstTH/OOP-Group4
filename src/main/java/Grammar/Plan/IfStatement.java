@@ -1,13 +1,8 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
-import Grammar.Plan.Plan;
-
-import java.util.Map;
 
 public record IfStatement (Expression expr, Plan s1, Plan s2) implements Plan {
     @Override

@@ -1,11 +1,6 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
-import Grammar.Plan.Direction;
-import GamePlay.Player;
-import GamePlay.Territory;
-
-import java.util.Map;
 
 
 public record MoveCommand (Direction dir) implements Plan {

@@ -16,9 +16,8 @@ interface PlayerI {
     int getCurrow();
     int getCurcol();
     long getBudget();
-    double getDeposit();
-    long getInterest();
-    long getMaxDeposit();
+    double getDeposit(Territory t);
+    long getInterest(Territory t);
     Map<String, Long> bindings();
     long opponent(Territory t);
     long nearby(Territory t, Direction direction);
@@ -27,10 +26,10 @@ interface PlayerI {
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t);
   
-    void invest(long amount);
+    void invest(long amount,Territory t);
     //returns true when collectable (have enough budget)
-    boolean collect(long amount);
-    void shoot(Direction direction, long  amount);
+    boolean collect(long amount,Territory t);
+    void shoot(Direction direction, long  amount,Territory t);
     //returns true if lost region is the city center
     void lostRegion(Region region, Territory t);
 }
@@ -43,7 +42,7 @@ public class Player implements PlayerI {
     private Plan plan;
     private final Map<String, Long> bindings = new HashMap<>();
 
-     public Player(long budget, int row, int col, Territory t) {
+     public Player(long budget, int row, int col) {
         crew = new CityCrew(row, col);
         cityCenter[0] = row;
         cityCenter[1] = col;
@@ -96,18 +95,13 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public double getDeposit() {
-        return crew.getDeposit();
+    public double getDeposit(Territory t) {
+        return crew.getDeposit(t);
     }
 
     @Override
-    public long getInterest() {
-        return crew.getInterest();
-    }
-
-    @Override
-    public long getMaxDeposit() {
-        return crew.getMaxDeposit();
+    public long getInterest(Territory t) {
+        return crew.getInterest(t);
     }
 
     @Override
@@ -150,22 +144,22 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void invest(long amount) {
+    public void invest(long amount,Territory t) {
         long cost = amount + 1;
         if ( budget >= cost ) {
             budget -= cost;
-            crew.invest(amount);
+            crew.invest(amount,t);
         } else {
             budget = Math.max(budget - 1, 0);
         }
     }
 
     @Override
-    public boolean collect(long amount) {
+    public boolean collect(long amount,Territory t) {
          long cost = 1;
          if (budget>=cost) {
              budget -= cost;
-             budget += crew.collect(amount);
+             budget += crew.collect(amount,t);
              // If the deposit becomes zero after the collection, the player loses the possession of that region.
              return true;
          }
@@ -173,11 +167,11 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void shoot(Direction direction, long amount) {
+    public void shoot(Direction direction, long amount,Territory t) {
         long cost = amount + 1;
         if (budget >= cost) {
             budget -= cost;
-            crew.shoot(direction, amount);
+            crew.shoot(direction, amount ,t);
         }
         //If the deposit becomes less than one, the opponent loses ownership of that region.
         //if the target region is a city center, and the attack reduces its deposit to zero, the attacked player loses the game.

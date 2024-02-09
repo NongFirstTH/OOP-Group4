@@ -1,7 +1,6 @@
 package Grammar.Parse;
 
 import Grammar.Expression.*;
-import Grammar.Plan.Plan;
 
 public class ExpressionParser implements Parser<Expression> {
 
