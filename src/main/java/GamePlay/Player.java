@@ -10,7 +10,7 @@ import java.util.Map;
 interface PlayerI {
     Region getCityCenter(Territory t);
     Plan getPlan();
-    void setPlan(Plan p);
+    void setPlan(Plan p, long cost);
     String getName();
     int getRow();
     int getCol();
@@ -27,7 +27,7 @@ interface PlayerI {
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t) throws EvalError;
   
-    void invest(long amount,Territory t);
+    void invest(long amount,Territory t, long maxDeposit);
     //returns true when collectable (have enough budget)
     boolean collect(long amount,Territory t);
     void shoot(Direction direction, long  amount,Territory t) throws EvalError;
@@ -43,12 +43,12 @@ public class Player implements PlayerI {
     private Plan plan;
     private final Map<String, Long> bindings = new HashMap<>();
 
-     public Player(long budget, int row, int col,Territory t) {
+     public Player(long budget, int row, int col, long init_center_dep, Territory t) {
         crew = new CityCrew(row, col);
         cityCenter[0] = row;
         cityCenter[1] = col;
         this.budget = budget;
-        t.getRegions(row,col).setOwner(this);
+        t.getRegions(row,col).setCityCenter(this, init_center_dep);
     }
 
     @Override
@@ -62,8 +62,11 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void setPlan(Plan plan) {
-        this.plan = plan;
+    public void setPlan(Plan plan, long cost) {
+         if (budget >= cost) {
+             budget -= cost;
+             this.plan = plan;
+         }
     }
 
     @Override
@@ -146,11 +149,11 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void invest(long amount,Territory t) {
+    public void invest(long amount,Territory t, long maxDeposit) {
         long cost = amount + 1;
         if ( budget >= cost ) {
             budget -= cost;
-            crew.invest(amount,t,this);
+            crew.invest(amount,t,this, maxDeposit);
         } else {
             budget = Math.max(budget - 1, 0);
         }
