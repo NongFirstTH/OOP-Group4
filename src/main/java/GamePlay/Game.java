@@ -64,7 +64,7 @@ public class Game {
     }
 
     private Game() {
-        playerturn = new Player(0, 0, 0, null);
+        playerturn = null;
         this.listOfPlayers = null;
         row = 0;
         col = 0;

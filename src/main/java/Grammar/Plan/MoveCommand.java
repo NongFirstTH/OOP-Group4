@@ -1,11 +1,12 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
+import Grammar.Expression.EvalError;
 
 
 public record MoveCommand (Direction dir) implements Plan {
     @Override
-    public boolean eval(Game g) {
+    public boolean eval(Game g) throws EvalError {
         return g.getPlayer().move(dir,g.getTerritory());
     }
 

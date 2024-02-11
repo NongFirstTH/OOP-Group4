@@ -6,12 +6,13 @@ interface RegionI {
     double deposit();
     long getInterest();
     void BeRelocated();
-    void beInvested(long amount);
-    void beCollected(long amount);
-    void beShot(Direction direction, long amount);
+    void beInvested(long amount,Player p);
+    long beCollected(long amount);
+    void beShot(long amount);
     double depositCal(double baseInterestRate, int currentTurn);
     double interestRateCal(double baseInterestRate, int currentTurn);
     Player getOwner();
+    void setOwner(Player p);
 }
 public class Region implements RegionI {
     private Player owner;
@@ -34,17 +35,17 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void beInvested(long amount) {
+    public void beInvested(long amount,Player p) {
 
     }
 
     @Override
-    public void beCollected(long amount) {
-
+    public long beCollected(long amount) {
+        return 0;
     }
 
     @Override
-    public void beShot(Direction direction, long amount) {
+    public void beShot(long amount) {
 
     }
 
@@ -62,6 +63,11 @@ public class Region implements RegionI {
     @Override
     public Player getOwner() {
         return owner;
+    }
+
+    @Override
+    public void setOwner(Player p) {
+        owner = p;
     }
 
 }

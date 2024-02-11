@@ -5,7 +5,7 @@ import Grammar.Plan.Direction;
 
 public record Nearby(Direction direction) implements Expression {
     @Override
-    public long eval(Game g){
+    public long eval(Game g) throws EvalError {
         return  g.getPlayer().nearby(g.getTerritory(), direction);
     }
     @Override

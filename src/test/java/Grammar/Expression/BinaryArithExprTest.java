@@ -1,11 +1,15 @@
 package Grammar.Expression;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Parse.ExpressionParser;
 import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +19,9 @@ public class BinaryArithExprTest {
         ExpressionParser e = new ExpressionParser(p);
         Territory t = new Territory(20,20);
         Player p1 = new Player(10,1,2,t);
-        return e.parse().eval(p1,t);
+        List<Player> l = new ArrayList<>();
+        l.add(p1);
+        return e.parse().eval(new Game(l,t));
     }
     @Test
     public void TestOperators() throws SyntaxError, EvalError {
