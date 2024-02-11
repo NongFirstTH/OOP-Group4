@@ -8,7 +8,7 @@ interface TerritoryI {
 public class Territory implements TerritoryI {
     private final int row;//rows in game
     private final int col;//cols in game
-    private Region[][] regions;
+    private final Region[][] regions;
 
     public Territory(int row ,int col){
         this.row = row;

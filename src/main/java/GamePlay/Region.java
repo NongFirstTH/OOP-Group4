@@ -6,13 +6,13 @@ interface RegionI {
     double deposit();
     long getInterest();
     void BeRelocated();
-    void beInvested(long amount,Player p);
+    void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount);
     void beShot(long amount);
-    double depositCal(double baseInterestRate, int currentTurn);
+    double depositCal(double baseInterestRate, int currentTurn, long maxDeposit);
     double interestRateCal(double baseInterestRate, int currentTurn);
     Player getOwner();
-    void setOwner(Player p);
+    void setCityCenter(Player p, long init_center_dep);
 }
 public class Region implements RegionI {
     private Player owner;
@@ -35,7 +35,7 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void beInvested(long amount,Player p) {
+    public void beInvested(long amount, Player p, long maxDeposit) {
 
     }
 
@@ -50,7 +50,7 @@ public class Region implements RegionI {
     }
 
     @Override
-    public double depositCal(double baseInterestRate, int currentTurn) {
+    public double depositCal(double baseInterestRate, int currentTurn, long maxDeposit) {
         deposit += deposit * interestRateCal(baseInterestRate, currentTurn) / 100.0;
         return deposit;
     }
@@ -66,8 +66,9 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void setOwner(Player p) {
+    public void setCityCenter(Player p, long init_center_dep) {
         owner = p;
+        deposit = init_center_dep;
     }
 
 }

@@ -14,7 +14,7 @@ interface CityCrewI {
 
     void move(Direction direction, Territory t) throws EvalError;
   
-    void invest(long amount, Territory t,Player p);
+    void invest(long amount, Territory t, Player p, long maxDeposit);
 
     long collect(long amount, Territory t);
 
@@ -137,8 +137,8 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public void invest(long amount,Territory t,Player p) {
-        t.getRegions(currow,curcol).beInvested(amount,p);
+    public void invest(long amount,Territory t, Player p, long maxDeposit) {
+        t.getRegions(currow,curcol).beInvested(amount, p, maxDeposit);
     }
 
     @Override

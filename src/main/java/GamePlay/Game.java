@@ -4,11 +4,26 @@ import Grammar.Expression.EvalError;
 import Grammar.Parse.PlanParser;
 import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
+import Grammar.Plan.Plan;
 
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
-public class Game {
+interface GameI {
+    Player getPlayer();
+    Territory getTerritory();
+    long getMaxDeposit();
+    void addPlayer(String name, int row, int col, Plan plan);
+    void nextTurn();
+    void revisePlan(Plan plan);
+
+    void executePlan() throws EvalError;
+
+    void playerLost(Player player);
+}
+
+public class Game implements GameI {
     private final long row;
     private final long col;
     private final long init_plan_sec;
@@ -19,17 +34,13 @@ public class Game {
     private final long max_dep;
     private final long interest_pct;
 
-    private final List<Player> listOfPlayers;
-    private int turnCount;
-    private Player playerturn;
+    private final Queue<Player> queueOfPlayers = new LinkedList<>();
+    private int turnCount = 0;
+    private Player playerTurn;
     private int time;
     private Territory t;
 
-    public Game(String s, List<Player> listOfPlayers, Territory t) throws SyntaxError, EvalError {
-        this.listOfPlayers = listOfPlayers;
-        playerturn = listOfPlayers.getFirst();
-        this.t = t;
-
+    public Game(String s, Territory t) throws SyntaxError, EvalError {
         Game g = new Game();
         Map<String, Long> bindings = g.getPlayer().bindings();
         new PlanParser(new PlanTokenizer(s)).parse().eval(null);
@@ -42,30 +53,25 @@ public class Game {
         rev_cost = bindings.get("rev_cost");
         max_dep = bindings.get("max_dep");
         interest_pct = bindings.get("interest_pct");
+
         t = new Territory((int) row, (int) col);
     }
 
-    public Game(List<Player> listOfPlayers, Territory t) throws SyntaxError, EvalError {
-        this.listOfPlayers = listOfPlayers;
-        playerturn = listOfPlayers.getFirst();
-        this.t = t;
-
-        Game g = new Game();
-        row = 20;
-        col = 20;
-        init_plan_sec = 0;
-        init_budget = 0;
-        init_center_dep = 0;
-        plan_rev_sec = 0;
-        rev_cost = 0;
-        max_dep = 0;
-        interest_pct = 0;
-        t = new Territory((int) row, (int) col);
+    public Game(int row, int col) throws SyntaxError, EvalError {
+        this.row=row;
+        this.col=col;
+        init_plan_sec=300;
+        init_budget=10000;
+        init_center_dep=100;
+        plan_rev_sec=1800;
+        rev_cost=100;
+        max_dep=1000000;
+        interest_pct=5;
+        t = new Territory(row, col);
     }
 
     private Game() {
-        playerturn = null;
-        this.listOfPlayers = null;
+        playerTurn = null;
         row = 0;
         col = 0;
         init_plan_sec = 0;
@@ -76,7 +82,42 @@ public class Game {
         max_dep = 0;
         interest_pct = 0;
     }
-    public Player getPlayer(){return playerturn;}
+
+    @Override
+    public Player getPlayer(){return playerTurn;}
+
+    @Override
     public Territory getTerritory(){return t;}
+
+    @Override
     public long getMaxDeposit(){return max_dep;}
+
+    @Override
+    public void addPlayer(String name, int row, int col, Plan plan) {
+        Player p = new Player(init_budget, row, col, init_center_dep, t);
+        p.setPlan(plan, 0);
+        queueOfPlayers.add(p);
+    }
+
+    @Override
+    public void nextTurn() {
+        playerTurn = queueOfPlayers.remove();
+        queueOfPlayers.add(playerTurn);
+        turnCount++;
+    }
+
+    @Override
+    public void revisePlan(Plan plan) {
+        playerTurn.setPlan(plan, rev_cost);
+    }
+
+    @Override
+    public void executePlan() throws EvalError {
+        playerTurn.getPlan().eval(this);
+    }
+
+    @Override
+    public void playerLost(Player player) {
+        queueOfPlayers.remove(player);
+    }
 }
