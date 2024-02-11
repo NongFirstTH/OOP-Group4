@@ -3,7 +3,7 @@ package Grammar.Expression;
 import GamePlay.Game;
 public record Opponent() implements Expression {
     @Override
-    public long eval(Game g){
+    public long eval(Game g) throws EvalError {
         return g.getPlayer().opponent(g.getTerritory());
     }
     @Override

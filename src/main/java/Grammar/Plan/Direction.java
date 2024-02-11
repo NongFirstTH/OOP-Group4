@@ -1,5 +1,5 @@
 package Grammar.Plan;
 
 public enum Direction {
-    up , down , upleft , upright , downleft , downright
+    up , upright , downright , down , downleft , upleft
 }

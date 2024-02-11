@@ -1,5 +1,6 @@
 package GamePlay;
 
+import Grammar.Expression.EvalError;
 import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
@@ -19,17 +20,17 @@ interface PlayerI {
     double getDeposit(Territory t);
     long getInterest(Territory t);
     Map<String, Long> bindings();
-    long opponent(Territory t);
-    long nearby(Territory t, Direction direction);
+    long opponent(Territory t) throws EvalError;
+    long nearby(Territory t, Direction direction) throws EvalError;
     //returns true when relocatable (to end turn)
     void relocate(Territory t);
     //returns true when movable (have enough budget)
-    boolean move(Direction direction, Territory t);
+    boolean move(Direction direction, Territory t) throws EvalError;
   
     void invest(long amount,Territory t);
     //returns true when collectable (have enough budget)
     boolean collect(long amount,Territory t);
-    void shoot(Direction direction, long  amount,Territory t);
+    void shoot(Direction direction, long  amount,Territory t) throws EvalError;
     //returns true if lost region is the city center
     void lostRegion(Region region, Territory t);
 }
@@ -42,11 +43,12 @@ public class Player implements PlayerI {
     private Plan plan;
     private final Map<String, Long> bindings = new HashMap<>();
 
-     public Player(long budget, int row, int col) {
+     public Player(long budget, int row, int col,Territory t) {
         crew = new CityCrew(row, col);
         cityCenter[0] = row;
         cityCenter[1] = col;
         this.budget = budget;
+        t.getRegions(row,col).setOwner(this);
     }
 
     @Override
@@ -110,13 +112,13 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public long opponent(Territory t) {
-        return crew.opponent(t);
+    public long opponent(Territory t) throws EvalError {
+        return crew.opponent(this,t);
     }
 
     @Override
-    public long nearby(Territory t, Direction direction) {
-        return crew.nearby(t, direction);
+    public long nearby(Territory t, Direction direction) throws EvalError {
+        return crew.nearby(t, direction,this);
     }
 
     @Override
@@ -130,7 +132,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean move(Direction direction, Territory t) {
+    public boolean move(Direction direction, Territory t) throws EvalError {
         long cost = 1;
         Player owner = crew.ownerMoveTo(direction, t);
         if ( budget >= cost ) {
@@ -148,7 +150,7 @@ public class Player implements PlayerI {
         long cost = amount + 1;
         if ( budget >= cost ) {
             budget -= cost;
-            crew.invest(amount,t);
+            crew.invest(amount,t,this);
         } else {
             budget = Math.max(budget - 1, 0);
         }
@@ -167,7 +169,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void shoot(Direction direction, long amount,Territory t) {
+    public void shoot(Direction direction, long amount,Territory t) throws EvalError {
         long cost = amount + 1;
         if (budget >= cost) {
             budget -= cost;
