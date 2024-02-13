@@ -148,7 +148,7 @@ public class CityCrew implements CityCrewI {
 
     @Override
     public void invest(long amount,Territory t, Player p, long maxDeposit) throws EvalError {
-        if((checkCrewAdjacent(p,t) && t.getRegions(currow,curcol) == null) || t.getRegions(currow,curcol).getOwner().equals(p)){
+        if((checkCrewAdjacent(p,t))){
             t.getRegions(currow,curcol).beInvested(amount, p, maxDeposit);
         }
     }
