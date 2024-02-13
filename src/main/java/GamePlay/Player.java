@@ -27,10 +27,10 @@ interface PlayerI {
     boolean move(Direction direction, Territory t) throws EvalError;
     void invest(long amount,Territory t, long maxDeposit);
     //returns true when collectable (have enough budget)
-    boolean collect(long amount,Territory t);
-    void shoot(Direction direction, long  amount,Territory t) throws EvalError;
+    boolean collect(long amount, Game g);
+    void shoot(Direction direction, long  amount, Game g) throws EvalError;
     //returns true if lost region is the city center
-    void lostRegion(Region region, Territory t);
+    void lostRegion(Region region, Game g);
     void interestCal(double baseInterestRate, long maxDeposit);
     void myTurn();
 }
@@ -164,11 +164,11 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public boolean collect(long amount,Territory t) {
+    public boolean collect(long amount, Game g) {
          long cost = 1;
          if (budget>=cost) {
              budget -= cost;
-             budget += crew.collect(amount,t);
+             budget += crew.collect(amount, g);
              // If the deposit becomes zero after the collection, the player loses the possession of that region.
              return true;
          }
@@ -176,11 +176,11 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void shoot(Direction direction, long amount,Territory t) throws EvalError {
+    public void shoot(Direction direction, long amount, Game g) throws EvalError {
         long cost = amount + 1;
         if (budget >= cost) {
             budget -= cost;
-            crew.shoot(direction, amount ,t);
+            crew.shoot(direction, amount , g);
         }
         //If the deposit becomes less than one, the opponent loses ownership of that region.
         //if the target region is a city center, and the attack reduces its deposit to zero, the attacked player loses the game.
@@ -205,10 +205,13 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void lostRegion(Region region, Territory t) {
+    public void lostRegion(Region region, Game g) {
          regions.remove(region);
-         if (region == getCityCenter(t)) {
-             plan = null;
+         if (region == getCityCenter(g.getTerritory())) {
+             g.playerLost(this);
+             for (Region r:regions) {
+                 r.lost();
+             }
          }
     }
 

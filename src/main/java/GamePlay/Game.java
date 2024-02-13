@@ -121,11 +121,7 @@ public class Game implements GameI {
     @Override
     public void executePlan() throws EvalError {
         Plan plan = playerTurn.getPlan();
-        if (plan==null) {
-            playerLost(playerTurn);
-        } else {
-            plan.eval(this);
-        }
+        plan.eval(this);
     }
 
     @Override
