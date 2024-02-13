@@ -130,7 +130,7 @@ public class Player implements PlayerI {
     @Override
     public void relocate(Territory t) {
         long cost = 5 * minDistance() + 10;
-        if ( budget >= cost && this == crew.owner(t) ) {
+        if ( budget >= cost && this == crew.getOwner(t) ) {
             budget-=cost;
             cityCenter[0] = crew.getCurrow();
             cityCenter[1] = crew.getCurcol();
@@ -154,7 +154,8 @@ public class Player implements PlayerI {
     @Override
     public void invest(long amount,Territory t, long maxDeposit) {
         long cost = amount + 1;
-        if ( budget >= cost ) {
+        Player owner = crew.getOwner(t);
+        if ( budget >= cost && (owner==null||owner==this)) {
             budget -= cost;
             crew.invest(amount,t,this, maxDeposit);
             if (amount>0) regions.add(t.getRegions(crew.getCurrow(), crew.getCurcol()));
@@ -168,7 +169,8 @@ public class Player implements PlayerI {
          long cost = 1;
          if (budget>=cost) {
              budget -= cost;
-             budget += crew.collect(amount, g);
+             if (crew.getOwner(g.getTerritory())==this)
+                budget += crew.collect(amount, g);
              // If the deposit becomes zero after the collection, the player loses the possession of that region.
              return true;
          }
