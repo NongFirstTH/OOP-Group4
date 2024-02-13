@@ -20,7 +20,7 @@ interface CityCrewI {
 
     void shoot(Direction direction, long amount, Game g) throws EvalError;
 
-    Player owner(Territory t);
+    Player getOwner(Territory t);
 }
 
 public class CityCrew implements CityCrewI {
@@ -194,7 +194,7 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public Player owner(Territory t) {
+    public Player getOwner(Territory t) {
         return t.getOwner(currow,curcol);
     }
 }
