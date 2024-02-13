@@ -9,7 +9,7 @@ import java.util.Map;
 public record AttackCommand (Direction dir, Expression expr) implements Plan {
     @Override
     public boolean eval(Game g) throws EvalError {
-        g.getPlayer().shoot(dir, expr.eval(g),g.getTerritory());
+        g.getPlayer().shoot(dir, expr.eval(g),g);
         return true;
     }
 

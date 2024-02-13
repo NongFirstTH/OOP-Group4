@@ -16,9 +16,9 @@ interface CityCrewI {
   
     void invest(long amount, Territory t, Player p, long maxDeposit);
 
-    long collect(long amount, Territory t);
+    long collect(long amount, Game g);
 
-    void shoot(Direction direction, long amount, Territory t) throws EvalError;
+    void shoot(Direction direction, long amount, Game g) throws EvalError;
 
     Player owner(Territory t);
 }
@@ -142,12 +142,12 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public long collect(long amount ,Territory t) {
-        return t.getRegions(currow,curcol).beCollected(amount);
+    public long collect(long amount ,Game g) {
+        return g.getTerritory().getRegions(currow,curcol).beCollected(amount, g);
     }
 
     @Override
-    public void shoot(Direction direction, long amount,Territory t) throws EvalError {
+    public void shoot(Direction direction, long amount, Game g) throws EvalError {
         int shootrow = currow;
         int shootcol = curcol;
         switch (direction){
@@ -175,8 +175,9 @@ public class CityCrew implements CityCrewI {
             }
             default -> throw new EvalError("unknown direction " + direction);
         }
-        if(t.getRegions(shootrow,shootcol)!=null){
-            t.getRegions(shootrow,shootcol).beShot(amount);
+        Region r = g.getTerritory().getRegions(shootrow,shootcol);
+        if(r!=null){
+            r.beShot(amount, g);
         }
     }
 

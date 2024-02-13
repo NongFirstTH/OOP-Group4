@@ -1,19 +1,19 @@
 package GamePlay;
 
-import Grammar.Plan.Direction;
-
 interface RegionI {
     double getDeposit();
     void interestCal(double baseInterestRate, int currentTurn, long maxDeposit);
     long getInterest(double baseInterestRate, int currentTurn);
     void BeRelocated(Player p, Region destinationRegion);
     void beInvested(long amount, Player p, long maxDeposit);
-    long beCollected(long amount);
-    void beShot(long amount);
+    long beCollected(long amount, Game g);
+    void beShot(long amount, Game g);
     double depositCal(double baseInterestRate, int currentTurn, long maxDeposit);
     double interestRateCal(double baseInterestRate, int currentTurn);
     Player getOwner();
     void setCityCenter(Player p, long init_center_dep);
+
+    void lost();
 }
 public class Region implements RegionI {
     private Player owner;
@@ -55,13 +55,13 @@ public class Region implements RegionI {
     }
 
     @Override
-    public long beCollected(long amount) {
+    public long beCollected(long amount, Game g) {
         deposit -= amount;
         return (long)deposit;
     }
 
     @Override
-    public void beShot(long amount) {
+    public void beShot(long amount, Game g) {
 
     }
 
@@ -87,4 +87,8 @@ public class Region implements RegionI {
         deposit = init_center_dep;
     }
 
+    @Override
+    public void lost() {
+        owner = null;
+    }
 }

@@ -11,7 +11,7 @@ public record RegionCommand (String command, Expression expr) implements Plan {
             g.getPlayer().invest(expr.eval(g), g.getTerritory(), g.getMaxDeposit());
             return true;
         }else if(command.equals("collect")){
-            return g.getPlayer().collect(expr.eval(g),g.getTerritory());
+            return g.getPlayer().collect(expr.eval(g),g);
         }
         throw new EvalError("Undefined Region Command: " + command);
     }
