@@ -1,7 +1,10 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
+import Grammar.Expression.EvalError;
+import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,10 +15,11 @@ import static org.junit.Assert.*;
 public class MoveCommandTest {
 
     @Test
-    public void testMove_SuccessfulMove() {
+    public void testMove_SuccessfulMove() throws SyntaxError, EvalError {
         //Create an instance of the testing classes
         Territory t = new Territory(20,20);
-        Player p = new Player(100,1,1,t);
+        Player p = new Player(100,1,1,100,t);
+        Game g = new Game(p.getRow(),p.getCol());
         // Create a MoveCommand instance with a valid direction
         MoveCommand moveCommand1 = new MoveCommand(down);
         MoveCommand moveCommand2 = new MoveCommand(up);
@@ -25,12 +29,12 @@ public class MoveCommandTest {
         MoveCommand moveCommand6 = new MoveCommand(downleft);
         // Perform the move
 
-        boolean result1 = moveCommand1.eval(p, t);
-        boolean result2 = moveCommand2.eval(p, t);
-        boolean result3 = moveCommand3.eval(p, t);
-        boolean result4 = moveCommand4.eval(p, t);
-        boolean result5 = moveCommand5.eval(p, t);
-        boolean result6 = moveCommand6.eval(p, t);
+        boolean result1 = moveCommand1.eval(g);
+        boolean result2 = moveCommand2.eval(g);
+        boolean result3 = moveCommand3.eval(g);
+        boolean result4 = moveCommand4.eval(g);
+        boolean result5 = moveCommand5.eval(g);
+        boolean result6 = moveCommand6.eval(g);
         // Always false because we don't give them a budget
 //        assertTrue(result1);
 //        assertTrue(result2);

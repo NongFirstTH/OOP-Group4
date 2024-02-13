@@ -3,9 +3,9 @@ package GamePlay;
 import Grammar.Plan.Direction;
 
 interface RegionI {
-    double deposit();
-    long getInterest();
-    void BeRelocated();
+    double getDeposit();
+    void getInterest(double baseInterest, int currentTurn, long maxDeposit);
+    void BeRelocated(Player p, Region destinationRegion);
     void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount);
     void beShot(long amount);
@@ -18,30 +18,42 @@ public class Region implements RegionI {
     private Player owner;
     private double deposit;
     private long interest;
+    private Territory t;
 
     @Override
-    public double deposit() {
+    public double getDeposit() {
         return deposit;
     }
 
     @Override
-    public long getInterest() {
-        return interest;
+    public void getInterest(double baseInterest, int currentTurn, long maxDeposit) {
+        double calculatedDeposit = depositCal(baseInterest,currentTurn,maxDeposit);
+        if (calculatedDeposit >= maxDeposit) {
+            interest = maxDeposit;
+        } else {
+            interest = (long) calculatedDeposit;
+        }
     }
 
     @Override
-    public void BeRelocated() {
+    public void BeRelocated(Player p, Region destinationRegion) {
 
     }
 
     @Override
     public void beInvested(long amount, Player p, long maxDeposit) {
-
+        double currentDeposit  = deposit + amount;
+        if (deposit >= maxDeposit) {
+            deposit = maxDeposit;
+        } else {
+            deposit = currentDeposit;
+        }
     }
 
     @Override
     public long beCollected(long amount) {
-        return 0;
+        deposit -= amount;
+        return (long)deposit;
     }
 
     @Override
