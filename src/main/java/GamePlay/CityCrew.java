@@ -43,7 +43,7 @@ public class CityCrew implements CityCrewI {
 
     @Override
     public double getDeposit(Territory t) {
-        return t.getRegions(currow,curcol).deposit();
+        return t.getRegions(currow,curcol).getDeposit();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class CityCrew implements CityCrewI {
     public long nearby(Territory t, Direction direction,Player p) throws EvalError {
         CityCrew c = new CityCrew(currow,curcol);
         long x = distance(c,direction,p,t);
-        double opponentDeposit = t.getRegions(c.currow,c.curcol).deposit();
+        double opponentDeposit = t.getRegions(c.currow,c.curcol).getDeposit();
         long y = opponentDeposit == 0 ? 0 : (long) (1 + Math.log10(opponentDeposit));
         return (long) (100L *x + y);
     }

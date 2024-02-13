@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class AttackCommandTest {
     Territory t = new Territory(20,20);
-    Player p1 = new Player(100,1,1,t);
-    Player p2 = new Player(100,1,2,t);
+    Player p1 = new Player(100,1,1,100,t);
+    Player p2 = new Player(100,1,2,100,t);
     PlanTokenizer pt1 = new PlanTokenizer("10");
     ExpressionParser e1 = new ExpressionParser(pt1);
 

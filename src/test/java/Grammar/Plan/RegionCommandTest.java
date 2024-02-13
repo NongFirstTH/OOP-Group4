@@ -1,5 +1,6 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
@@ -14,9 +15,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegionCommandTest {
-    public RegionCommandTest() throws SyntaxError {
+    public RegionCommandTest() throws SyntaxError, EvalError {
     }
-
+    Territory t = new Territory(100,100);
+    Player p = new Player(100,1,1,100,t);
+    Game g = new Game(p.getRow(),p.getCol());
     PlanTokenizer pt1 = new PlanTokenizer("50");
     ExpressionParser e1 = new ExpressionParser(pt1);
     @Test
@@ -24,9 +27,9 @@ public class RegionCommandTest {
 
         RegionCommand regionCommand = new RegionCommand("invest", e1.parse());
         Territory t = new Territory(100,100);
-        Player p = new Player(100,1,1,t);
+        Player p = new Player(100,1,1,100,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
-        assertDoesNotThrow(() -> regionCommand.eval(p, t));
+        assertDoesNotThrow(() -> regionCommand.eval(g));
         assertEquals(49, p.getBudget());
     }
 
@@ -37,9 +40,9 @@ public class RegionCommandTest {
 
         RegionCommand regionCommand = new RegionCommand("invest", e2.parse());
         Territory t = new Territory(100,100);
-        Player p = new Player(100,1,1,t);
+        Player p = new Player(100,1,1,100,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
-        assertDoesNotThrow(() -> regionCommand.eval(p, t));
+        assertDoesNotThrow(() -> regionCommand.eval(g));
         assertEquals(99, p.getBudget());
 
     }
@@ -51,9 +54,9 @@ public class RegionCommandTest {
 
         RegionCommand regionCommand = new RegionCommand("collect",e3.parse());
         Territory t = new Territory(100,100);
-        Player p = new Player(100,1,1,t);
+        Player p = new Player(100,1,1,100,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
-        assertDoesNotThrow(() -> regionCommand.eval(p, t));
+        assertDoesNotThrow(() -> regionCommand.eval(g));
         assertEquals(99,p.getBudget());
 
     }
@@ -64,10 +67,10 @@ public class RegionCommandTest {
 
         RegionCommand regionCommand = new RegionCommand("collect", e4.parse());
         Territory t = new Territory(100,100);
-        Player p = new Player(0,1,1,t);
+        Player p = new Player(0,1,1,100,t);
         // Make sure to handle the exception or add 'throws EvalError' to the method signature
-        assertDoesNotThrow(() -> regionCommand.eval(p, t));
-        assertFalse(regionCommand.eval(p, t));
+        assertDoesNotThrow(() -> regionCommand.eval(g));
+        assertFalse(regionCommand.eval(g));
     }
 
     PlanTokenizer pt5 = new PlanTokenizer("111");
@@ -77,7 +80,7 @@ public class RegionCommandTest {
 
         RegionCommand regionCommand = new RegionCommand("find", e5.parse());
         Territory t = new Territory(100,100);
-        Player p = new Player(100,1,1,t);
-        assertThrows(EvalError.class, () -> regionCommand.eval(p, t));
+        Player p = new Player(100,1,1,100,t);
+        assertThrows(EvalError.class, () -> regionCommand.eval(g));
     }
 }
