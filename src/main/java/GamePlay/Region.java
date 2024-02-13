@@ -4,7 +4,8 @@ import Grammar.Plan.Direction;
 
 interface RegionI {
     double getDeposit();
-    void getInterest(double baseInterest, int currentTurn, long maxDeposit);
+    void interestCal(double baseInterestRate, int currentTurn, long maxDeposit);
+    long getInterest(double baseInterestRate, int currentTurn);
     void BeRelocated(Player p, Region destinationRegion);
     void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount);
@@ -26,6 +27,9 @@ public class Region implements RegionI {
     }
 
     @Override
+    public void interestCal(double baseInterestRate, int currentTurn, long maxDeposit) {
+    }
+  
     public void getInterest(double baseInterest, int currentTurn, long maxDeposit) {
         double calculatedDeposit = depositCal(baseInterest,currentTurn,maxDeposit);
         if (calculatedDeposit >= maxDeposit) {

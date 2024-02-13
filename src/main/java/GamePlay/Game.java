@@ -21,6 +21,8 @@ interface GameI {
     void executePlan() throws EvalError;
 
     void playerLost(Player player);
+
+    long getBaseInterest();
 }
 
 public class Game implements GameI {
@@ -35,7 +37,6 @@ public class Game implements GameI {
     private final long interest_pct;
 
     private final Queue<Player> queueOfPlayers = new LinkedList<>();
-    private int turnCount = 0;
     private Player playerTurn;
     private int time;
     private Territory t;
@@ -90,6 +91,11 @@ public class Game implements GameI {
     public Territory getTerritory(){return t;}
 
     @Override
+    public long getBaseInterest(){
+        return interest_pct;
+    }
+
+    @Override
     public long getMaxDeposit(){return max_dep;}
 
     @Override
@@ -103,7 +109,8 @@ public class Game implements GameI {
     public void nextTurn() {
         playerTurn = queueOfPlayers.remove();
         queueOfPlayers.add(playerTurn);
-        turnCount++;
+        playerTurn.myTurn();
+        playerTurn.interestCal(interest_pct, max_dep);
     }
 
     @Override
@@ -113,7 +120,12 @@ public class Game implements GameI {
 
     @Override
     public void executePlan() throws EvalError {
-        playerTurn.getPlan().eval(this);
+        Plan plan = playerTurn.getPlan();
+        if (plan==null) {
+            playerLost(playerTurn);
+        } else {
+            plan.eval(this);
+        }
     }
 
     @Override

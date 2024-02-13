@@ -25,7 +25,7 @@ public record Variable(String name) implements Expression {
                 return (long) g.getPlayer().getDeposit(g.getTerritory());
             }
             case "interest" -> {
-                return g.getPlayer().getInterest(g.getTerritory());
+                return g.getPlayer().getInterest(g.getBaseInterest(), g.getTerritory());
             }
             case "maxdeposit" -> {
                 return g.getMaxDeposit();

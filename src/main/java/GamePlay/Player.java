@@ -4,8 +4,7 @@ import Grammar.Expression.EvalError;
 import Grammar.Plan.Direction;
 import Grammar.Plan.Plan;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 interface PlayerI {
     Region getCityCenter(Territory t);
@@ -18,7 +17,7 @@ interface PlayerI {
     int getCurcol();
     long getBudget();
     double getDeposit(Territory t);
-    long getInterest(Territory t);
+    long getInterest(double baseInterestRate, Territory t);
     Map<String, Long> bindings();
     long opponent(Territory t) throws EvalError;
     long nearby(Territory t, Direction direction) throws EvalError;
@@ -26,13 +25,14 @@ interface PlayerI {
     void relocate(Territory t);
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t) throws EvalError;
-  
     void invest(long amount,Territory t, long maxDeposit);
     //returns true when collectable (have enough budget)
     boolean collect(long amount,Territory t);
     void shoot(Direction direction, long  amount,Territory t) throws EvalError;
     //returns true if lost region is the city center
     void lostRegion(Region region, Territory t);
+    void interestCal(double baseInterestRate, long maxDeposit);
+    void myTurn();
 }
 
 public class Player implements PlayerI {
@@ -41,7 +41,9 @@ public class Player implements PlayerI {
     private final CityCrew crew;
     private long budget;
     private Plan plan;
+    private final LinkedHashSet<Region> regions = new LinkedHashSet<>();
     private final Map<String, Long> bindings = new HashMap<>();
+    private int turn;
 
      public Player(long budget, int row, int col, long init_center_dep, Territory t) {
         crew = new CityCrew(row, col);
@@ -49,6 +51,7 @@ public class Player implements PlayerI {
         cityCenter[1] = col;
         this.budget = budget;
         t.getRegions(row,col).setCityCenter(this, init_center_dep);
+        regions.add(t.getRegions(row, col));
     }
 
     @Override
@@ -105,8 +108,8 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public long getInterest(Territory t) {
-        return crew.getInterest(t);
+    public long getInterest(double baseInterestRate, Territory t) {
+        return crew.getInterest(baseInterestRate, turn, t);
     }
 
     @Override
@@ -154,6 +157,7 @@ public class Player implements PlayerI {
         if ( budget >= cost ) {
             budget -= cost;
             crew.invest(amount,t,this, maxDeposit);
+            if (amount>0) regions.add(t.getRegions(crew.getCurrow(), crew.getCurcol()));
         } else {
             budget = Math.max(budget - 1, 0);
         }
@@ -202,7 +206,21 @@ public class Player implements PlayerI {
 
     @Override
     public void lostRegion(Region region, Territory t) {
-        if (region == getCityCenter(t)) {
+         regions.remove(region);
+         if (region == getCityCenter(t)) {
+             plan = null;
+         }
+    }
+
+    @Override
+    public void interestCal(double baseInterestRate, long maxDeposit) {
+        for (Region region:regions) {
+            region.interestCal(baseInterestRate, turn, maxDeposit);
         }
+    }
+
+    @Override
+    public void myTurn() {
+        turn++;
     }
 }

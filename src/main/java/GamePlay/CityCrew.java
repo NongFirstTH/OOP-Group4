@@ -6,8 +6,8 @@ interface CityCrewI {
     int getCurcol();
     int getCurrow();
     double getDeposit(Territory t);
-    long getInterest(Territory t);
-    long opponent(Player p,Territory t) throws EvalError;
+    long getInterest(double baseInterestRate, int currentTurn, Territory t);
+    long opponent(Player p, Territory t) throws EvalError;
     long nearby(Territory t, Direction direction,Player p) throws EvalError;
   
     Player ownerMoveTo(Direction direction, Territory t) throws EvalError;
@@ -47,8 +47,8 @@ public class CityCrew implements CityCrewI {
     }
 
     @Override
-    public long getInterest(Territory t) {
-        return t.getRegions(currow,curcol).getInterest();
+    public long getInterest(double baseInterestRate, int currentTurn, Territory t) {
+        return t.getRegions(currow,curcol).getInterest(baseInterestRate, currentTurn);
     }
 
     private long distance(CityCrew c,Direction direction,Player p,Territory t) throws EvalError {
