@@ -25,7 +25,7 @@ interface PlayerI {
     void relocate(Territory t);
     //returns true when movable (have enough budget)
     boolean move(Direction direction, Territory t) throws EvalError;
-    void invest(long amount,Territory t, long maxDeposit);
+    void invest(long amount,Territory t, long maxDeposit) throws EvalError;
     //returns true when collectable (have enough budget)
     boolean collect(long amount, Game g);
     void shoot(Direction direction, long  amount, Game g) throws EvalError;
@@ -152,7 +152,7 @@ public class Player implements PlayerI {
     }
 
     @Override
-    public void invest(long amount,Territory t, long maxDeposit) {
+    public void invest(long amount,Territory t, long maxDeposit) throws EvalError {
         long cost = amount + 1;
         if ( budget >= cost ) {
             budget -= cost;
