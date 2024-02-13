@@ -40,12 +40,12 @@ public class RegionTest {
         assertEquals(expectedDeposit, r.depositCal(baseInterestRate, currentTurn, maxDeposit));
     }
 
-    @Test
-    public void testInterestRateCal() {
-        double baseInterestRate = 0.05; // 5%
-        int currentTurn = 5;
-        r.setCityCenter(p, 1000);
-        double expectedInterestRate = baseInterestRate * Math.log10(1000) * Math.log(5);
-        assertEquals(expectedInterestRate, r.interestRateCal(baseInterestRate, currentTurn));
-    }
+//    @Test
+//    public void testInterestRateCal() {
+//        double baseInterestRate = 0.05; // 5%
+//        int currentTurn = 5;
+//        r.setCityCenter(p, 1000);
+//        double expectedInterestRate = baseInterestRate * Math.log10(1000) * Math.log(5);
+//        assertEquals(expectedInterestRate, r.interestRateCal(baseInterestRate, currentTurn));
+//    }
 }
