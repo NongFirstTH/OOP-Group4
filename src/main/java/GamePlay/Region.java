@@ -3,13 +3,11 @@ package GamePlay;
 interface RegionI {
     double getDeposit();
     void interestCal(double baseInterestRate, int currentTurn, long maxDeposit);
-    long getInterest(double baseInterestRate, int currentTurn);
-    void BeRelocated(Player p, Region destinationRegion);
+    long getInterest(double baseInterestRate, int currentTurn) ;
     void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount, Game g);
     void beShot(long amount, Game g);
     double depositCal(double baseInterestRate, int currentTurn, long maxDeposit);
-    double interestRateCal(double baseInterestRate, int currentTurn);
     Player getOwner();
     void setCityCenter(Player p, long init_center_dep);
 
@@ -20,6 +18,7 @@ public class Region implements RegionI {
     private double deposit;
     private long interest;
     private Territory t;
+    private double currentRate;
 
     @Override
     public double getDeposit() {
@@ -27,25 +26,31 @@ public class Region implements RegionI {
     }
 
     @Override
-    public void interestCal(double baseInterestRate, int currentTurn, long maxDeposit) {
-    }
-  
-    public void getInterest(double baseInterest, int currentTurn, long maxDeposit) {
-        double calculatedDeposit = depositCal(baseInterest,currentTurn,maxDeposit);
-        if (calculatedDeposit >= maxDeposit) {
-            interest = maxDeposit;
-        } else {
-            interest = (long) calculatedDeposit;
+    public double depositCal(double baseInterestRate, int currentTurn, long maxDeposit) {
+        deposit += getInterest(baseInterestRate, currentTurn);
+        if(deposit >= maxDeposit){
+            deposit = maxDeposit;
         }
+        return deposit;
     }
 
     @Override
-    public void BeRelocated(Player p, Region destinationRegion) {
+    public long getInterest(double baseInterestRate, int currentTurn) {
+        double calculatedInterestRate = interestRateCal(baseInterestRate, currentTurn);
+        double calculatedInterest = deposit * (calculatedInterestRate / 100.0);
+        interest = (long)calculatedInterest;
+        return interest;
+    }
 
+    private double interestRateCal(double baseInterestRate, int currentTurn) {
+        double calculatedInterestRate = baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
+        currentRate = calculatedInterestRate;
+        return calculatedInterestRate;
     }
 
     @Override
     public void beInvested(long amount, Player p, long maxDeposit) {
+        owner = p;
         double currentDeposit  = deposit + amount;
         if (deposit >= maxDeposit) {
             deposit = maxDeposit;
@@ -56,24 +61,28 @@ public class Region implements RegionI {
 
     @Override
     public long beCollected(long amount, Game g) {
-        deposit -= amount;
-        return (long)deposit;
+        if(amount <= deposit){
+            deposit -= amount;
+            if(deposit == 0){
+                owner.lostRegion(this,g);
+                owner = null;
+            }
+            return amount;
+        }else{
+            return 0;
+        }
     }
 
     @Override
     public void beShot(long amount, Game g) {
-
-    }
-
-    @Override
-    public double depositCal(double baseInterestRate, int currentTurn, long maxDeposit) {
-        deposit += deposit * interestRateCal(baseInterestRate, currentTurn) / 100.0;
-        return deposit;
-    }
-
-    @Override
-    public double interestRateCal(double baseInterestRate, int currentTurn) {
-        return baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
+        deposit -= amount;
+        if(deposit <= 0){
+            deposit = 0;
+            if(owner != null){
+                owner.lostRegion(this, g);
+                owner = null;
+            }
+        }
     }
 
     @Override
