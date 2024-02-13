@@ -14,7 +14,7 @@ interface CityCrewI {
 
     void move(Direction direction, Territory t) throws EvalError;
   
-    void invest(long amount, Territory t, Player p, long maxDeposit);
+    void invest(long amount, Territory t, Player p, long maxDeposit) throws EvalError;
 
     long collect(long amount, Game g);
 
@@ -136,9 +136,21 @@ public class CityCrew implements CityCrewI {
         return false;
     }
 
+    private  boolean checkCrewAdjacent(Player p,Territory t) throws EvalError {
+        for(Direction direction : Direction.values()){
+            CityCrew c = new CityCrew(currow,curcol);
+            if(c.isMove(direction,t) && t.getRegions(c.currow,c.curcol).getOwner().equals(p)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
-    public void invest(long amount,Territory t, Player p, long maxDeposit) {
-        t.getRegions(currow,curcol).beInvested(amount, p, maxDeposit);
+    public void invest(long amount,Territory t, Player p, long maxDeposit) throws EvalError {
+        if((checkCrewAdjacent(p,t) && t.getRegions(currow,curcol) == null) || t.getRegions(currow,curcol).getOwner().equals(p)){
+            t.getRegions(currow,curcol).beInvested(amount, p, maxDeposit);
+        }
     }
 
     @Override
