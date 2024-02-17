@@ -36,7 +36,7 @@ interface PlayerI {
 }
 
 public class Player implements PlayerI {
-    private String name;
+    private final String name;
     private final int[] cityCenter = new int[2];
     private final CityCrew crew;
     private long budget;
@@ -45,13 +45,14 @@ public class Player implements PlayerI {
     private final Map<String, Long> bindings = new HashMap<>();
     private int turn;
 
-     public Player(long budget, int row, int col, long init_center_dep, Territory t) {
-        crew = new CityCrew(row, col);
-        cityCenter[0] = row;
-        cityCenter[1] = col;
-        this.budget = budget;
-        t.getRegions(row,col).setCityCenter(this, init_center_dep);
-        regions.add(t.getRegions(row, col));
+     public Player(String name, long budget, int row, int col, long init_center_dep, Territory t) {
+         this.name = name;
+         crew = new CityCrew(row, col);
+         cityCenter[0] = row;
+         cityCenter[1] = col;
+         this.budget = budget;
+         t.getRegions(row,col).setCityCenter(this, init_center_dep);
+         regions.add(t.getRegions(row, col));
     }
 
     @Override
@@ -220,7 +221,7 @@ public class Player implements PlayerI {
     @Override
     public void interestCal(double baseInterestRate, long maxDeposit) {
         for (Region region:regions) {
-            region.interestCal(baseInterestRate, turn, maxDeposit);
+            region.depositCal(baseInterestRate, turn, maxDeposit);
         }
     }
 

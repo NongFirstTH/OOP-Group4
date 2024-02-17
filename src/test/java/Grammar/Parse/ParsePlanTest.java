@@ -12,7 +12,7 @@ public class ParsePlanTest {
         return s;
     }
 
-    public void assertParseThenPrettyPrint(String result, String plan) throws SyntaxError {
+    void assertParseThenPrettyPrint(String result, String plan) throws SyntaxError {
         StringBuilder s = parseThenPrettyPrint(plan);
         assertEquals(result, s.toString());
     }
@@ -123,7 +123,7 @@ public class ParsePlanTest {
     }
 
     @Test
-    public void sampleConstructionPlanTest () throws SyntaxError {
+    public void sampleConstructionPlanTest() throws SyntaxError {
         assertParseThenPrettyPrint(
                 """
                         t = (t + 1)

@@ -146,7 +146,7 @@ public class PlanTokenizer implements Tokenizer{
     }
 
     private boolean isIgnore(char character) {
-        return character == ' ' || character == '\n';
+        return character == ' ' || character == '\t' || character == '\n';
     }
 
     private boolean isOperator(char character) {

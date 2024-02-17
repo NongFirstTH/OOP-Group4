@@ -2,7 +2,6 @@ package GamePlay;
 
 interface RegionI {
     double getDeposit();
-    void interestCal(double baseInterestRate, int currentTurn, long maxDeposit);
     long getInterest(double baseInterestRate, int currentTurn) ;
     void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount, Game g);

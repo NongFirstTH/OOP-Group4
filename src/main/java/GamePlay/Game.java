@@ -100,9 +100,10 @@ public class Game implements GameI {
 
     @Override
     public void addPlayer(String name, int row, int col, Plan plan) {
-        Player p = new Player(init_budget, row, col, init_center_dep, t);
+        Player p = new Player(name, init_budget, row, col, init_center_dep, t);
         p.setPlan(plan, 0);
         queueOfPlayers.add(p);
+        if (playerTurn==null) playerTurn = p;
     }
 
     @Override
