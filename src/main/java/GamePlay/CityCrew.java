@@ -138,7 +138,8 @@ public class CityCrew implements CityCrewI {
     }
 
     private  boolean checkCrewAdjacent(Player p,Territory t) throws EvalError {
-        if (t.getRegions(currow, curcol).getOwner().equals(p))
+        Player owner = getOwner(t);
+        if (owner!=null && owner.equals(p))
             return true;
         for(Direction direction : Direction.values()){
             CityCrew c = new CityCrew(currow,curcol);
