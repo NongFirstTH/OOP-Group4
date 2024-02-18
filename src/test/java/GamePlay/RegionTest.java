@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RegionTest {
     private Region r = new Region();
     private Territory t = new Territory(100,100);
-    private Player p = new Player(100,1,1,100,t);
+    private Player p = new Player("Knack",100,1,1,100,t);
     public RegionTest() throws SyntaxError, EvalError {
     }
 
