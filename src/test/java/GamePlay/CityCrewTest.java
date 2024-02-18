@@ -21,10 +21,11 @@ class CityCrewTest {
     @Test
     void Testmove() throws SyntaxError, EvalError {
         Territory t = new Territory(3,3);
-        Player p = new Player(1000,1,1,t);
+        Player p = new Player("A",1000,1,1,100,t);
         List<Player> l = new ArrayList<>();
         l.add(p);
-        Game g = new Game(l,t);
+        Game g = new Game(3,3);
+        g.addPlayer("A",1,1,null);
 
 //        assertMove(1,1,g,up);
 //

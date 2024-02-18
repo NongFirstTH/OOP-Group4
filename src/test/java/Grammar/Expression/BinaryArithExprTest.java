@@ -1,6 +1,7 @@
 package Grammar.Expression;
 
 import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Parse.ExpressionParser;
@@ -17,11 +18,9 @@ public class BinaryArithExprTest {
     public long result(String src) throws SyntaxError, EvalError {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
-        Territory t = new Territory(20,20);
-        Player p1 = new Player(10,1,2,t);
-        List<Player> l = new ArrayList<>();
-        l.add(p1);
-        return e.parse().eval(new Game(l,t));
+        GameFactory gameF = new GameFactory();
+        Game g = gameF.newGame1P();
+        return e.parse().eval(g);
     }
     @Test
     public void TestOperators() throws SyntaxError, EvalError {
