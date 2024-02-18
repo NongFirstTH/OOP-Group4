@@ -1,58 +1,106 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Expression.EvalError;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 
-import java.util.HashMap;
-
-import static Grammar.Plan.Direction.*;
+import static  Grammar.Plan.Direction.*;
 import static org.junit.Assert.*;
 
 public class MoveCommandTest {
+    MoveCommand d = new MoveCommand(down);
+    MoveCommand u = new MoveCommand(up);
+    MoveCommand dr = new MoveCommand(downright);
+    MoveCommand ur = new MoveCommand(upright);
+    MoveCommand ul = new MoveCommand(upleft);
+    MoveCommand dl = new MoveCommand(downleft);
+    @Test
+    public void move_Success() throws SyntaxError, EvalError {
+        GameFactory gameFactory = new GameFactory();
+        Game g = gameFactory.newGame2P(3,4,2,5);
+        Player p = g.getPlayer();
+
+        //test move to opponent's region
+        assertTrue(ur.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(4,p.getCurcol());
+        assertEquals(9999,p.getBudget());
+
+        //Test down direction
+        assertTrue(d.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(4,p.getCurrow());
+        assertEquals(4,p.getCurcol());
+        assertEquals(9998,p.getBudget());
+
+        //test up direction
+        assertTrue(u.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(4,p.getCurcol());
+        assertEquals(9997,p.getBudget());
+
+        //test down-right direction
+        assertTrue(dr.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(5,p.getCurcol());
+        assertEquals(9996,p.getBudget());
+
+        //test up-right direction
+        assertTrue(ur.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(6,p.getCurcol());
+        assertEquals(9995,p.getBudget());
+
+        //test up-left direction
+        assertTrue(dl.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(5,p.getCurcol());
+        assertEquals(9994,p.getBudget());
+
+        //test down-left direction
+        assertTrue(ul.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        System.out.println("Current budget: " + p.getBudget());
+        assertEquals(3,p.getCurrow());
+        assertEquals(4,p.getCurcol());
+        assertEquals(9993,p.getBudget());
+    }
 
     @Test
-    public void testMove_SuccessfulMove() throws SyntaxError, EvalError {
-        //Create an instance of the testing classes
-        Territory t = new Territory(20,20);
-        Player p = new Player(100,1,1,100,t);
-        Game g = new Game(p.getRow(),p.getCol());
-        // Create a MoveCommand instance with a valid direction
-        MoveCommand moveCommand1 = new MoveCommand(down);
-        MoveCommand moveCommand2 = new MoveCommand(up);
-        MoveCommand moveCommand3 = new MoveCommand(downright);
-        MoveCommand moveCommand4 = new MoveCommand(upright);
-        MoveCommand moveCommand5 = new MoveCommand(upleft);
-        MoveCommand moveCommand6 = new MoveCommand(downleft);
-        // Perform the move
+    public void move_Fail() throws EvalError, SyntaxError {
+        GameFactory gameFactory = new GameFactory();
+        Game g = gameFactory.newGame1P(2,5);
+        Player p =  g.getPlayer();
+        Territory t = g.getTerritory();
+        //make player have 0 budget with amount 9999 + 1
+        p.invest(9999,t,10000);
 
-        boolean result1 = moveCommand1.eval(g);
-        boolean result2 = moveCommand2.eval(g);
-        boolean result3 = moveCommand3.eval(g);
-        boolean result4 = moveCommand4.eval(g);
-        boolean result5 = moveCommand5.eval(g);
-        boolean result6 = moveCommand6.eval(g);
-        // Always false because we don't give them a budget
-//        assertTrue(result1);
-//        assertTrue(result2);
-//        assertTrue(result3);
-//        assertTrue(result4);
-//        assertTrue(result5);
-//        assertTrue(result6);
+        assertFalse(d.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        assertFalse(u.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        assertFalse(dr.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        assertFalse(ur.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        assertFalse(ul.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
+        assertFalse(dl.eval(g));
+        System.out.println("Current position: " + "(" + p.getCurrow() + ", " + p.getCurcol() + ")");
     }
-//    @Test
-//    public void testMove_InvalidDirection() {
-//        // Create an instance of the testing classes
-//        Territory t = new Territory(20,20);
-//        Player p = new Player(100,1,1,t);
-//        // Create a MoveCommand instance with an invalid direction
-//        MoveCommand moveCommand = new MoveCommand(Direction.up);
-//        //Perform the move
-//        boolean result = moveCommand.move(p, t);
-//        //Assert that the move was not successful due to an invalid direction
-//        assertFalse(result);
-//    }
 }
