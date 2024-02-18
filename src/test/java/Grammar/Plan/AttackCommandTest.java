@@ -1,31 +1,108 @@
 package Grammar.Plan;
 
+import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
-import GamePlay.Territory;
+import GamePlay.Region;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
 import Grammar.Parse.ExpressionParser;
 import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import static Grammar.Plan.Direction.*;
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class AttackCommandTest {
-    Territory t = new Territory(20,20);
+    @Test
+    public void shoot_Success() throws SyntaxError, EvalError {
+        GameFactory gameFactory = new GameFactory();
+        Game g = gameFactory.newGame2P(1,1,2,2);
+        Player p1 = g.getPlayer();
 
-    PlanTokenizer pt1 = new PlanTokenizer("10");
-    ExpressionParser e1 = new ExpressionParser(pt1);
+        PlanTokenizer tokenizer = new PlanTokenizer("10");
+        ExpressionParser expressionParser = new ExpressionParser(tokenizer);
+        Expression expr = expressionParser.parse();
 
-    public AttackCommandTest() throws SyntaxError {
+        PlanTokenizer tokenizer1 = new PlanTokenizer("90");
+        ExpressionParser expressionParser1 = new ExpressionParser(tokenizer1);
+        Expression expr1 = expressionParser1.parse();
+
+        AttackCommand shoot_dr1 = new AttackCommand(downright, expr);
+        AttackCommand shoot_dr2 = new AttackCommand(downright, expr1);
+        AttackCommand shoot_d = new AttackCommand(down,expr);
+        assertTrue(shoot_dr1.eval(g));
+        // budget decrease by 10 + 1
+        assertEquals(9989,p1.getBudget());
+        // deposit decrease by 10
+        assertEquals(90,g.getTerritory().getRegions(2,2).getDeposit());
+
+        // go to next turn change to p2
+        g.nextTurn();
+        Player p2 = g.getPlayer();
+        // move to (2,1) then invest
+        p2.move(downleft,g.getTerritory());
+        p2.invest(15,g.getTerritory(),1000);
+
+        // move to (3,1) then invest
+        p2.move(down, g.getTerritory());
+        p2.invest(15,g.getTerritory(),1000);
+
+        // go to next turn change to p1
+        g.nextTurn();
+        assertTrue(shoot_d.eval(g));
+        assertEquals(5, g.getTerritory().getRegions(2,1).getDeposit());
+        assertTrue(shoot_d.eval(g));
+        assertEquals(0, g.getTerritory().getRegions(2,1).getDeposit());
+        assertNull(g.getTerritory().getRegions(2,1).getOwner());
+
+        // shoot city center to make p2 loss
+        assertTrue(shoot_dr2.eval(g));
+
+        assertEquals(0,g.getTerritory().getRegions(2,2).getDeposit());
+        assertNull(g.getTerritory().getRegions(2,2).getOwner());
+
+        /* check if city center had been destroyed
+           other region that this player occupied is unowned
+           but deposit is still the same as before
+         */
+        assertNull(g.getTerritory().getRegions(3,1).getOwner());
+        assertEquals(15, g.getTerritory().getRegions(3,1).getDeposit());
     }
 
     @Test
-    public void AttackTest() throws SyntaxError, EvalError {
-//        AttackCommand attackCommand = new AttackCommand(Direction.up, e1.parse());
-//        p1.shoot(upright,10);
-//        assertEquals(89,p1.getBudget());
-//        assertEquals(100, p2.getBudget());
+    public void shoot_unowned() throws SyntaxError, EvalError {
+        GameFactory gameFactory = new GameFactory();
+        Game g = gameFactory.newGame2P(1,1,2,2);
+        Player p1 = g.getPlayer();
+
+        PlanTokenizer tokenizer = new PlanTokenizer("10");
+        ExpressionParser expressionParser = new ExpressionParser(tokenizer);
+        Expression expr = expressionParser.parse();
+
+        AttackCommand shoot_ur = new AttackCommand(upright, expr);
+        assertTrue(shoot_ur.eval(g));
+        /* test if shoot to unowned region
+           nothing happened but still pay
+         */
+        assertEquals(9989, p1.getBudget());
+    }
+    @Test
+    public void shoot_notEnoughBudget() throws SyntaxError, EvalError {
+        GameFactory gameFactory = new GameFactory();
+        Game g = gameFactory.newGame2P(1,1,2,2);
+        Player p1 = g.getPlayer();
+
+        PlanTokenizer tokenizer = new PlanTokenizer("10000");
+        ExpressionParser expressionParser = new ExpressionParser(tokenizer);
+        Expression expr = expressionParser.parse();
+
+        AttackCommand shoot_ur = new AttackCommand(upright, expr);
+        assertTrue(shoot_ur.eval(g));
+        /* test if shoot to unowned region
+           nothing happened but still pay
+         */
+        assertEquals(9999, p1.getBudget());
     }
 }

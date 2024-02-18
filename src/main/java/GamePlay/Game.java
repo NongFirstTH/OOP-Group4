@@ -123,6 +123,7 @@ public class Game implements GameI {
         queueOfPlayers.add(playerTurn);
         playerTurn.myTurn();
         playerTurn.interestCal(interest_pct, max_dep);
+        playerTurn = queueOfPlayers.peek();
     }
 
     @Override
