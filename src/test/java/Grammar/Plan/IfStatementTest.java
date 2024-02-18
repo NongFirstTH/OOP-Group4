@@ -1,15 +1,14 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
 import Grammar.Expression.EvalError;
 import Grammar.Expression.Expression;
 import Grammar.Expression.IntLit;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
-
-import static Grammar.Plan.Direction.upleft;
-import static Grammar.Plan.Direction.upright;
+import static Grammar.Plan.Direction.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IfStatementTest {
@@ -29,8 +28,9 @@ public class IfStatementTest {
     }
 
     void assertTestEvalEffects(int currow, int curcol, Plan s) throws EvalError, SyntaxError {
-        Game g = new Game(10, 10);
-        g.addPlayer(null ,3, 3, null);
+
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(3, 3);
 
         s.eval(g);
 

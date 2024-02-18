@@ -22,7 +22,7 @@ interface GameI {
     void nextTurn();
     void revisePlan(Plan plan);
 
-    void executePlan() throws EvalError;
+    boolean executePlan() throws EvalError;
 
     void playerLost(Player player);
 
@@ -107,13 +107,14 @@ public class Game implements GameI {
         Player p = new Player(name, init_budget, row, col, init_center_dep, t);
         p.setPlan(plan, 0);
         queueOfPlayers.add(p);
-        if (playerTurn==null) nextTurn();
+        if (playerTurn==null)
+            nextTurn();
     }
 
     @Override
     public void addPlayer(String name, Plan plan) {
         Random random = new Random();
-        Player p = new Player(name, init_budget, random.nextInt((int) row)+1, random.nextInt((int) col)+1, init_center_dep, t);
+        addPlayerToTestOnly(name, random.nextInt((int) row)+1, random.nextInt((int) col)+1, plan);
     }
 
     @Override
@@ -130,9 +131,10 @@ public class Game implements GameI {
     }
 
     @Override
-    public void executePlan() throws EvalError {
+    public boolean executePlan() throws EvalError {
         Plan plan = playerTurn.getPlan();
         plan.eval(this);
+        return queueOfPlayers.size() > 1;
     }
 
     @Override
