@@ -84,6 +84,7 @@ public class CityCrew implements CityCrewI {
         long x = distance(c,direction,p,t);
         double opponentDeposit = t.getRegions(c.currow,c.curcol).getDeposit();
         long y = opponentDeposit == 0 ? 0 : (long) (1 + Math.log10(opponentDeposit));
+        if(x==Long.MAX_VALUE) return 0;
         return (long) (100L *x + y);
     }
 

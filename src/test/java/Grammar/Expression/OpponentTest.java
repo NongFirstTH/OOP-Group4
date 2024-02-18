@@ -1,31 +1,42 @@
 package Grammar.Expression;
-
 import GamePlay.Game;
-import GamePlay.Player;
-import GamePlay.Territory;
 import Grammar.Parse.SyntaxError;
-import Grammar.Plan.Direction;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static Grammar.Plan.Direction.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OpponentTest {
     @Test
-    public void TestEval() throws SyntaxError, EvalError {
-        Opponent a = new Opponent();
-        Territory t = new Territory(20,20);
-        Player p1 = new Player(10,3,1,t);
-        Player p2 = new Player(10,4,2,t);
-        Player p3 = new Player(10,3,2,t);
-        List<Player> l = new ArrayList<>();
-        l.add(p1);
-        l.add(p2);
+    public void HasClosestOpponent() throws SyntaxError, EvalError {
+        Game g = new Game(9,9);
+        g.addPlayer("myPlayer",5,4,null);
+        g.addPlayer("PlayerUp",2,4,null);
+        g.addPlayer("PlayerUpright",4,5,null);
+        g.addPlayer("PlayerUpright2",4,6,null);
+        g.addPlayer("PlayerDownright",7,8,null);
+        g.addPlayer("PlayerDown",7,4,null);
+        g.addPlayer("PlayerDownleft",6,1,null);
+        g.addPlayer("PlayerUpleft",3,1,null);
 
-        assertEquals(0,a.eval(new Game(l,t)));
+        Opponent n = new Opponent();
+        assertEquals(12,n.eval(g));
+    }
+    @Test
+    public void SameDistanceOpponent() throws SyntaxError, EvalError {
+        Game g = new Game(9,9);
+        g.addPlayer("myPlayer",5,4,null);
+        g.addPlayer("PlayerUp",2,4,null);
+        g.addPlayer("PlayerUpleft",3,1,null);
+
+        Opponent n = new Opponent();
+        assertEquals(31,n.eval(g));
+    }
+    @Test
+    public void NoOpponent() throws SyntaxError, EvalError {
+        Game g = new Game(9,9);
+        g.addPlayer("myPlayer",5,4,null);
+
+        Opponent n = new Opponent();
+        assertEquals(0,n.eval(g));
     }
 
     String printResult() throws SyntaxError {
