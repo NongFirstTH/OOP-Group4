@@ -25,7 +25,7 @@ class CityCrewTest {
         List<Player> l = new ArrayList<>();
         l.add(p);
         Game g = new Game(3,3);
-        g.addPlayer("A",1,1,null);
+        g.addPlayerToTestOnly("A",1,1,null);
 
 //        assertMove(1,1,g,up);
 //
