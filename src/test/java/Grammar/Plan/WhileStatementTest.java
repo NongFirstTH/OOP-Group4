@@ -1,6 +1,7 @@
 package Grammar.Plan;
 
 import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
 import Grammar.Expression.*;
 import Grammar.Parse.PlanParser;
@@ -34,8 +35,8 @@ public class WhileStatementTest {
 
         Plan while10L = new PlanParser(new PlanTokenizer(s)).parse();
 
-        Game g = new Game(10, 10);
-        g.addPlayer(null, 1, 1, null);
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(1, 1);
 
         assertTrue(while10L.eval(g));
         assertEquals(10, new Variable("count").eval(g));
@@ -51,8 +52,8 @@ public class WhileStatementTest {
 
         Plan while10L = new PlanParser(new PlanTokenizer(s)).parse();
 
-        Game g = new Game(10, 10);
-        g.addPlayer(null, 1, 1, null);
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(1, 1);
 
         assertFalse(while10L.eval(g));
         assertEquals(1, new Variable("count").eval(g));
@@ -69,8 +70,9 @@ public class WhileStatementTest {
 
         Plan while10L = new PlanParser(new PlanTokenizer(s)).parse();
 
-        Game g = new Game(10, 10);
-        g.addPlayer(null, 1, 1, null);
+
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(1, 1);
 
         assertFalse(while10L.eval(g));
         assertEquals(13, new Variable("count").eval(g));
@@ -85,8 +87,8 @@ public class WhileStatementTest {
 
         Plan while10L = new PlanParser(new PlanTokenizer(s)).parse();
 
-        Game g = new Game(10, 10);
-        g.addPlayer(null, 1, 1, null);
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(1, 1);
 
         assertTrue(while10L.eval(g));
         assertEquals(10000, new Variable("count").eval(g));

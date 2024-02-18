@@ -6,6 +6,8 @@ import Grammar.Expression.EvalError;
 import Grammar.Parse.SyntaxError;
 import org.junit.Test;
 
+import GamePlay.GameFactory;
+
 import static Grammar.Plan.Direction.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,8 +24,8 @@ public class StatementPairTest {
     }
 
     public void assertTestEvalEffects(int currow, int curcol, Plan s) throws EvalError, SyntaxError {
-        Game g = new Game(10, 10);
-        g.addPlayer(null ,3, 3, null);
+        GameFactory factory = new GameFactory();
+        Game g = factory.newGame1P(5, 5);
 
         s.eval(g);
 
@@ -38,9 +40,9 @@ public class StatementPairTest {
         Plan moveTrue = new MoveCommand(upleft);
         Plan moveFalse = new StatementPair(new MoveCommand(upright), new Done());
 
-        assertTestEvalEffects(2, 1, new StatementPair(moveTrue ,moveTrue));
-        assertTestEvalEffects(2, 3, new StatementPair(moveTrue, moveFalse));
-        assertTestEvalEffects(3, 4, new StatementPair(moveFalse, moveTrue));
-        assertTestEvalEffects(3, 4, new StatementPair(moveFalse, moveFalse));
+        assertTestEvalEffects(4, 3, new StatementPair(moveTrue ,moveTrue));
+        assertTestEvalEffects(4, 5, new StatementPair(moveTrue, moveFalse));
+        assertTestEvalEffects(5, 6, new StatementPair(moveFalse, moveTrue));
+        assertTestEvalEffects(5, 6, new StatementPair(moveFalse, moveFalse));
     }
 }

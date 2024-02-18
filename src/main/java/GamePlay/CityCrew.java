@@ -143,7 +143,8 @@ public class CityCrew implements CityCrewI {
             return true;
         for(Direction direction : Direction.values()){
             CityCrew c = new CityCrew(currow,curcol);
-            if(c.isMove(direction,t) && t.getRegions(c.currow,c.curcol).getOwner().equals(p)){
+            Player owner2 = t.getRegions(c.currow,c.curcol).getOwner();
+            if(c.isMove(direction,t) && owner2!=null && owner2.equals(p)){
                 return true;
             }
         }
