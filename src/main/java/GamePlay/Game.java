@@ -9,12 +9,16 @@ import Grammar.Plan.Plan;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 
 interface GameI {
     Player getPlayer();
     Territory getTerritory();
     long getMaxDeposit();
-    void addPlayer(String name, int row, int col, Plan plan);
+    void addPlayerToTestOnly(String name, int row, int col, Plan plan);
+
+    void addPlayer(String name, Plan plan);
+
     void nextTurn();
     void revisePlan(Plan plan);
 
@@ -99,11 +103,17 @@ public class Game implements GameI {
     public long getMaxDeposit(){return max_dep;}
 
     @Override
-    public void addPlayer(String name, int row, int col, Plan plan) {
+    public void addPlayerToTestOnly(String name, int row, int col, Plan plan) {
         Player p = new Player(name, init_budget, row, col, init_center_dep, t);
         p.setPlan(plan, 0);
         queueOfPlayers.add(p);
-        if (playerTurn==null) playerTurn = p;
+        if (playerTurn==null) nextTurn();
+    }
+
+    @Override
+    public void addPlayer(String name, Plan plan) {
+        Random random = new Random();
+        Player p = new Player(name, init_budget, random.nextInt((int) row)+1, random.nextInt((int) col)+1, init_center_dep, t);
     }
 
     @Override
