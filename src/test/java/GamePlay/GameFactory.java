@@ -10,7 +10,7 @@ public class GameFactory {
     }
 
     public Game newGame1P(int row, int col) throws SyntaxError, EvalError {
-        Game g = new Game(10, 10);
+        Game g = new Game(10,10);
         g.addPlayerToTestOnly("p1" ,row, col, null);
         return g;
     }
