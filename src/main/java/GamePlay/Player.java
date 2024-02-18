@@ -184,6 +184,8 @@ public class Player implements PlayerI {
         if (budget >= cost) {
             budget -= cost;
             crew.shoot(direction, amount , g);
+        } else {
+            budget = Math.max(budget - 1, 0);
         }
         //If the deposit becomes less than one, the opponent loses ownership of that region.
         //if the target region is a city center, and the attack reduces its deposit to zero, the attacked player loses the game.
