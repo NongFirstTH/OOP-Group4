@@ -9,8 +9,8 @@ public class GameFactory {
         return new Game(10, 10);
     }
 
-    public Game newGame1P() throws SyntaxError, EvalError {
-        Game g = new Game(10, 10);
+    public Game newGame1P(int row, int col) throws SyntaxError, EvalError {
+        Game g = new Game(row, col);
         g.addPlayerToTestOnly("p1" ,5, 5, null);
         return g;
     }
