@@ -1,6 +1,7 @@
 package Grammar.Expression;
 
 import GamePlay.Game;
+import GamePlay.GameFactory;
 import GamePlay.Player;
 import GamePlay.Territory;
 import Grammar.Parse.SyntaxError;
@@ -14,24 +15,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VariableTest {
     long evalResult(String src) throws EvalError, SyntaxError {
         Variable v = new Variable(src);
-        Territory t = new Territory(20,20);
-        Player p1 = new Player(10,2,3,t);
-        List<Player> l = new ArrayList<>();
-        l.add(p1);
-        p1.bindings().put("a", 220L);
-        p1.bindings().put("b", 290L);
-        return v.eval(new Game(l,t));
+        Game g = new Game(9,9);
+        g.addPlayerToTestOnly("p",1,1,null);
+        g.getPlayer().bindings().put("a", 220L);
+        g.getPlayer().bindings().put("b", 290L);
+        return v.eval(g);
     }
     @Test
     public void TestReadSpecialVar() throws EvalError, SyntaxError {
-        assertEquals(2,evalResult("rows"));
-        assertEquals(3,evalResult("cols"));
-        assertEquals(2,evalResult("currow"));
-        assertEquals(3,evalResult("curcol"));
-        assertEquals(10,evalResult("budget"));
-        assertEquals(0,evalResult("deposit"));
+        assertEquals(1,evalResult("rows"));
+        assertEquals(1,evalResult("cols"));
+        assertEquals(1,evalResult("currow"));
+        assertEquals(1,evalResult("curcol"));
+        assertEquals(10000,evalResult("budget"));
+        assertEquals(100,evalResult("deposit"));
         assertEquals(0,evalResult("interest"));
-        assertEquals(0,evalResult("maxdeposit"));
+        assertEquals(1000000,evalResult("maxdeposit"));
     }
     @Test
     public void TestReadVar() throws EvalError, SyntaxError {
@@ -43,9 +42,7 @@ public class VariableTest {
     @Test
     public void TestEvalRandom() throws EvalError, SyntaxError {
         Variable s = new Variable("random");
-        Territory t = new Territory(20,20);
-        Player p1 = new Player(10,1,1,t);
-        double result = s.eval(new Game("a",null,t));
+        double result = s.eval(null);
         for(int i = 0;i<1000;i++){
             assertTrue(result >= 0 && result<=1000);
         }

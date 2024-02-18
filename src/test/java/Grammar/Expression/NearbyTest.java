@@ -10,14 +10,14 @@ public class NearbyTest {
     @Test
     public void NearbyHasOpponent() throws SyntaxError, EvalError {
         Game g = new Game(9,9);
-        g.addPlayer("myPlayer",5,4,null);
-        g.addPlayer("PlayerUp",2,4,null);
-        g.addPlayer("PlayerUpright",4,5,null);
-        g.addPlayer("PlayerUpright2",4,6,null);
-        g.addPlayer("PlayerDownright",7,8,null);
-        g.addPlayer("PlayerDown",7,4,null);
-        g.addPlayer("PlayerDownleft",6,1,null);
-        g.addPlayer("PlayerUpleft",3,1,null);
+        g.addPlayerToTestOnly("myPlayer",5,4,null);
+        g.addPlayerToTestOnly("PlayerUp",2,4,null);
+        g.addPlayerToTestOnly("PlayerUpright",4,5,null);
+        g.addPlayerToTestOnly("PlayerUpright2",4,6,null);
+        g.addPlayerToTestOnly("PlayerDownright",7,8,null);
+        g.addPlayerToTestOnly("PlayerDown",7,4,null);
+        g.addPlayerToTestOnly("PlayerDownleft",6,1,null);
+        g.addPlayerToTestOnly("PlayerUpleft",3,1,null);
 
         Nearby n = new Nearby(up);
         assertEquals(303,n.eval(g));
@@ -35,7 +35,7 @@ public class NearbyTest {
     @Test
     public void NearbyHasNoOpponent() throws SyntaxError, EvalError {
         Game g = new Game(9,9);
-        g.addPlayer("myPlayer",5,4,null);
+        g.addPlayerToTestOnly("myPlayer",5,4,null);
 
         Nearby n = new Nearby(up);
         assertEquals(0,n.eval(g));

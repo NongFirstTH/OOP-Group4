@@ -19,7 +19,7 @@ public class BinaryArithExprTest {
         PlanTokenizer p = new PlanTokenizer(src);
         ExpressionParser e = new ExpressionParser(p);
         GameFactory gameF = new GameFactory();
-        Game g = gameF.newGame1P();
+        Game g = gameF.newGame1P(1,1);
         return e.parse().eval(g);
     }
     @Test
