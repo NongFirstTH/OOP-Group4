@@ -6,10 +6,7 @@ import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import Grammar.Plan.Plan;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 interface GameI {
     Player getPlayer();
@@ -40,8 +37,8 @@ public class Game implements GameI {
     private final long max_dep;
     private final long interest_pct;
 
-    private final Queue<Player> queueOfPlayers = new LinkedList<>();
-    private Player playerTurn;
+    private final List<Player> players = new LinkedList<>();
+    private int turn;
     private int time;
     private Territory t;
 
@@ -76,7 +73,7 @@ public class Game implements GameI {
     }
 
     private Game() {
-        playerTurn = null;
+        turn = 0;
         row = 0;
         col = 0;
         init_plan_sec = 0;
@@ -89,7 +86,7 @@ public class Game implements GameI {
     }
 
     @Override
-    public Player getPlayer(){return playerTurn;}
+    public Player getPlayer(){return players.get(turn);}
 
     @Override
     public Territory getTerritory(){return t;}
@@ -106,40 +103,53 @@ public class Game implements GameI {
     public void addPlayerToTestOnly(String name, int row, int col, Plan plan) {
         Player p = new Player(name, init_budget, row, col, init_center_dep, t);
         p.setPlan(plan, 0);
-        queueOfPlayers.add(p);
-        if (playerTurn==null)
-            nextTurn();
+        players.add(p);
     }
 
     @Override
     public void addPlayer(String name, Plan plan) {
         Random random = new Random();
-        addPlayerToTestOnly(name, random.nextInt((int) row)+1, random.nextInt((int) col)+1, plan);
+        boolean isUniq = false;
+        int row = 0, col = 0;
+        while (!isUniq) {
+            row = random.nextInt((int) this.row) + 1;
+            col = random.nextInt((int) this.col) + 1;
+            isUniq = true;
+            for (Player p: players) {
+                if (row == p.getRow() && col == p.getCol()) {
+                    isUniq = false;
+                    break;
+                }
+            }
+        }
+
+        addPlayerToTestOnly(name, row, col, plan);
     }
 
     @Override
     public void nextTurn() {
-        playerTurn = queueOfPlayers.remove();
-        queueOfPlayers.add(playerTurn);
-        playerTurn.myTurn();
-        playerTurn.interestCal(interest_pct, max_dep);
-        playerTurn = queueOfPlayers.peek();
+        turn = (turn+1)%players.size();
+        Player p = getPlayer();
+        p.myTurn();
+        p.interestCal(interest_pct, max_dep);
     }
 
     @Override
     public void revisePlan(Plan plan) {
-        playerTurn.setPlan(plan, rev_cost);
+        getPlayer().setPlan(plan, rev_cost);
     }
 
     @Override
     public boolean executePlan() throws EvalError {
-        Plan plan = playerTurn.getPlan();
+        Plan plan = getPlayer().getPlan();
         plan.eval(this);
-        return queueOfPlayers.size() > 1;
+        return players.size()>1;
     }
 
     @Override
     public void playerLost(Player player) {
-        queueOfPlayers.remove(player);
+        int lost = players.indexOf(player);
+        players.remove(player);
+        turn = lost<turn ? turn-1 : turn;
     }
 }

@@ -5,9 +5,13 @@ import Grammar.Plan.*;
 
 public class PlanParser implements Parser<Plan> {
     private final PlanTokenizer tkz;
+    private final ExpressionParser exprParser;
+    private final DirectionParser dirParser;
 
     public PlanParser(PlanTokenizer tkz) {
         this.tkz = tkz;
+        exprParser = new ExpressionParser(tkz);
+        dirParser = new DirectionParser(tkz);
     }
     public Plan parse() throws SyntaxError {
         // begin parsing at start symbol
@@ -67,8 +71,8 @@ public class PlanParser implements Parser<Plan> {
         return switch (peek) {
             case "done" -> new Done();
             case "relocate" -> new Relocate();
-            case "move" -> new MoveCommand(new DirectionParser(tkz).parse());
-            case "shoot" -> new AttackCommand(new DirectionParser(tkz).parse(), parseExpression());
+            case "move" -> new MoveCommand(dirParser.parse());
+            case "shoot" -> new AttackCommand(dirParser.parse(), parseExpression());
             default -> new RegionCommand(peek, parseExpression());
         };
     }
@@ -103,7 +107,7 @@ public class PlanParser implements Parser<Plan> {
     }
 
     private Expression parseExpression() throws SyntaxError {
-        return  new ExpressionParser(tkz).parse();
+        return exprParser.parse();
     }
 
 
