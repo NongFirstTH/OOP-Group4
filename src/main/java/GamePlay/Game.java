@@ -12,11 +12,15 @@ interface GameI {
     Player getPlayer();
     Territory getTerritory();
     long getMaxDeposit();
+
+    void addPlayer(String name);
+
     void addPlayerToTestOnly(String name, int row, int col, Plan plan);
 
-    void addPlayer(String name, Plan plan);
-
     void nextTurn();
+
+    void devisePlan(int p, Plan plan);
+
     void revisePlan(Plan plan);
 
     boolean executePlan() throws EvalError;
@@ -99,15 +103,7 @@ public class Game implements GameI {
     @Override
     public long getMaxDeposit(){return max_dep;}
 
-    @Override
-    public void addPlayerToTestOnly(String name, int row, int col, Plan plan) {
-        Player p = new Player(name, init_budget, row, col, init_center_dep, t);
-        p.setPlan(plan, 0);
-        players.add(p);
-    }
-
-    @Override
-    public void addPlayer(String name, Plan plan) {
+    private int[] getUniqueCityCenter() {
         Random random = new Random();
         boolean isUniq = false;
         int row = 0, col = 0;
@@ -122,8 +118,21 @@ public class Game implements GameI {
                 }
             }
         }
+        return new int[]{row, col};
+    }
 
-        addPlayerToTestOnly(name, row, col, plan);
+    @Override
+    public void addPlayer(String name) {
+        int[] cityCenter = getUniqueCityCenter();
+        Player p = new Player(name, init_budget, cityCenter[0], cityCenter[1], init_center_dep, t);
+        players.add(p);
+    }
+
+    @Override
+    public void addPlayerToTestOnly(String name, int row, int col, Plan plan) {
+        Player p = new Player(name, init_budget, row, col, init_center_dep, t);
+        p.setPlan(plan, 0);
+        players.add(p);
     }
 
     @Override
@@ -132,6 +141,11 @@ public class Game implements GameI {
         Player p = getPlayer();
         p.myTurn();
         p.interestCal(interest_pct, max_dep);
+    }
+
+    @Override
+    public void devisePlan(int p, Plan plan) {
+        players.get(p).setPlan(plan, 0);
     }
 
     @Override
@@ -151,5 +165,7 @@ public class Game implements GameI {
         int lost = players.indexOf(player);
         players.remove(player);
         turn = lost<turn ? turn-1 : turn;
+
+//        System.out.println("\t"+player.getName()+" lost");
     }
 }
