@@ -5,6 +5,7 @@ import SockJS from "sockjs-client/dist/sockjs";
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import {setIsConnected, appendMessage,setStompClient} from "../store/Slices/webSocketSlice.ts";
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
+import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
 
 function useWebSocket(){
     const dispatch = useAppDispatch()
@@ -32,6 +33,7 @@ function useWebSocket(){
     }
 
     function addPlayer(username : string){
+        console.log('Add player call');
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             const stringWrapper = {
             text: username
@@ -83,16 +85,12 @@ function useWebSocket(){
         }
     }
 
-    const onConnected = (stompClient : Stomp.Client, username : string) => {
+    const onConnected = (stompClient : Stomp.Client) => {
         stompClient.subscribe('/topic/public', onMessageReceived);
         stompClient.subscribe('/topic/region', onRegionMutate);
-        const chatMessage = {
-            text: username,
-        };
-        //stompClient.send("/app/game.new", {}, JSON.stringify(chatMessage));
+        stompClient.subscribe('/topic/territory', onGetTerritory);
         dispatch(setIsConnected(true))
         dispatch(setStompClient(stompClient))
-        addPlayer(username)
     }
     const onMessageReceived = (payload : Stomp.Message) => {
         dispatch(appendMessage(JSON.parse(payload.body)))
@@ -100,13 +98,21 @@ function useWebSocket(){
     const onRegionMutate = (payload : Stomp.Message) => {
         console.log(JSON.parse(payload.body))
     }
+    const getTerritory = () => {
+        if (webSocket.stompClient && webSocket.stompClient.connected) {
+            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify({}));
+        }
+    }
+    const onGetTerritory = (payload : Stomp.Message) => {
+        dispatch(sliceSetTerritory(JSON.parse(payload.body)))
+    }
 //     const count = (count : String) => {
 //         stompClient.subscribe('/topic/public', onMessageReceived);
 //         stompClient.send("/app/chat.getCount", {}, JSON.stringify({count : getCount}));
 //         dispatch(setCount(count))
 //     }
 
-    return {gameConfig,addPlayer,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage}
+    return {gameConfig,addPlayer,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage,getTerritory}
 }
 
 export default useWebSocket;

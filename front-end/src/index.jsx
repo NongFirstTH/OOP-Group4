@@ -1,41 +1,38 @@
 import React, { useState } from "react";
 import "./forApp.css";
-import App from "./App.jsx";
+import AddPlayer from "./AddPlayer.jsx";
+import Start from "./components/webComponents/Start.tsx";
+import Map from "./components/webComponents/Map.jsx";
+import { useAppSelector } from "./store/hooks.ts";
+import { selectWebSocket } from "./store/Slices/webSocketSlice.ts";
+
 
 const Index = () => {
-  const [startGame, setStartGame] = useState(false);
 
-  const onStartGame = () => {
-    setStartGame(true);
-  };
 
-  const handleBack = () => {
-    setStartGame(false);
-  };
+ const webSocketState = useAppSelector(selectWebSocket);
 
-  return (
-    <div>
-      {startGame ? (
-        <App onBack={handleBack} />
-      ) : (
-        <div className="app-container flex flex-col items-center justify-center h-screen bg-gray-200">
-          <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />{" "}
-          {/* Added photo */}
-          <h1 className="text-4xl font-bold mb-4">Welcome to UPBEAT</h1>
-          <p className="text-lg text-gray-700 mb-8">
-            Are you ready to embark on an exciting journey as the newly elected
-            mayor of a budding city?{" "}
-          </p>
-          <button
-             class = "rounded-lg ..."
-            onClick={onStartGame}
-          >
-            Start Game
-          </button>
-        </div>
-      )}
-    </div>
-  );
+
+//   const [startGame, setStartGame] = useState(false);
+
+
+//   const onStartGame = () => {
+//     setStartGame(true);
+//   };
+//
+//   const handleBack = () => {
+//     setStartGame(false);
+//   };
+
+
+ return (
+   <div>
+     {console.log(webSocketState.gameState)}
+     {webSocketState.gameState=='START' && <Start /> }
+     {webSocketState.gameState=='ADD' && <AddPlayer /> }
+     {webSocketState.gameState=='GAME' && <Map /> }
+   </div>
+ );
 };
 
 export default Index;
