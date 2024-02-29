@@ -126,7 +126,7 @@ public class PlanTokenizer implements Tokenizer{
     }
 
     private boolean isAlphanumericCharacters(char c) {
-        return isCharacter(c)||isDigit(c);
+        return isCharacter(c)||isDigit(c)||c=='_';
     }
 
     private boolean isComment(char character) {

@@ -6,7 +6,10 @@ import Grammar.Parse.PlanTokenizer;
 import Grammar.Parse.SyntaxError;
 import Grammar.Plan.Plan;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 interface GameI {
     Player getPlayer();
@@ -46,10 +49,10 @@ public class Game implements GameI {
     private int time;
     private Territory t;
 
-    public Game(String s, Territory t) throws SyntaxError, EvalError {
+    public Game(String s) throws SyntaxError, EvalError {
         Game g = new Game();
         Map<String, Long> bindings = g.getPlayer().bindings();
-        new PlanParser(new PlanTokenizer(s)).parse().eval(null);
+        new PlanParser(new PlanTokenizer(s)).parse().eval(g);
         row = bindings.get("m");
         col = bindings.get("n");
         init_plan_sec = 60L*bindings.get("init_plan_min")+bindings.get("init_plan_sec");
@@ -78,8 +81,8 @@ public class Game implements GameI {
 
     private Game() {
         turn = 0;
-        row = 0;
-        col = 0;
+        row = 1;
+        col = 1;
         init_plan_sec = 0;
         init_budget = 0;
         init_center_dep = 0;
@@ -87,6 +90,7 @@ public class Game implements GameI {
         rev_cost = 0;
         max_dep = 0;
         interest_pct = 0;
+        players.add(new Player("",0,1,1,0,new Territory(1,1)));
     }
 
     @Override
