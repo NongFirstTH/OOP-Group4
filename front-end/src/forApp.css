@@ -1,72 +1,91 @@
-/* styles.css */
 .app-container {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: whitesmoke;
-  }
-  
-  .centered-image {
-    margin-bottom: 20px;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .flex-cols {
-    flex-direction: column;
-  }
-  
-  .creation-section {
-    margin-right: 20px;
-  }
-  
-  .players-section {
-    flex: 1;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"] {
-    padding: 8px;
-    margin-right: 10px;
-  }
-  
-  button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 25px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  ul li {
-    margin-bottom: 10px;
-  }
-  
-  p {
-    font-style: italic;
-    
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #070F2B; /* Your desired background color */
-  }
-  
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: whitesmoke;
+  flex-direction: column;
+}
+
+.centered-image {
+  margin-bottom: 200px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-cols {
+  flex-direction: column;
+}
+
+.creation-section {
+  margin-right: 20px;
+}
+
+.players-section {
+  flex: 1;
+}
+
+form {
+margin-bottom: 20px;
+display: flex; /* Make the form flex container */
+justify-content: center; /* Center items horizontally */
+text-align: left;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+p {
+  font-style: italic;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #070F2B; /* Your desired background color */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Adjusted to 20px */
+  align-items: center; /* Align items vertically */
+  margin-right: 20px;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  margin-right: 10px; /* Adjust spacing between label and input */
+  font-size: 30px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  width: 400px; /* Increased width */
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 30px;
+}
+
+button {
+  padding: 15px 30px; /* Adjusted padding */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 30px;
+}
+
+button:hover {
+  background-color: #0056b3; /* Adjusted hover background color */
+}
