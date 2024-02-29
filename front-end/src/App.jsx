@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./forApp.css";
 
-function App() {
+function App({ onBack }) {
   const [players, setPlayers] = useState([]);
 
   const handleCharacterCreation = (event) => {
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
       <div className="centered-image">
-        <img src="/img/upbeat_logo.png" alt="Upbeat Logo" width={200} />
+        <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />
       </div>
       <h1>Create City Crew</h1>
       <div className="container flex flex-cols">
@@ -57,8 +57,8 @@ function App() {
         </div>
       </div>
       <div className="button-container fixed bottom-0 flex justify-between w-full">
-        <div className="button ">
-          {/* <button>Back</button> */}
+        <div className="button">
+          <button onClick={onBack}>Back</button>
           <button>Start</button>
         </div>
       </div>
