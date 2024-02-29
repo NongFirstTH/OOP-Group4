@@ -16,25 +16,6 @@ export default class Canvas extends React.Component {
     this.drawHexes(canvasHex);
   };
 
-  // calculateCanvasSize = () => {
-  //   const {hexSize} = this.state
-  //   // Calculate individual hexagon width and height
-  //   const hexWidth = 2 * hexSize;
-  //   const hexHeight = Math.sqrt(3) * hexSize;
-
-  //   // Calculate total width needed for hexagons (including spacing)
-  //   const totalHexWidth = (hexWidth ) * this.props.cols;
-
-  //   // Calculate total height needed for hexagons (including spacing)
-  //   const totalHexHeight = (hexHeight ) * this.props.rows
-
-  //   // Add margins to get final canvas dimensions
-  //   const width = totalHexWidth + 2 
-  //   const height = totalHexHeight + 2 
-
-  //   return { width, height };
-  // };
-
   evenq_to_axial(hex) {
     const q = hex.col;
     const r = hex.row - (q - (q & 1)) / 2;
@@ -148,12 +129,12 @@ export default class Canvas extends React.Component {
 
   drawHexCoordinates(canvasID, center, h) {
     const ctx = canvasID.getContext("2d");
+    ctx.fillStyle = "white"
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
   }
 
   render() {
-    // const { width, height } = this.calculateCanvasSize();
     return (
       <div>
         <canvas

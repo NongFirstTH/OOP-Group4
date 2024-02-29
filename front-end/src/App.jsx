@@ -1,8 +1,16 @@
+// import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import "./forApp.css";
+import Map from "../../hello-react/src/App";
 
 function App({ onBack }) {
+  const [gotoMap, setGotoMap] = useState(false);
   const [players, setPlayers] = useState([]);
+
+  const onClickStart = () => {
+    setGotoMap(true);
+  };
 
   const handleCharacterCreation = (event) => {
     event.preventDefault();
@@ -25,43 +33,47 @@ function App({ onBack }) {
   };
 
   return (
-    <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
+    <div>
+      {gotoMap ? (<Map/>):(
+        <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
       <div className="centered-image">
-        <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />
+      <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />
       </div>
       <h1>Create City Crew</h1>
       <div className="container flex flex-cols">
-        <div className="creation-section">
-          <form onSubmit={handleCharacterCreation}>
-            <label htmlFor="name">Character Name: </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-            />
-            <button type="submit">Create Character</button>
+      <div className="creation-section">
+      <form onSubmit={handleCharacterCreation}>
+      <label htmlFor="name">Character Name: </label>
+      <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Enter your name"
+      />
+      <button type="submit">Create Character</button>
           </form>
         </div>
         <div className="players-section">
-          <h2>Players:</h2>
-          {players.length > 0 ? (
-            <ul>
-              {players.map((player) => (
-                <li key={player.id}>{player.name}</li>
-              ))}
+        <h2>Players:</h2>
+        {players.length > 0 ? (
+          <ul>
+          {players.map((player) => (
+            <li key={player.id}>{player.name}</li>
+            ))}
             </ul>
-          ) : (
-            <p>No players yet. Be the first to join!</p>
-          )}
-        </div>
-      </div>
-      <div className="button-container fixed bottom-0 flex justify-between w-full">
-        <div className="button">
-          <button onClick={onBack}>Back</button>
-          <button>Start</button>
-        </div>
-      </div>
+            ) : (
+              <p>No players yet. Be the first to join!</p>
+              )}
+              </div>
+              </div>
+              <div className="button-container fixed bottom-0 flex justify-between w-full">
+              <div className="button">
+              <button onClick={onBack}>Back</button>
+              <button onClick={onClickStart}>Start</button>
+               </div>
+              </div>
+          </div>
+      )}
     </div>
   );
 }
