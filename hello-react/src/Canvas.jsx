@@ -129,6 +129,7 @@ export default class Canvas extends React.Component {
 
   drawHexCoordinates(canvasID, center, h) {
     const ctx = canvasID.getContext("2d");
+    ctx.fillStyle = "white"
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
   }
