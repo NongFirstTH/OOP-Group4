@@ -4,9 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="Add index page">
+    <list default="true" id="ba875ec3-84cb-4ef3-a9ad-55449b6aabc0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Lec17Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/GameTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Lec17ApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Region.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Territory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Territory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/BinaryArithExpr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Expression/BinaryArithExpr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/EvalError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Expression/EvalError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/IntLit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Expression/IntLit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/ExpressionParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Parse/ExpressionParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Parse/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AssignmentStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AssignmentStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AttackCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AttackCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/IfStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/IfStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/MoveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/MoveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Plan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/RegionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/RegionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/WhileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Grammar/Plan/WhileStatement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,177 +50,162 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;KnackPR&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="recentNewPullRequestHead">
-      <RepoCoordinatesHolder>
-        <option name="owner" value="NongFirstTH" />
-        <option name="repository" value="OOP-Group4" />
-      </RepoCoordinatesHolder>
-    </option>
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="7056a99d-f73f-45ab-af65-50796c58983e" />
-        <option name="url" value="https://github.com/NongFirstTH/OOP-Group4.git" />
-      </UrlAndAccount>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="2bObBokYC2E8SolkegC2JVG8IM0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2cuEU1GusZwNTaDN71yKr17rGoq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Knack&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer/IdeaProjects&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "shin",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/OOP-Group4",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "two.files.diff.last.used.file": "C:/Users/User/IdeaProjects/Lab17-Group37/websocket-demo-frontend/src/store/Slices/usernameSlice.ts"
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Lab17-Group37\websocket-demo-frontend\src\store\Slices" />
+      <recent name="C:\Users\User\IdeaProjects\Lab17-Group37\src\main\java\com\websocket\demo" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\OOP-Group4\src\main\java" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="GamePlay" />
-      <recent name="Grammar.Plan" />
+      <recent name="com.websocket.demo.GamePlay" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AttackCommandTest.shoot_Success">
-    <configuration name="AttackCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="newPj" />
+  <component name="RunManager" selected="Application.com.websocket.demo.Lec17Application">
+    <configuration name="Lec17Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Lec17Application" />
+      <module name="lec17" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Grammar.Plan" />
-      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="com.websocket.demo.Lec17Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.websocket.demo.Lec17Application" />
+      <module name="lec17" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.websocket.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.gameInit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lec17" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GamePlay.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.websocket.demo.GamePlay" />
+      <option name="MAIN_CLASS_NAME" value="GamePlay.GameTest" />
+      <option name="METHOD_NAME" value="gameInit" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="Lec17ApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lec17" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.websocket.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.websocket.demo.Lec17ApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="AttackCommandTest.shoot_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="newPj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Grammar.Plan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Grammar.Plan" />
-      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
-      <option name="METHOD_NAME" value="shoot_Success" />
-      <option name="TEST_OBJECT" value="method" />
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="lec17" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="AttackCommandTest.shoot_notEnoughBudget" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="newPj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Grammar.Plan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Grammar.Plan" />
-      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
-      <option name="METHOD_NAME" value="shoot_notEnoughBudget" />
-      <option name="TEST_OBJECT" value="method" />
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="lec17" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AttackCommandTest.shoot_unowned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="newPj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Grammar.Plan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Grammar.Plan" />
-      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
-      <option name="METHOD_NAME" value="shoot_unowned" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RegionCommandTest.invalid_Command" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="newPj" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Grammar.Plan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Grammar.Plan" />
-      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.RegionCommandTest" />
-      <option name="METHOD_NAME" value="invalid_Command" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AttackCommandTest.shoot_Success" />
-        <item itemvalue="JUnit.AttackCommandTest" />
-        <item itemvalue="JUnit.AttackCommandTest.shoot_notEnoughBudget" />
-        <item itemvalue="JUnit.AttackCommandTest.shoot_unowned" />
-        <item itemvalue="JUnit.RegionCommandTest.invalid_Command" />
+        <item itemvalue="Application.com.websocket.demo.Lec17Application" />
+        <item itemvalue="Application.Lec17Application" />
+        <item itemvalue="JUnit.Lec17ApplicationTests" />
+        <item itemvalue="JUnit.GameTest.gameInit" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="" />
-      <created>1706088940931</created>
+      <changelist id="ba875ec3-84cb-4ef3-a9ad-55449b6aabc0" name="Changes" comment="" />
+      <created>1708953075980</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1706088940931</updated>
-    </task>
-    <task id="LOCAL-00001" summary="test">
-      <option name="closed" value="true" />
-      <created>1706089001659</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1706089001659</updated>
+      <updated>1708953075980</updated>
     </task>
     <task id="LOCAL-00002" summary="test">
       <option name="closed" value="true" />
@@ -376,18 +394,8 @@
     <option name="localTasksCounter" value="25" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="test" />
     <MESSAGE value="add constructor" />
     <MESSAGE value="do something" />
