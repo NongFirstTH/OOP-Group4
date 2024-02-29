@@ -18,7 +18,7 @@ const Index = () => {
       {startGame ? (
         <App onBack={handleBack} />
       ) : (
-        <div className="app-container flex flex-col items-center justify-center h-screen">
+        <div className="app-container flex flex-col items-center justify-center h-screen bg-gray-200">
           <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />{" "}
           {/* Added photo */}
           <h1 className="text-4xl font-bold mb-4">Welcome to UPBEAT</h1>
@@ -27,7 +27,7 @@ const Index = () => {
             mayor of a budding city?{" "}
           </p>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+             class = "rounded-lg ..."
             onClick={onStartGame}
           >
             Start Game

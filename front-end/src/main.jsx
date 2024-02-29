@@ -1,4 +1,4 @@
 import ReactDOM from "react-dom/client";
-import Index from "./index";
+import SimpleForm from "./init";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<Index />);
+ReactDOM.createRoot(document.getElementById("root")).render(<SimpleForm />);
