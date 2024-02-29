@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="Add front-end CreateCharacter">
+    <list default="true" id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="Add index page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709209841927</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Add index page">
+      <option name="closed" value="true" />
+      <created>1709212869729</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709212869729</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -400,7 +409,8 @@
     <MESSAGE value="Change AssignmentStatementTest, AttackCommandTest, DoneTest&#10;, MoveCommandTest, RegionCommandTest, RegionTest, RelocateTest" />
     <MESSAGE value="Change nextTurn in Game.java, AssignmentStatementTest, AttackCommandTest, RegionCommandTest" />
     <MESSAGE value="Add front-end CreateCharacter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add front-end CreateCharacter" />
+    <MESSAGE value="Add index page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add index page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
