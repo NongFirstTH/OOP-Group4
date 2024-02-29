@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="Change nextTurn in Game.java, AssignmentStatementTest, AttackCommandTest, RegionCommandTest" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KnackPR&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="NongFirstTH" />
+        <option name="repository" value="OOP-Group4" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7056a99d-f73f-45ab-af65-50796c58983e" />
+        <option name="url" value="https://github.com/NongFirstTH/OOP-Group4.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2bObBokYC2E8SolkegC2JVG8IM0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Knack",
+    "last_opened_file_path": "C:/Users/Acer/IdeaProjects",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="GamePlay" />
+      <recent name="Grammar.Plan" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.AttackCommandTest.shoot_Success">
+    <configuration name="AttackCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="newPj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Grammar.Plan" />
+      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AttackCommandTest.shoot_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="newPj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Grammar.Plan" />
+      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
+      <option name="METHOD_NAME" value="shoot_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AttackCommandTest.shoot_notEnoughBudget" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="newPj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Grammar.Plan" />
+      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
+      <option name="METHOD_NAME" value="shoot_notEnoughBudget" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AttackCommandTest.shoot_unowned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="newPj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Grammar.Plan" />
+      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.AttackCommandTest" />
+      <option name="METHOD_NAME" value="shoot_unowned" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegionCommandTest.invalid_Command" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="newPj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Grammar.Plan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Grammar.Plan" />
+      <option name="MAIN_CLASS_NAME" value="Grammar.Plan.RegionCommandTest" />
+      <option name="METHOD_NAME" value="invalid_Command" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AttackCommandTest.shoot_Success" />
+        <item itemvalue="JUnit.AttackCommandTest" />
+        <item itemvalue="JUnit.AttackCommandTest.shoot_notEnoughBudget" />
+        <item itemvalue="JUnit.AttackCommandTest.shoot_unowned" />
+        <item itemvalue="JUnit.RegionCommandTest.invalid_Command" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c006d90-cdaa-48bf-bd67-ed85f00759cc" name="Changes" comment="" />
+      <created>1706088940931</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706088940931</updated>
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <option name="closed" value="true" />
+      <created>1706089001659</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706089001659</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test">
+      <option name="closed" value="true" />
+      <created>1706089610837</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706089610837</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add constructor">
+      <option name="closed" value="true" />
+      <created>1706346381517</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706346381517</updated>
+    </task>
+    <task id="LOCAL-00004" summary="do something">
+      <option name="closed" value="true" />
+      <created>1706423307133</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706423307133</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add move method but still unfinished">
+      <option name="closed" value="true" />
+      <created>1706435861190</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706435861190</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change from HashMap to Map">
+      <option name="closed" value="true" />
+      <created>1706883749858</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706883749858</updated>
+    </task>
+    <task id="LOCAL-00007" summary="change MoveCommand to use move in Player">
+      <option name="closed" value="true" />
+      <created>1706883769822</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706883769822</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Change move in MoveCommand and change MoveCommandTest but still unfinished">
+      <option name="closed" value="true" />
+      <created>1706944424711</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706944424711</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Change MoveCommandTest&#10;Add AttackCommand and its Test&#10;Add RegionCommand and its Test&#10;this all not finish yet">
+      <option name="closed" value="true" />
+      <created>1706954462798</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706954462798</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Change Command, CommandTest and add some Region method&#10;Change AttackCommand&#10;Change Move Command and its test&#10;Add some Region method&#10;Change RegionCommand and its test">
+      <option name="closed" value="true" />
+      <created>1706965135191</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706965135191</updated>
+    </task>
+    <task id="LOCAL-00011" summary="change bindings in Game">
+      <option name="closed" value="true" />
+      <created>1706968087840</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706968087840</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Change Binding and add Test&#10;Add AssignmentStatementTest&#10;Change bindings in AttackCommandTest&#10;Import Direction from plan and change test&#10;Change bindings for each test">
+      <option name="closed" value="true" />
+      <created>1706968207278</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706968207278</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Use Parse to rewrite test">
+      <option name="closed" value="true" />
+      <created>1707026649736</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707026649736</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Change AttackCommandTest by import Direction&#10;Add some test case(Throws exception)">
+      <option name="closed" value="true" />
+      <created>1707029349464</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707029349464</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Done test">
+      <option name="closed" value="true" />
+      <created>1707031896847</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707031896847</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Change eval in test&#10;Add method in Region and do some RegionTest">
+      <option name="closed" value="true" />
+      <created>1707831446533</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1707831446533</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add Region Method and change RegionTest">
+      <option name="closed" value="true" />
+      <created>1707837163012</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1707837163012</updated>
+    </task>
+    <task id="LOCAL-00018" summary="change newGame1P parameter">
+      <option name="closed" value="true" />
+      <created>1708242102341</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1708242102341</updated>
+    </task>
+    <task id="LOCAL-00019" summary="change newGame1P parameter again">
+      <option name="closed" value="true" />
+      <created>1708242160136</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1708242160136</updated>
+    </task>
+    <task id="LOCAL-00020" summary="change newGame1P parameter again">
+      <option name="closed" value="true" />
+      <created>1708242243836</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1708242243836</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Change AssignmentStatementTest, AttackCommandTest, DoneTest&#10;, MoveCommandTest, RegionCommandTest, RegionTest, RelocateTest">
+      <option name="closed" value="true" />
+      <created>1708242744466</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1708242744466</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Change nextTurn in Game.java, AssignmentStatementTest, AttackCommandTest, RegionCommandTest">
+      <option name="closed" value="true" />
+      <created>1708253519698</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1708253519698</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="add constructor" />
+    <MESSAGE value="do something" />
+    <MESSAGE value="add move method but still unfinished" />
+    <MESSAGE value="change from HashMap to Map" />
+    <MESSAGE value="change MoveCommand to use move in Player" />
+    <MESSAGE value="Change move in MoveCommand and change MoveCommandTest but still unfinished" />
+    <MESSAGE value="Change MoveCommandTest&#10;Add AttackCommand and its Test&#10;Add RegionCommand and its Test&#10;this all not finish yet" />
+    <MESSAGE value="Change Command, CommandTest and add some Region method&#10;Change AttackCommand&#10;Change Move Command and its test&#10;Add some Region method&#10;Change RegionCommand and its test" />
+    <MESSAGE value="change bindings in Game" />
+    <MESSAGE value="Change Binding and add Test&#10;Add AssignmentStatementTest&#10;Change bindings in AttackCommandTest&#10;Import Direction from plan and change test&#10;Change bindings for each test" />
+    <MESSAGE value="Use Parse to rewrite test" />
+    <MESSAGE value="Change AttackCommandTest by import Direction&#10;Add some test case(Throws exception)" />
+    <MESSAGE value="Done test" />
+    <MESSAGE value="Change eval in test&#10;Add method in Region and do some RegionTest" />
+    <MESSAGE value="Add Region Method and change RegionTest" />
+    <MESSAGE value="change newGame1P parameter" />
+    <MESSAGE value="change newGame1P parameter again" />
+    <MESSAGE value="Change AssignmentStatementTest, AttackCommandTest, DoneTest&#10;, MoveCommandTest, RegionCommandTest, RegionTest, RelocateTest" />
+    <MESSAGE value="Change nextTurn in Game.java, AssignmentStatementTest, AttackCommandTest, RegionCommandTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change nextTurn in Game.java, AssignmentStatementTest, AttackCommandTest, RegionCommandTest" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanTokenizer.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/OOP_Group4$AssignmentStatementTest.ic" NAME="AssignmentStatementTest Coverage Results" MODIFIED="1708188447764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Grammar.Plan.*</FILTER>
+    </SUITE>
+  </component>
+</project>

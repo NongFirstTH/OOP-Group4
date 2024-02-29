@@ -1,0 +1,71 @@
+/* styles.css */
+.app-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: whitesmoke;
+  }
+  
+  .centered-image {
+    margin-bottom: 20px;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .flex-cols {
+    flex-direction: column;
+  }
+  
+  .creation-section {
+    margin-right: 20px;
+  }
+  
+  .players-section {
+    flex: 1;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-style: italic;
+    
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #070F2B; /* Your desired background color */
+  }
+  
