@@ -1,5 +1,7 @@
 package Grammar.Expression;
+
 import GamePlay.Game;
+
 import java.util.Random;
 
 public record Variable(String name) implements Expression {
