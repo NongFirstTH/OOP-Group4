@@ -2,7 +2,7 @@ import React from "react";
 import Canvas from "./Canvas";
 import "../styles/App.css";
 
-export default class App extends React.Component {
+export default class Map extends React.Component {
   render(){
     return (
       <div>
