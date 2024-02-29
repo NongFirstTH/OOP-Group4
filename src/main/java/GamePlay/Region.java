@@ -11,6 +11,8 @@ interface RegionI {
     void setCityCenter(Player p, long init_center_dep);
 
     void lost();
+
+    RegionWrap wrap();
 }
 public class Region implements RegionI {
     private Player owner;
@@ -98,5 +100,10 @@ public class Region implements RegionI {
     @Override
     public void lost() {
         owner = null;
+    }
+
+    @Override
+    public RegionWrap wrap() {
+        return new RegionWrap((long) deposit);
     }
 }

@@ -78,8 +78,15 @@ public class GameController {
         return ChatMessage.x("next turn success?");
     }
 
+    @MessageMapping("/game.getTerritory")
+    @SendTo("/topic/territory")
+    public TerritoryWrap getTerritory() {
+        g.nextTurn();
+        return g.territoryWrap();
+    }
+
     public void regionMutate(int row, int col, int player, long deposit) {
-        messageSendingOperations.convertAndSend("/topic/region", new RegionWrap(row, col, player, deposit));
+        messageSendingOperations.convertAndSend("/topic/region", new RegionWrap(deposit));
     }
 
     @SendTo("/topic/public")

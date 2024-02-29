@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/App.css";
+import "./styles/App.css";
 
 export default class Canvas extends React.Component {
   constructor(props) {
@@ -45,13 +45,18 @@ export default class Canvas extends React.Component {
           center.y < height - hexHeight
         ) {
           this.drawHex(canvas, center, this.Hex(q, r));
+          if (
+            this.state.currentHex &&
+            this.Hex(q, r).q === this.state.currentHex.curcol &&
+            this.Hex(q, r).r === this.state.currentHex.currow
+          )
           this.drawHexCoordinates(canvas, center, this.Hex(q, r));
         }
       }
     }
   }
 
-  drawHex(canvasID, center, hex, color, line) {
+  drawHex(canvasID, center, hex) {
     for (let i = 0; i <= 5; i++) {
       let start = this.getHexCornorCoord(center, i);
       let end = this.getHexCornorCoord(center, i + 1);
@@ -130,6 +135,7 @@ export default class Canvas extends React.Component {
   drawHexCoordinates(canvasID, center, h) {
     const ctx = canvasID.getContext("2d");
     ctx.fillStyle = "white"
+    ctx.fillText(this.props.deposit, center.x-5, center.y+20);
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
   }

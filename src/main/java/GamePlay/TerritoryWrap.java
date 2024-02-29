@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class RegionWrap {
-    long deposit;
+public class TerritoryWrap {
+    public final RegionWrap[] regions;
 }

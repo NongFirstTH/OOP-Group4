@@ -31,6 +31,8 @@ interface GameI {
     void playerLost(Player player);
 
     long getBaseInterest();
+
+    TerritoryWrap territoryWrap();
 }
 
 public class Game implements GameI {
@@ -102,6 +104,11 @@ public class Game implements GameI {
     @Override
     public long getBaseInterest(){
         return interest_pct;
+    }
+
+    @Override
+    public TerritoryWrap territoryWrap() {
+        return t.wrap();
     }
 
     @Override

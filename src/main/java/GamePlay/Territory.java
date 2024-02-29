@@ -3,6 +3,8 @@ package GamePlay;
 interface TerritoryI {
     Region getRegions(int row, int col);
     Player getOwner(int row, int col);
+
+    TerritoryWrap wrap();
 }
 
 public class Territory implements TerritoryI {
@@ -29,5 +31,17 @@ public class Territory implements TerritoryI {
     @Override
     public Player getOwner(int row, int col) {
         return regions[row-1][col-1].getOwner();
+    }
+
+    @Override
+    public TerritoryWrap wrap() {
+        TerritoryWrap w = new TerritoryWrap(new RegionWrap[row*col]);
+        int i=0;
+        for (Region[] regionss:regions) {
+                for (Region region:regionss) {
+                    w.getRegions()[i++] = region.wrap();
+                }
+        }
+        return w;
     }
 }

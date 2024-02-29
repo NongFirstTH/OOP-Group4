@@ -2,13 +2,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import "./forApp.css";
-import Map from "../../hello-react/src/App";
+import Map from "./components/webComponents/Map.jsx";
+import {useDispatch} from "react-redux";
+import useWebSocket from "./customHook/useWebSocket.ts";
+import {setUsername as sliceSetUsername} from "./store/Slices/usernameSlice.ts";
+import {setGameState} from "./store/Slices/webSocketSlice.ts";
 
-function App({ onBack }) {
+
+import {  useAppSelector } from "./store/hooks.ts";
+import { selectTerritory } from "./store/Slices/territorySlice.ts";
+
+function AddPlayer({ onBack }) {
   const [gotoMap, setGotoMap] = useState(false);
   const [players, setPlayers] = useState([]);
+  const [player, setPlayer] = useState("");
+  const dispatch = useDispatch();
+  const {addPlayer} = useWebSocket();
+
+//   const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
+//     getTerritory();
+//     console.log(territoryState);
     setGotoMap(true);
   };
 
@@ -28,13 +43,16 @@ function App({ onBack }) {
       alert("This name is already taken. Please choose a different name.");
     } else {
       const newPlayer = { id: Date.now(), name };
+      setPlayer(newPlayer.name);
       setPlayers([...players, newPlayer]);
+        dispatch(sliceSetUsername(player))
+        addPlayer(player)
     }
   };
 
   return (
     <div>
-      {gotoMap ? (<Map/>):(
+      {gotoMap ? (dispatch(setGameState('GAME'))):(
         <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
       <div className="centered-image">
       <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />
@@ -78,4 +96,4 @@ function App({ onBack }) {
   );
 }
 
-export default App;
+export default AddPlayer;
