@@ -8,7 +8,18 @@ function Init() {
 
     const onSubmit = () => {
         dispatch(setGameState('ADD'));
+//         console.log(n);
+//         dispatch(setN(n));
+//         dispatch(setM(m));
+//         dispatch(setInitPlanMin(initPlanMin));
+//         dispatch(setInitPlanSec(initPlanSec));
+//         dispatch(setPlanRevMin(planRevMin));
+//         dispatch(setPlanRevSec(planRevSec));
+//         dispatch(setRevCost(revCost));
+//         dispatch(setMaxDep(maxDep));
+//         dispatch(setInterestPct(interestPct));
     };
+
   return (
     <div style={{
         display: 'flex',
@@ -145,7 +156,7 @@ function Init() {
           />
         </div> 
       </form>
-      <button type="submit" >Submit</button>
+       <button type="submit" onClick={onSubmit}>Submit</button>
     </div>
     </div>
   );

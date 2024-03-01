@@ -33,12 +33,56 @@ export const gameConfigSlice = createSlice({
     name: 'config',
     initialState,
     reducers: {
-        setConfig: (state, action: PayloadAction<string>) => {
-            state.config = action.payload;
+        setM: (state, action: PayloadAction<number>) => {
+            state.m = action.payload;
+        },
+        setN: (state, action: PayloadAction<number>) => {
+            state.n = action.payload;
+        },
+        setInitPlanMin: (state, action: PayloadAction<number>) => {
+            state.init_plan_min = action.payload;
+        },
+        setInitPlanSec: (state, action: PayloadAction<number>) => {
+            state.init_plan_sec = action.payload;
+        },
+        setInitBudget: (state, action: PayloadAction<number>) => {
+            state.init_budget = action.payload;
+        },
+        setInitCenterDep: (state, action: PayloadAction<number>) => {
+            state.init_center_dep = action.payload;
+        },
+        setPlanRevMin: (state, action: PayloadAction<number>) => {
+            state.plan_rev_min = action.payload;
+        },
+        setPlanRevSec: (state, action: PayloadAction<number>) => {
+            state.plan_rev_sec = action.payload;
+        },
+        setRevCost: (state, action: PayloadAction<number>) => {
+            state.rev_cost = action.payload;
+        },
+        setMaxDep: (state, action: PayloadAction<number>) => {
+            state.max_dep = action.payload;
+        },
+        setInterestPct: (state, action: PayloadAction<number>) => {
+            state.interest_pct = action.payload;
         },
     },
 });
 
-export const {setConfig} = gameConfigSlice.actions;
+export const {
+    setM,
+    setN,
+    setInitPlanMin,
+    setInitPlanSec,
+    setInitBudget,
+    setInitCenterDep,
+    setPlanRevMin,
+    setPlanRevSec,
+    setRevCost,
+    setMaxDep,
+    setInterestPct
+} = gameConfigSlice.actions;
+
 export default gameConfigSlice.reducer;
-export const selectConfig = (state: RootState) => state.config.config;
+
+export const selectConfig = (state: RootState) => state.config;
