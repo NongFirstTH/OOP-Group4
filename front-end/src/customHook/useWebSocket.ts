@@ -23,12 +23,24 @@ function useWebSocket(){
         }
     }
 
-    function gameConfig(config : string){
+    function gameConfig(
+            m: number, n: number, init_plan_min: number, init_plan_sec: number, init_budget: number,
+            init_center_dep: number, plan_rev_min: number, plan_rev_sec: number, rev_cost: number,
+            max_dep: number, interest_pct: number
+    ){
         if (webSocket.stompClient && webSocket.stompClient.connected) {
-            const stringWrapper = {
-                text: config
+            const init = {
+                m: m,
+                n: n,
+                init_plan_sec: init_plan_min*60+init_plan_sec,
+                init_budget: init_budget,
+                init_center_dep: init_center_dep,
+                plan_rev_sec: plan_rev_min*60+plan_rev_sec,
+                rev_cost: rev_cost,
+                max_dep: max_dep,
+                interest_pct: interest_pct
             };
-            webSocket.stompClient.send("/app/game.new", {}, JSON.stringify(stringWrapper));
+            webSocket.stompClient.send("/app/game.new", {}, JSON.stringify(init));
         }
     }
 
