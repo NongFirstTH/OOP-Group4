@@ -35,12 +35,24 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "NongFirstTH"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
       <RepoCoordinatesHolder>
         <option name="owner" value="NongFirstTH" />
         <option name="repository" value="OOP-Group4" />
       </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4ece3931-be99-4609-a123-6a3a56ab7cc8" />
+        <option name="url" value="https://github.com/NongFirstTH/OOP-Group4" />
+      </UrlAndAccount>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -92,11 +104,30 @@
       <option name="presentableId" value="Default" />
       <updated>1709225871470</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fix AddPlayer.jsx addPlayer function &amp;&amp; change new logo">
+      <option name="closed" value="true" />
+      <created>1709268240038</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709268240038</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change new logo size">
+      <option name="closed" value="true" />
+      <created>1709269793184</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709269793184</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add index page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add index page" />
+    <MESSAGE value="Fix AddPlayer.jsx addPlayer function &amp;&amp; change new logo" />
+    <MESSAGE value="change new logo size" />
+    <option name="LAST_COMMIT_MESSAGE" value="change new logo size" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/OOP_Group4$AssignmentStatementTest.ic" NAME="AssignmentStatementTest Coverage Results" MODIFIED="1708188447764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
