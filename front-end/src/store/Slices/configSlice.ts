@@ -2,11 +2,31 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store.ts";
 
 interface configState {
-    config: string;
+    m: number;
+    n: number;
+    init_plan_min: number;
+    init_plan_sec: number;
+    init_budget: number;
+    init_center_dep: number;
+    plan_rev_min: number;
+    plan_rev_sec: number;
+    rev_cost: number;
+    max_dep: number;
+    interest_pct: number;
 }
 
 const initialState: configState = {
-    config: "m=20\nn=15\ninit_plan_min=5\ninit_plan_sec=0\ninit_budget=10000\ninit_center_dep=100\nplan_rev_min=30\nplan_rev_sec=0\nrev_cost=100\nmax_dep=1000000\ninterest_pct=5",
+    m: 20,
+    n: 15,
+    init_plan_min: 5,
+    init_plan_sec: 0,
+    init_budget: 10000,
+    init_center_dep: 100,
+    plan_rev_min: 30,
+    plan_rev_sec: 0,
+    rev_cost: 100,
+    max_dep: 1000000,
+    interest_pct: 5
 };
 
 export const gameConfigSlice = createSlice({

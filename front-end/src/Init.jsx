@@ -1,7 +1,15 @@
 import React from 'react';
 import './forApp.css';
+import {useDispatch} from "react-redux";
+import {setGameState} from "./store/Slices/webSocketSlice.ts";
 
-function SimpleForm() {
+function Init() {
+    const dispatch = useDispatch();
+
+    const onSubmit = () => {
+        dispatch(setGameState('ADD'));
+    };
+
   return (
     <div style={{
         display: 'flex',
@@ -112,11 +120,11 @@ function SimpleForm() {
           />
         </div> 
       </form>
-      <button type="submit" >Submit</button>
+      <button type="submit" onClick={onSubmit}>Submit</button>
     </div>
     </div>
   );
 }
 
-export default SimpleForm;
+export default Init;
        

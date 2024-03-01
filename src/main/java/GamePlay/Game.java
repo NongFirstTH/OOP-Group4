@@ -66,6 +66,19 @@ public class Game implements GameI {
         t = new Territory((int) row, (int) col);
     }
 
+    public Game(InitGame init) throws SyntaxError, EvalError {
+        row = init.getM();
+        col = init.getN();
+        init_plan_sec = init.getInit_plan_sec();
+        init_budget = init.getInit_budget();
+        init_center_dep = init.getInit_center_dep();
+        plan_rev_sec = init.getPlan_rev_sec();
+        rev_cost = init.getRev_cost();
+        max_dep = init.getMax_dep();
+        interest_pct = init.getInterest_pct();
+        t = new Territory((int) row, (int) col);
+    }
+
     public Game(int row, int col) throws SyntaxError, EvalError {
         this.row=row;
         this.col=col;
