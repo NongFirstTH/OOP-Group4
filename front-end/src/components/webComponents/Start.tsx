@@ -10,7 +10,7 @@ export default function Start() {
         connect();
     };
     return (<div className="app-container flex flex-col items-center justify-center h-screen">
-      <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />{" "}
+      <img src="/img/newlogo.png" alt="Game" className="mb-8" />{" "}
       {/* Added photo */}
       <h1 className="text-4xl font-bold mb-4">Welcome to UPBEAT</h1>
       <p className="text-lg text-gray-700 mb-8">

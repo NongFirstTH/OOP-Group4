@@ -45,8 +45,8 @@ function AddPlayer({ onBack }) {
       const newPlayer = { id: Date.now(), name };
       setPlayer(newPlayer.name);
       setPlayers([...players, newPlayer]);
-        dispatch(sliceSetUsername(player))
-        addPlayer(player)
+        dispatch(sliceSetUsername(newPlayer.name))
+        addPlayer(newPlayer.name)
     }
   };
 
@@ -55,7 +55,7 @@ function AddPlayer({ onBack }) {
       {gotoMap ? (dispatch(setGameState('GAME'))):(
         <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
       <div className="centered-image">
-      <img src="/img/upbeat_logo.png" alt="Game" className="mb-8" />
+      <img src="/img/newlogo.png" alt="Game" className="mb-8" />
       </div>
       <h1>Create City Crew</h1>
       <div className="container flex flex-cols">
