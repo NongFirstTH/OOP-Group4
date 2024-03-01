@@ -22,4 +22,4 @@ export const territorySlice = createSlice({
 
 export const { setTerritory } = territorySlice.actions;
 export default territorySlice.reducer;
-export const selectTerritory = (state: RootState) => state.territory.territory;
+export const selectTerritory = (state: RootState) => state.territory;

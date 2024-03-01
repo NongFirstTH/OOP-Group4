@@ -4,16 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="Add index page">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GamePlay/InitGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="make onChange button for Init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/AddPlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/AddPlayer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/Init.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/Init.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/Map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/Map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/customHook/useWebSocket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/customHook/useWebSocket.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/init.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/Init.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/store/Slices/territorySlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/store/Slices/territorySlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Chat/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Chat/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Chat/MessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Chat/MessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/CityCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/CityCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/InitGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/InitGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/Region.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/RegionWrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/RegionWrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Territory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/Territory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Wrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/GamePlay/Wrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/BinaryArithExpr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/BinaryArithExpr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/EvalError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/EvalError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/IntLit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/IntLit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Nearby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/Nearby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Opponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/Opponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Expression/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Expression/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/DirectionParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/DirectionParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/ExpressionParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/ExpressionParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/PlanParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/PlanTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/PlanTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Parse/SyntaxError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Parse/SyntaxError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AssignmentStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/AssignmentStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/AttackCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/AttackCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Done.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/Done.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/IfStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/IfStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/MoveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/MoveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/NoStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/NoStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/Plan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/RegionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/RegionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/Relocate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/Relocate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/StatementPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/StatementPair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Grammar/Plan/WhileStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Grammar/Plan/WhileStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Lec17Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/Lec17Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/WebSocketEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/demo/config/WebSocketEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GamePlay/CityCrewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/CityCrewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GamePlay/GameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/GameFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GamePlay/GameTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GamePlay/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GamePlay/RegionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/RegionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Expression/BinaryArithExprTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Expression/BinaryArithExprTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Expression/IntLitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Expression/IntLitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Expression/NearbyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Expression/NearbyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Expression/OpponentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Expression/OpponentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Expression/VariableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Expression/VariableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Parse/ParsePlanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Parse/ParsePlanTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/AssignmentStatementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/AssignmentStatementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/AttackCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/AttackCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/DoneTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/DoneTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/IfStatementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/IfStatementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/MoveCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/MoveCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/NoStatementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/NoStatementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/RegionCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/RegionCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/RelocateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/RelocateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/StatementPairTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/StatementPairTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Grammar/Plan/WhileStatementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Grammar/Plan/WhileStatementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/websocket/demo/GamePlay/GameTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +94,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "NongFirstTH"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NongFirstTH&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
       <RepoCoordinatesHolder>
@@ -67,15 +126,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "shinV2",
-    "last_opened_file_path": "D:/work/OOP-Group4"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;shinV2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/work/OOP-Group4&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.websocket.demo.GamePlay" />
+      <recent name="com.websocket.demo" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Lec17Application">
+    <configuration name="Lec17Application (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Lec17Application" />
+      <module name="lec17" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration name="Lec17Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.websocket.demo.Lec17Application" />
       <module name="lec17" />
@@ -89,9 +162,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="config.Lec17Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="config.Lec17Application" />
+      <module name="lec17" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="Lec17ApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lec17" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.websocket.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.websocket.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.websocket.demo.Lec17ApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Lec17Application" />
+        <item itemvalue="JUnit.Lec17ApplicationTests" />
+        <item itemvalue="Application.Lec17Application (1)" />
+        <item itemvalue="Application.config.Lec17Application" />
       </list>
     </recent_temporary>
   </component>
@@ -120,14 +220,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709269793184</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="make onChange button for Init">
+      <option name="closed" value="true" />
+      <created>1709273472727</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709273472727</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add index page" />
     <MESSAGE value="Fix AddPlayer.jsx addPlayer function &amp;&amp; change new logo" />
     <MESSAGE value="change new logo size" />
-    <option name="LAST_COMMIT_MESSAGE" value="change new logo size" />
+    <MESSAGE value="make onChange button for Init" />
+    <option name="LAST_COMMIT_MESSAGE" value="make onChange button for Init" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/OOP_Group4$AssignmentStatementTest.ic" NAME="AssignmentStatementTest Coverage Results" MODIFIED="1708188447764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
