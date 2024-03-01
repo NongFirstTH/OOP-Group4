@@ -27,9 +27,9 @@ public class GameController {
 //    }
     @MessageMapping("/game.new")
     @SendTo("/topic/public")
-    public ChatMessage newGame(Wrapper chatMessage, SimpMessageHeaderAccessor headerAccessor) throws SyntaxError, EvalError {
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getText());
-        g = new Game(chatMessage.getText());
+    public ChatMessage newGame(InitGame init, SimpMessageHeaderAccessor headerAccessor) throws SyntaxError, EvalError {
+//        headerAccessor.getSessionAttributes().put("username", chatMessage.getText());
+        g = new Game(init);
         return ChatMessage.x("create Game success");
     }
 

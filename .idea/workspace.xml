@@ -4,14 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="change new logo size">
+    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="Add index page">
+      <change afterPath="$PROJECT_DIR$/src/main/java/GamePlay/InitGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/init.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/init.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/AddPlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/AddPlayer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/init.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/Init.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GamePlay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GamePlay/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -53,14 +67,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;FirstV3&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/work/OOP-Group4&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "shinV2",
+    "last_opened_file_path": "D:/work/OOP-Group4"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Lec17Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.websocket.demo.Lec17Application" />

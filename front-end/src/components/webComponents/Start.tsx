@@ -6,7 +6,7 @@ export default function Start() {
     const dispatch = useDispatch();
     const {connect} = useWebSocket();
     const onClickStart = () => {
-        dispatch(setGameState('ADD'));
+        dispatch(setGameState('INIT'));
         connect();
     };
     return (<div className="app-container flex flex-col items-center justify-center h-screen">

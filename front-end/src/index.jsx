@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./forApp.css";
+import Init from "./Init.jsx";
 import AddPlayer from "./AddPlayer.jsx";
 import Start from "./components/webComponents/Start.tsx";
 import Map from "./components/webComponents/Map.jsx";
@@ -29,6 +30,7 @@ const Index = () => {
    <div>
      {console.log(webSocketState.gameState)}
      {webSocketState.gameState=='START' && <Start /> }
+     {webSocketState.gameState=='INIT' && <Init /> }
      {webSocketState.gameState=='ADD' && <AddPlayer /> }
      {webSocketState.gameState=='GAME' && <Map /> }
    </div>

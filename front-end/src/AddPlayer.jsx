@@ -12,7 +12,7 @@ import {setGameState} from "./store/Slices/webSocketSlice.ts";
 import {  useAppSelector } from "./store/hooks.ts";
 import { selectTerritory } from "./store/Slices/territorySlice.ts";
 
-function AddPlayer({ onBack }) {
+function AddPlayer() {
   const [gotoMap, setGotoMap] = useState(false);
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState("");
@@ -26,6 +26,12 @@ function AddPlayer({ onBack }) {
 //     console.log(territoryState);
     setGotoMap(true);
   };
+
+    const onBack = () => {
+  //     getTerritory();
+  //     console.log(territoryState);
+      dispatch(setGameState('INIT'));
+    };
 
   const handleCharacterCreation = (event) => {
     event.preventDefault();

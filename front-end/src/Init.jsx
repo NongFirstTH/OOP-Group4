@@ -1,7 +1,14 @@
 import React from 'react';
 import './forApp.css';
+import {useDispatch} from "react-redux";
+import {setGameState} from "./store/Slices/webSocketSlice.ts";
 
 function Init() {
+    const dispatch = useDispatch();
+
+    const onSubmit = () => {
+        dispatch(setGameState('ADD'));
+    };
   return (
     <div style={{
         display: 'flex',
