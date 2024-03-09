@@ -45,11 +45,11 @@ function useWebSocket(){
     }
 
     function addPlayer(username : string){
-        console.log('Add player call');
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             const stringWrapper = {
             text: username
-        };
+            };
+            console.log('Add player call');
             webSocket.stompClient.send("/app/game.addPlayer", {}, JSON.stringify(stringWrapper));
         }
     }
