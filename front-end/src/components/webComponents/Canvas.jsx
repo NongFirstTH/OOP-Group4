@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/App.css";
 
 export default class Canvas extends React.Component {
@@ -15,7 +15,14 @@ export default class Canvas extends React.Component {
     // this.drawHex(canvasHex, { x: 50, y: 50 });
     this.drawHexes(canvasHex);
   };
-
+  calculateCanvasSize() {
+    const { hexWidth, hexHeight, vertDist, horizDist } =
+      this.getHexParameters();
+    const { rows, cols } = this.props;
+    const width = cols * horizDist + hexWidth /2 +10;
+    const height = rows * vertDist + hexHeight+20;
+    return { width, height };
+  }
   evenq_to_axial(hex) {
     const q = hex.col;
     const r = hex.row - (q - (q & 1)) / 2;
@@ -50,12 +57,29 @@ export default class Canvas extends React.Component {
             this.Hex(q, r).q === this.state.currentHex.curcol &&
             this.Hex(q, r).r === this.state.currentHex.currow
           )
-          this.drawHexCoordinates(canvas, center, this.Hex(q, r));
+            this.drawHexCoordinates(canvas, center, this.Hex(q, r));
         }
       }
     }
   }
 
+  fillHex(canvasID, center, fillColor) {
+    const ctx = canvasID.getContext("2d");
+    ctx.beginPath();
+    for (let i = 0; i <= 5; i++) {
+      let corner = this.getHexCornorCoord(center, i);
+      if (i === 0) {
+        ctx.moveTo(corner.x, corner.y);
+      } else {
+        ctx.lineTo(corner.x, corner.y);
+      }
+    }
+    ctx.closePath();
+
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+  }
+  
   drawHex(canvasID, center, hex) {
     for (let i = 0; i <= 5; i++) {
       let start = this.getHexCornorCoord(center, i);
@@ -72,6 +96,7 @@ export default class Canvas extends React.Component {
           "yellow",
           4
         );
+        this.fillHex(canvasID, center, "green");
       } else {
         this.drawLine(
           canvasID,
@@ -134,19 +159,26 @@ export default class Canvas extends React.Component {
 
   drawHexCoordinates(canvasID, center, h) {
     const ctx = canvasID.getContext("2d");
-    ctx.fillStyle = "white"
-    ctx.fillText(this.props.deposit, center.x-5, center.y+20);
+    ctx.fillStyle = "white";
+    ctx.fillText(this.props.deposit, center.x - 5, center.y + 20);
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
   }
+  
+  useEffect = () => {
+    this.setState({
+      currentHex: { currow: this.props.currow, curcol: this.props.curcol },
+    });
+  };
 
   render() {
+    const { width, height } = this.calculateCanvasSize();
     return (
       <div>
         <canvas
           ref="canvasHex"
-          width={this.props.width}
-          height={this.props.height}
+          width={width}
+          height={height}
         ></canvas>
       </div>
     );
