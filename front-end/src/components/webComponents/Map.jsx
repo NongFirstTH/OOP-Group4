@@ -8,6 +8,7 @@ import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 const Map = () => {
   // const territoryState = useAppSelector(selectTerritory);
   // console.log(territoryState);
+
   const [currentRow, setCurrentRow] = useState(11);
   const [currentCol, setCurrentCol] = useState(11);
   return (

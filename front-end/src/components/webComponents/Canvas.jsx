@@ -38,7 +38,6 @@ export default class Canvas extends React.Component {
       y: vertDist + 10,
     };
     this.setState({ hexOrigin });
-
     for (let r = 1; r <= this.props.rows; r++) {
       for (let q = 1; q <= this.props.cols; q++) {
         const evenQCoord = { col: q, row: r };
