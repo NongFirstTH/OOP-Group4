@@ -1,4 +1,4 @@
-package com.websocket.demo.GamePlay;
+package com.websocket.demo.GamePlay.Wrapper;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -13,7 +13,6 @@ import {  useAppSelector } from "./store/hooks.ts";
 import { selectTerritory } from "./store/Slices/territorySlice.ts";
 
 function AddPlayer() {
-  const [gotoMap, setGotoMap] = useState(false);
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState("");
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ function AddPlayer() {
   const onClickStart = () => {
 //     getTerritory();
 //     console.log(territoryState);
-    setGotoMap(true);
+    dispatch(setGameState('DEVISE'));
   };
 
     const onBack = () => {
@@ -58,7 +57,6 @@ function AddPlayer() {
 
   return (
     <div>
-      {gotoMap ? (dispatch(setGameState('GAME'))):(
         <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
       <div className="centered-image">
       <img src="/img/newlogo.png" alt="Game" className="mb-8" />
