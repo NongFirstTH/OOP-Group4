@@ -1,4 +1,8 @@
 package com.websocket.demo.GamePlay;
+import com.websocket.demo.GamePlay.Wrapper.InitGame;
+import com.websocket.demo.GamePlay.Wrapper.PlanWrap;
+import com.websocket.demo.GamePlay.Wrapper.RegionWrap;
+import com.websocket.demo.GamePlay.Wrapper.Wrapper;
 import com.websocket.demo.Grammar.Expression.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
@@ -17,44 +21,22 @@ public class GameController {
     Game g;
     private final SimpMessageSendingOperations messageSendingOperations;
 
-//    @MessageMapping("/chat.addUser")
-//    @SendTo("/topic/public")
-//    public ChatMessage newGame(ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) throws SyntaxError, EvalError {
-//        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-//        g = new Game(chatMessage.getSender());
-//        return chatMessage;
-//    }
     @MessageMapping("/game.new")
-    @SendTo("/topic/public")
-    public ChatMessage newGame(InitGame init) throws SyntaxError, EvalError {
-//        headerAccessor.getSessionAttributes().put("username", chatMessage.getText());
-        messageSendingOperations.convertAndSend("/topic/public", ChatMessage.x("g create called"));
+    public void newGame(InitGame init) throws SyntaxError, EvalError {
         g = new Game(init);
-        return ChatMessage.x("create Game success");
+        messageSendingOperations.convertAndSend("/topic/status", "create Game success");
     }
 
-//    @MessageMapping("/game.new")
-//    @SendTo("/topic/public")
-//    public ChatMessage newGame(Wrapper config, SimpMessageHeaderAccessor headerAccessor) throws SyntaxError, EvalError {
-//        headerAccessor.getSessionAttributes().put("username", config.getS());
-////        g = new Game(config.getS());
-//        return ChatMessage.x("success");
-//    }
-
     @MessageMapping("/game.addPlayer")
-    @SendTo("/topic/public")
-    public ChatMessage addPlayer(Wrapper name) {
-        g.addPlayer(name.getText());
-        return ChatMessage.x("add "+ name.getText());
+    public void addPlayer(String name) {
+        g.addPlayer(name);
+        messageSendingOperations.convertAndSend("/topic/status", "add "+name);
     }
 
     @MessageMapping("/game.devise")
-    @SendTo("/topic/public")
-    public ChatMessage devise(Wrapper plan) throws SyntaxError {
-        g.devisePlan(plan.getN(), parsePlan(plan.getText()));
-//        messageSendingOperations.convertAndSend("/topic/public", ChatMessage.x("--add--"));
-        regionMutate(1,2,3,4);
-        return ChatMessage.x("devise success?");
+    public void devise(PlanWrap plan) throws SyntaxError {
+        g.devisePlan(plan.getPlayer(), parsePlan(plan.getPlan()));
+        messageSendingOperations.convertAndSend("/topic/status", "devise success???");
     }
 
     @MessageMapping("/game.revise")
@@ -79,7 +61,7 @@ public class GameController {
     }
 
     public void regionMutate(int row, int col, int player, long deposit) {
-        messageSendingOperations.convertAndSend("/topic/region", new RegionWrap(row, col, player, deposit));
+//        messageSendingOperations.convertAndSend("/topic/region", new RegionWrap(row, col, player, deposit));
     }
 
     @SendTo("/topic/public")

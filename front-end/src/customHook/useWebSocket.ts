@@ -57,8 +57,8 @@ function useWebSocket(){
     function devisePlan(player: number, plan: string) {
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             const wrapper = {
-                n: player,
-                text: plan
+                player: player,
+                plan: plan
             };
             webSocket.stompClient.send("/app/game.devise", {}, JSON.stringify(wrapper));
         }
@@ -101,6 +101,7 @@ function useWebSocket(){
         stompClient.subscribe('/topic/public', onMessageReceived);
         stompClient.subscribe('/topic/region', onRegionMutate);
         stompClient.subscribe('/topic/territory', onGetTerritory);
+        stompClient.subscribe('/topic/status');
         dispatch(setIsConnected(true))
         dispatch(setStompClient(stompClient))
     }

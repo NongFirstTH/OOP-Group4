@@ -13,12 +13,12 @@ export const planSlice = createSlice({
     name: 'plan',
     initialState,
     reducers: {
-    setPlan: (state, action: PayloadAction<string>) => {
-    state.plan = action.payload;
-    },
+        setPlan: (state, action: PayloadAction<string>) => {
+            state.plan = action.payload;
+        },
     },
 });
 
 export const {setPlan} = planSlice.actions;
 export default planSlice.reducer;
-export const selectPlan = (state: RootState) => state.plan.plan;
+export const selectPlan = (state: RootState) => state.plan;
