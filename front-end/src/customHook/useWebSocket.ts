@@ -7,18 +7,10 @@ import {setIsConnected, appendMessage,setStompClient} from "../store/Slices/webS
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
 
-import {selectTerritory} from "../store/Slices/territorySlice.ts";
-
-import { useEffect } from "react";
-
 function useWebSocket(){
     const dispatch = useAppDispatch()
     const webSocket = useAppSelector(selectWebSocket)
 
-const territoryState = useAppSelector(selectTerritory);
-useEffect(() => {
-console.log(territoryState);
-}, [territoryState]);
     function connect(username : string){
         try {
             const socket: WebSocket = new SockJS(`http://localhost:8080/ws`);
@@ -126,9 +118,7 @@ console.log(territoryState);
         console.log(JSON.parse(payload.body))
     }
     const onGetTerritory = (payload : Stomp.Message) => {
-        console.log(JSON.parse(payload.body));
         dispatch(sliceSetTerritory(JSON.parse(payload.body)))
-        console.log(territoryState);
     }
 //     const count = (count : String) => {
 //         stompClient.subscribe('/topic/public', onMessageReceived);
