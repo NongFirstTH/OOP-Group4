@@ -28,7 +28,7 @@ function AddPlayer() {
 //   const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
-//     getTerritory();
+    getTerritory();
 //     console.log(territoryState);
     dispatch(setGameState('DEVISE'));
   };
@@ -59,7 +59,7 @@ function AddPlayer() {
       setPlayers([...players, newPlayer]);
         dispatch(sliceSetUsername(newPlayer.name))
         addPlayer(newPlayer.name)
-        getTerritory()
+        // getTerritory()
     }
   };
 
