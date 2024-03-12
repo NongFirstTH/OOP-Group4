@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Canvas from "./Canvas";
 import "./styles/App.css";
-import { useAppSelector } from "../../store/hooks.ts";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import Player from "./Player.jsx";
 
 
 const Map = () => {
-  // const territoryState = useAppSelector(selectTerritory);
-  // console.log(territoryState);
+
+  const dispatch = useAppDispatch();
+  const territoryState = useAppSelector(selectTerritory);
+
+  useEffect(() => {
+      console.log(territoryState);
+  }, [territoryState]);
+
   const [currentRow, setCurrentRow] = useState(1);
   const [currentCol, setCurrentCol] = useState(3);
   // Example usage:
