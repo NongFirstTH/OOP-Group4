@@ -7,10 +7,18 @@ import {setIsConnected, appendMessage,setStompClient} from "../store/Slices/webS
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
 
+import {selectTerritory} from "../store/Slices/territorySlice.ts";
+
+import { useEffect } from "react";
+
 function useWebSocket(){
     const dispatch = useAppDispatch()
     const webSocket = useAppSelector(selectWebSocket)
 
+const territoryState = useAppSelector(selectTerritory);
+useEffect(() => {
+console.log(territoryState);
+}, [territoryState]);
     function connect(username : string){
         try {
             const socket: WebSocket = new SockJS(`http://localhost:8080/ws`);
@@ -46,11 +54,10 @@ function useWebSocket(){
 
     function addPlayer(username : string){
         if (webSocket.stompClient && webSocket.stompClient.connected) {
-            const stringWrapper = {
-            text: username
+            const wrapper = {
+                text: username
             };
-            console.log('Add player call');
-            webSocket.stompClient.send("/app/game.addPlayer", {}, JSON.stringify(stringWrapper));
+            webSocket.stompClient.send("/app/game.addPlayer", {}, JSON.stringify(wrapper));
         }
     }
 
@@ -97,6 +104,13 @@ function useWebSocket(){
         }
     }
 
+
+    function getTerritory (){
+        if (webSocket.stompClient && webSocket.stompClient.connected) {
+            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify({}));
+        }
+    }
+
     const onConnected = (stompClient : Stomp.Client) => {
         stompClient.subscribe('/topic/public', onMessageReceived);
         stompClient.subscribe('/topic/region', onRegionMutate);
@@ -111,13 +125,10 @@ function useWebSocket(){
     const onRegionMutate = (payload : Stomp.Message) => {
         console.log(JSON.parse(payload.body))
     }
-    const getTerritory = () => {
-        if (webSocket.stompClient && webSocket.stompClient.connected) {
-            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify({}));
-        }
-    }
     const onGetTerritory = (payload : Stomp.Message) => {
+        console.log(JSON.parse(payload.body));
         dispatch(sliceSetTerritory(JSON.parse(payload.body)))
+        console.log(territoryState);
     }
 //     const count = (count : String) => {
 //         stompClient.subscribe('/topic/public', onMessageReceived);

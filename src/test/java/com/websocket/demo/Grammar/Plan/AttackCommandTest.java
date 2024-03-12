@@ -36,7 +36,7 @@ public class AttackCommandTest {
         // budget decrease by 10 + 1
         assertEquals(9989,p1.getBudget());
         // deposit decrease by 10
-        assertEquals(90,g.getTerritory().getRegions(2,2).getDeposit());
+        assertEquals(90,g.getTerritory().getRegion(2,2).getDeposit());
 
         // go to next turn change to p2
         g.nextTurn();
@@ -52,23 +52,23 @@ public class AttackCommandTest {
         // go to next turn change to p1
         g.nextTurn();
         assertTrue(shoot_d.eval(g));
-        assertEquals(5, g.getTerritory().getRegions(2,1).getDeposit());
+        assertEquals(5, g.getTerritory().getRegion(2,1).getDeposit());
         assertTrue(shoot_d.eval(g));
-        assertEquals(0, g.getTerritory().getRegions(2,1).getDeposit());
-        assertNull(g.getTerritory().getRegions(2,1).getOwner());
+        assertEquals(0, g.getTerritory().getRegion(2,1).getDeposit());
+        assertNull(g.getTerritory().getRegion(2,1).getOwner());
 
         // shoot city center to make p2 loss
         assertTrue(shoot_dr2.eval(g));
 
-        assertEquals(0,g.getTerritory().getRegions(2,2).getDeposit());
-        assertNull(g.getTerritory().getRegions(2,2).getOwner());
+        assertEquals(0,g.getTerritory().getRegion(2,2).getDeposit());
+        assertNull(g.getTerritory().getRegion(2,2).getOwner());
 
         /* check if city center had been destroyed
            other region that this player occupied is unowned
            but deposit is still the same as before
          */
-        assertNull(g.getTerritory().getRegions(3,1).getOwner());
-        assertEquals(15, g.getTerritory().getRegions(3,1).getDeposit());
+        assertNull(g.getTerritory().getRegion(3,1).getOwner());
+        assertEquals(15, g.getTerritory().getRegion(3,1).getDeposit());
     }
 
     @Test

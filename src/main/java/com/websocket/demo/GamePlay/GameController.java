@@ -1,8 +1,5 @@
 package com.websocket.demo.GamePlay;
-import com.websocket.demo.GamePlay.Wrapper.InitGame;
-import com.websocket.demo.GamePlay.Wrapper.PlanWrap;
-import com.websocket.demo.GamePlay.Wrapper.RegionWrap;
-import com.websocket.demo.GamePlay.Wrapper.Wrapper;
+import com.websocket.demo.GamePlay.Wrapper.*;
 import com.websocket.demo.Grammar.Expression.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
@@ -28,9 +25,9 @@ public class GameController {
     }
 
     @MessageMapping("/game.addPlayer")
-    public void addPlayer(String name) {
-        g.addPlayer(name);
-        messageSendingOperations.convertAndSend("/topic/status", "add "+name);
+    public void addPlayer(StringWrap name) {
+        g.addPlayer(name.getText());
+        messageSendingOperations.convertAndSend("/topic/status", "add "+name.getText());
     }
 
     @MessageMapping("/game.devise")
@@ -58,6 +55,12 @@ public class GameController {
     public ChatMessage nextTurn() {
         g.nextTurn();
         return ChatMessage.x("next turn success?");
+    }
+
+    @MessageMapping("/game.getTerritory")
+    @SendTo("/topic/territory")
+    public RegionWrap[][] getTerritory() {
+        return g.getTerritory().wrap();
     }
 
     public void regionMutate(int row, int col, int player, long deposit) {

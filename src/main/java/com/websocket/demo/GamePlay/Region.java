@@ -1,23 +1,22 @@
 package com.websocket.demo.GamePlay;
 
+import com.websocket.demo.GamePlay.Wrapper.RegionWrap;
+
 interface RegionI {
     double getDeposit();
-    long getInterest(double baseInterestRate, int currentTurn) ;
+    double getInterest(double baseInterestRate, int currentTurn) ;
     void beInvested(long amount, Player p, long maxDeposit);
     long beCollected(long amount, Game g);
     void beShot(long amount, Game g);
     double depositCal(double baseInterestRate, int currentTurn, long maxDeposit);
     Player getOwner();
     void setCityCenter(Player p, long init_center_dep);
-
     void lost();
+    RegionWrap wrap();
 }
 public class Region implements RegionI {
     private Player owner;
     private double deposit;
-    private long interest;
-    private Territory t;
-    private double currentRate;
 
     @Override
     public double getDeposit() {
@@ -34,17 +33,13 @@ public class Region implements RegionI {
     }
 
     @Override
-    public long getInterest(double baseInterestRate, int currentTurn) {
+    public double getInterest(double baseInterestRate, int currentTurn) {
         double calculatedInterestRate = interestRateCal(baseInterestRate, currentTurn);
-        double calculatedInterest = deposit * (calculatedInterestRate / 100.0);
-        interest = (long)calculatedInterest;
-        return interest;
+        return deposit * (calculatedInterestRate / 100.0);
     }
 
     private double interestRateCal(double baseInterestRate, int currentTurn) {
-        double calculatedInterestRate = baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
-        currentRate = calculatedInterestRate;
-        return calculatedInterestRate;
+        return baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
     }
 
     @Override
@@ -98,5 +93,10 @@ public class Region implements RegionI {
     @Override
     public void lost() {
         owner = null;
+    }
+
+    @Override
+    public RegionWrap wrap() {
+        return new RegionWrap(owner==null?null:owner.getName(), (long) deposit);
     }
 }
