@@ -43,12 +43,12 @@ public class CityCrew implements CityCrewI {
 
     @Override
     public double getDeposit(Territory t) {
-        return t.getRegions(currow,curcol).getDeposit();
+        return t.getRegion(currow,curcol).getDeposit();
     }
 
     @Override
     public long getInterest(double baseInterestRate, int currentTurn, Territory t) {
-        return t.getRegions(currow,curcol).getInterest(baseInterestRate, currentTurn);
+        return (long)t.getRegion(currow,curcol).getInterest(baseInterestRate, currentTurn);
     }
 
     private long distance(CityCrew c,Direction direction,Player p,Territory t) throws EvalError {
@@ -82,7 +82,7 @@ public class CityCrew implements CityCrewI {
     public long nearby(Territory t, Direction direction,Player p) throws EvalError {
         CityCrew c = new CityCrew(currow,curcol);
         long x = distance(c,direction,p,t);
-        double opponentDeposit = t.getRegions(c.currow,c.curcol).getDeposit();
+        double opponentDeposit = t.getRegion(c.currow,c.curcol).getDeposit();
         long y = opponentDeposit == 0 ? 0 : (long) (1 + Math.log10(opponentDeposit));
         if(x==Long.MAX_VALUE) return 0;
         return (long) (100L *x + y);
@@ -129,7 +129,7 @@ public class CityCrew implements CityCrewI {
             }
             default -> throw new EvalError("unknown direction " + direction);
         }
-        if(t.getRegions(moverow,movecol)!=null){
+        if(t.getRegion(moverow,movecol)!=null){
             currow = moverow;
             curcol = movecol;
             return true;
@@ -144,7 +144,7 @@ public class CityCrew implements CityCrewI {
         for(Direction direction : Direction.values()){
             CityCrew c = new CityCrew(currow,curcol);
             if (c.isMove(direction,t)) {
-                Player owner2 = t.getRegions(c.currow, c.curcol).getOwner();
+                Player owner2 = t.getRegion(c.currow, c.curcol).getOwner();
                 if (owner2 != null && owner2.equals(p)) {
                     return true;
                 }
@@ -156,13 +156,13 @@ public class CityCrew implements CityCrewI {
     @Override
     public void invest(long amount,Territory t, Player p, long maxDeposit) throws EvalError {
         if((checkCrewAdjacent(p,t))){
-            t.getRegions(currow,curcol).beInvested(amount, p, maxDeposit);
+            t.getRegion(currow,curcol).beInvested(amount, p, maxDeposit);
         }
     }
 
     @Override
     public long collect(long amount ,Game g) {
-        return g.getTerritory().getRegions(currow,curcol).beCollected(amount, g);
+        return g.getTerritory().getRegion(currow,curcol).beCollected(amount, g);
     }
 
     @Override
@@ -194,7 +194,7 @@ public class CityCrew implements CityCrewI {
             }
             default -> throw new EvalError("unknown direction " + direction);
         }
-        Region r = g.getTerritory().getRegions(shootrow,shootcol);
+        Region r = g.getTerritory().getRegion(shootrow,shootcol);
         if(r!=null){
             r.beShot(amount, g);
         }

@@ -53,13 +53,13 @@ public class Player implements PlayerI {
          cityCenter[0] = row;
          cityCenter[1] = col;
          this.budget = budget;
-         t.getRegions(row,col).setCityCenter(this, init_center_dep);
-         regions.add(t.getRegions(row, col));
+         t.getRegion(row,col).setCityCenter(this, init_center_dep);
+         regions.add(t.getRegion(row, col));
     }
 
     @Override
     public Region getCityCenter(Territory t) {
-        return t.getRegions(cityCenter[0], cityCenter[1]);
+        return t.getRegion(cityCenter[0], cityCenter[1]);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class Player implements PlayerI {
         if ( budget >= cost && (owner==null||owner==this)) {
             budget -= cost;
             crew.invest(amount,t,this, maxDeposit);
-            if (amount>0) regions.add(t.getRegions(crew.getCurrow(), crew.getCurcol()));
+            if (amount>0) regions.add(t.getRegion(crew.getCurrow(), crew.getCurcol()));
         } else {
             budget = Math.max(budget - 1, 0);
         }

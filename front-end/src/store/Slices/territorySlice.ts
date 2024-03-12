@@ -1,8 +1,13 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store.ts";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store.ts";
+
+interface Territory {
+    player: string|null;
+    deposit: number;
+}
 
 interface TerritoryState {
-    territory: number[];
+    territory: Territory[][];
 }
 
 const initialState: TerritoryState = {
@@ -13,9 +18,8 @@ export const territorySlice = createSlice({
     name: 'territory',
     initialState,
     reducers: {
-        setTerritory: (state, action: PayloadAction<number[]>) => {
+        setTerritory: (state, action: PayloadAction<Territory[][]>) => {
             state.territory = action.payload;
-            console.log(action.payload);
         },
     },
 });

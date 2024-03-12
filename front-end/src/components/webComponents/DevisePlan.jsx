@@ -18,7 +18,7 @@ function DevisePlan() {
     const onSubmit = () => {
 //         dispatch(setGameState('GAME'));
         dispatch(sliceSetPlan(plan));
-        devisePlan(1, plan);
+        devisePlan(0, plan);
     };
 
     return (
@@ -40,7 +40,7 @@ function DevisePlan() {
                             value={plan}
                             onChange={(e) => setPlan(e.target.value)}
                             required
-                            rows={30}
+                            rows={25}
                             style={{ width: '400px' , fontSize: '28px' }}
                         />
                     </div>

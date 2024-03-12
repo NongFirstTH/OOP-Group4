@@ -4,10 +4,12 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class RegionWrap {
-    private final int row;
-    private final int col;
-    private final int player;
+    private final String player;
     private final long deposit;
+
+    public RegionWrap(String player, long deposit) {
+        this.player = player;
+        this.deposit = deposit;
+    }
 }

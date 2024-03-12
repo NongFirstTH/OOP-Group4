@@ -1,6 +1,6 @@
 // import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./forApp.css";
 import Map from "./components/webComponents/Map.jsx";
 import {useDispatch} from "react-redux";
@@ -8,15 +8,22 @@ import useWebSocket from "./customHook/useWebSocket.ts";
 import {setUsername as sliceSetUsername} from "./store/Slices/usernameSlice.ts";
 import {setGameState} from "./store/Slices/webSocketSlice.ts";
 
+// import {selectTerritory} from "./store/Slices/territorySlice.ts";
 
 import {  useAppSelector } from "./store/hooks.ts";
-import { selectTerritory } from "./store/Slices/territorySlice.ts";
 
 function AddPlayer() {
+
+//   const territoryState = useAppSelector(selectTerritory);
+
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState("");
   const dispatch = useDispatch();
-  const {addPlayer} = useWebSocket();
+  const {addPlayer,getTerritory} = useWebSocket();
+
+//       useEffect(() => {
+//         console.log(territoryState);
+//       }, [player]);
 
 //   const territoryState = useAppSelector((state) => state.territory.territory);
 
@@ -52,6 +59,7 @@ function AddPlayer() {
       setPlayers([...players, newPlayer]);
         dispatch(sliceSetUsername(newPlayer.name))
         addPlayer(newPlayer.name)
+        getTerritory()
     }
   };
 
@@ -95,7 +103,7 @@ function AddPlayer() {
                </div>
               </div>
           </div>
-      )}
+      )
     </div>
   );
 }

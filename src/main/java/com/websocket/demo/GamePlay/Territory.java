@@ -1,8 +1,11 @@
 package com.websocket.demo.GamePlay;
 
+import com.websocket.demo.GamePlay.Wrapper.RegionWrap;
+
 interface TerritoryI {
-    Region getRegions(int row, int col);
+    Region getRegion(int row, int col);
     Player getOwner(int row, int col);
+    RegionWrap[][] wrap();
 }
 
 public class Territory implements TerritoryI {
@@ -21,7 +24,7 @@ public class Territory implements TerritoryI {
         }
     }
     @Override
-    public Region getRegions(int row, int col) {
+    public Region getRegion(int row, int col) {
         if(row < 1 || row > this.row || col < 1 || col > this.col) return null;
         return regions[row-1][col-1];
     }
@@ -29,5 +32,16 @@ public class Territory implements TerritoryI {
     @Override
     public Player getOwner(int row, int col) {
         return regions[row-1][col-1].getOwner();
+    }
+
+    @Override
+    public RegionWrap[][] wrap() {
+        RegionWrap[][] regions = new RegionWrap[row][col];
+        for (int i=0; i<row; i++) {
+            for (int j=0; j<col; j++) {
+                regions[i][j] = getRegion(i+1, j+1).wrap();
+            }
+        }
+        return regions;
     }
 }
