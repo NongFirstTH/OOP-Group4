@@ -7,32 +7,29 @@ export default class Canvas extends React.Component {
     this.state = {
       hexSize: 40,
       hexOrigin: { x: 0, y: 0 },
-      rows: this.props.rows,
-      cols: this.props.cols,
+      rows: this.props.mapArray.length,
+      cols: 15,
       currentHex: { currow: this.props.currow, curcol: this.props.curcol },
-      playerName: this.props.player.getName(),
-      regions: {
-        playerRows: this.props.player.getRows(),
-        playerCols: this.props.player.getCols(),
-      },
-      regionsMatrix: this.props.player.regionMatrix,
+      playerName: 'A',
     };
     this.canvasRef = createRef();
   }
   componentDidMount = () => {
     const canvasHex = this.canvasRef.current;
     // this.drawHex(canvasHex, { x: 50, y: 50 });
+    // console.log(this.props.mapArray);
     this.drawHexes(canvasHex);
   };
 
   calculateCanvasSize() {
     const { hexWidth, hexHeight, vertDist, horizDist } =
       this.getHexParameters();
-    const { rows, cols } = this.props;
+    const { rows, cols } = this.state;
     const width = cols * horizDist + hexWidth / 2 + 10;
     const height = rows * vertDist + hexHeight + 20;
     return { width, height };
   }
+
   evenq_to_axial(hex) {
     const q = hex.col;
     const r = hex.row - (q - (q & 1)) / 2;
@@ -48,9 +45,11 @@ export default class Canvas extends React.Component {
       y: vertDist + 10,
     };
     this.setState({ hexOrigin });
-    for (let r = 1; r <= this.state.rows; r++) {
-      for (let q = 1; q <= this.state.cols; q++) {
-        const evenQCoord = { col: q, row: r };
+    // for (let r = 1; r <= this.state.rows; r++) {
+    //   for (let q = 1; q <= this.state.cols; q++) {
+      this.props.mapArray.map((innerArray, q) => {
+        innerArray.map((element,r) => {
+        const evenQCoord = { col: q+1, row: r+1};
         const axialCoord = this.evenq_to_axial(evenQCoord);
         let center = this.hexToPixel(axialCoord);
         if (
@@ -58,21 +57,67 @@ export default class Canvas extends React.Component {
           center.x < width - hexWidth &&
           center.y > hexHeight / 2 &&
           center.y < height - hexHeight
-        ) {
-          this.drawHex(canvas, center, this.Hex(q, r), evenQCoord);
-          if (
-            (this.state.currentHex &&
-              this.Hex(q, r).q === this.state.currentHex.curcol &&
-              this.Hex(q, r).r === this.state.currentHex.currow) ||
-            this.state.playerName ===
-              this.state.regionsMatrix[evenQCoord.row - 1][evenQCoord.col - 1]
-          )
-            this.drawHexCoordinates(canvas, center, this.Hex(q, r));
+          ) {
+            // console.log(this.props.mapArray[r - 1][q - 1].element);
+          console.log(this.state.playerName);
+          this.drawHex(
+            canvas,
+            center,
+            this.Hex(q+1, r+1),
+            element
+          );
+          if (element.player !== null)
+            this.drawHexCoordinates(
+              canvas,
+              center,
+              this.Hex(q+1, r+1),
+              element
+            );
         }
+      })
+    })
+  }
+
+  drawHex(canvasID, center, hex, map) {
+    for (let i = 0; i <= 5; i++) {
+      let start = this.getHexCornorCoord(center, i);
+      let end = this.getHexCornorCoord(center, i + 1);
+       if (
+        // this.state.currentHex &&
+        // map.element.player !== null &&
+        map.element.player === this.state.playerName
+      ) {
+        this.drawLine(
+          canvasID,
+          { x: start.x, y: start.y },
+          { x: end.x, y: end.y },
+          "black",
+          1
+        );
+        this.fillHex(canvasID, center, "#1D8348");
+      } 
+      else if (
+        map.element.player !== null
+      ) {
+        this.fillHex(canvasID, center, "#2ECC71 ");
+      }
+       else {
+        this.drawLine(
+          canvasID,
+          { x: start.x, y: start.y },
+          { x: end.x, y: end.y },
+          "blue",
+          2
+        );
+        this.fillHex(canvasID, center, "white");
+      }
+      if(hex.r == this.state.currentHex.currow && hex.q == this.state.currentHex.curcol){
+        this.fillHex(canvasID, center, "red");
       }
     }
   }
 
+  
   fillHex(canvasID, center, fillColor) {
     const ctx = canvasID.getContext("2d");
     ctx.beginPath();
@@ -88,39 +133,6 @@ export default class Canvas extends React.Component {
 
     ctx.fillStyle = fillColor;
     ctx.fill();
-  }
-
-  drawHex(canvasID, center, hex, map) {
-    for (let i = 0; i <= 5; i++) {
-      let start = this.getHexCornorCoord(center, i);
-      let end = this.getHexCornorCoord(center, i + 1);
-      if (this.state.currentHex && hex.q === this.state.currentHex.curcol &&
-        hex.r === this.state.currentHex.currow) {
-        this.drawLine(
-          canvasID,
-          { x: start.x, y: start.y },
-          { x: end.x, y: end.y },
-          "black",
-          1
-        );
-          this.fillHex(canvasID, center, "#1D8348");
-        } else if (
-          this.state.playerName ===
-          this.state.regionsMatrix[map.row - 1][map.col - 1]
-          ) {
-            this.fillHex(canvasID, center, "#2ECC71 ");
-          } else {
-        this.drawLine(
-          canvasID,
-          { x: start.x, y: start.y },
-          { x: end.x, y: end.y },
-          "blue",
-          2
-        );
-        // this.fillHex(canvasID, center, "#F4ECF7");
-        this.fillHex(canvasID, center, "white");
-      }
-    }
   }
 
   setCurrentHex(q, r) {
@@ -171,10 +183,10 @@ export default class Canvas extends React.Component {
     ctx.closePath();
   }
 
-  drawHexCoordinates(canvasID, center, h) {
+  drawHexCoordinates(canvasID, center, h, map) {
     const ctx = canvasID.getContext("2d");
     ctx.fillStyle = "black";
-    ctx.fillText(this.props.deposit, center.x - 5, center.y + 20);
+    ctx.fillText(map.element.deposit, center.x - 5, center.y + 20);
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
   }
