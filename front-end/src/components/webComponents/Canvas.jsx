@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { createRef, useEffect} from "react";
 import "./styles/App.css";
 
 export default class Canvas extends React.Component {
@@ -7,14 +7,21 @@ export default class Canvas extends React.Component {
     this.state = {
       hexSize: 40,
       hexOrigin: { x: 0, y: 0 },
+      rows: this.props.rows,
+      cols: this.props.cols,
       currentHex: { currow: this.props.currow, curcol: this.props.curcol },
+      playerName: this.props.player.getName(),
+      regions: {playerRows: this.props.player.getRows() ,playerCols: this.props.player.getCols()},
+      regionsMatrix: this.props.player.regionMatrix
     };
+    this.canvasRef = createRef();
   }
   componentDidMount = () => {
-    const { canvasHex } = this.refs;
+    const canvasHex = this.canvasRef.current;
     // this.drawHex(canvasHex, { x: 50, y: 50 });
     this.drawHexes(canvasHex);
   };
+
   calculateCanvasSize() {
     const { hexWidth, hexHeight, vertDist, horizDist } =
       this.getHexParameters();
@@ -38,11 +45,10 @@ export default class Canvas extends React.Component {
       y: vertDist + 10,
     };
     this.setState({ hexOrigin });
-    for (let r = 1; r <= this.props.rows; r++) {
-      for (let q = 1; q <= this.props.cols; q++) {
+    for (let r = 1; r <= this.state.rows; r++) {
+      for (let q = 1; q <= this.state.cols; q++) {
         const evenQCoord = { col: q, row: r };
         const axialCoord = this.evenq_to_axial(evenQCoord);
-
         let center = this.hexToPixel(axialCoord);
         if (
           center.x > hexWidth / 2 &&
@@ -50,12 +56,12 @@ export default class Canvas extends React.Component {
           center.y > hexHeight / 2 &&
           center.y < height - hexHeight
         ) {
-          this.drawHex(canvas, center, this.Hex(q, r));
-          if (
-            this.state.currentHex &&
-            this.Hex(q, r).q === this.state.currentHex.curcol &&
-            this.Hex(q, r).r === this.state.currentHex.currow
-          )
+          this.drawHex(canvas, center, this.Hex(q, r),evenQCoord);
+          // if (
+          //   this.state.currentHex &&
+          //   this.Hex(q, r).q === this.state.currentHex.curcol &&
+          //   this.Hex(q, r).r === this.state.currentHex.currow
+          // )
             this.drawHexCoordinates(canvas, center, this.Hex(q, r));
         }
       }
@@ -79,31 +85,34 @@ export default class Canvas extends React.Component {
     ctx.fill();
   }
   
-  drawHex(canvasID, center, hex) {
+  drawHex(canvasID, center, hex ,map) {
     for (let i = 0; i <= 5; i++) {
       let start = this.getHexCornorCoord(center, i);
       let end = this.getHexCornorCoord(center, i + 1);
       if (
         this.state.currentHex &&
         hex.q === this.state.currentHex.curcol &&
-        hex.r === this.state.currentHex.currow
+        hex.r === this.state.currentHex.currow ||
+        this.state.playerName == this.state.regionsMatrix[map.row-1][map.col-1]
       ) {
         this.drawLine(
           canvasID,
           { x: start.x, y: start.y },
           { x: end.x, y: end.y },
-          "yellow",
-          4
+          "black",
+          1
         );
-        this.fillHex(canvasID, center, "green");
+            this.fillHex(canvasID, center, "green");
       } else {
         this.drawLine(
           canvasID,
           { x: start.x, y: start.y },
           { x: end.x, y: end.y },
           "blue",
-          1
-        );
+          2
+          );
+          
+          this.fillHex(canvasID, center, "#F4ECF7");
       }
     }
   }
@@ -158,7 +167,7 @@ export default class Canvas extends React.Component {
 
   drawHexCoordinates(canvasID, center, h) {
     const ctx = canvasID.getContext("2d");
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "black";
     ctx.fillText(this.props.deposit, center.x - 5, center.y + 20);
     ctx.fillText(h.r, center.x - 10, center.y);
     ctx.fillText(h.q, center.x + 7, center.y);
@@ -175,7 +184,7 @@ export default class Canvas extends React.Component {
     return (
       <div>
         <canvas
-          ref="canvasHex"
+          ref = {this.canvasRef}
           width={width}
           height={height}
         ></canvas>
