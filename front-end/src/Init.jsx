@@ -72,7 +72,7 @@ function Init() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: '100vh'
+
         }}>
             <div className="app-container">
                 <form>

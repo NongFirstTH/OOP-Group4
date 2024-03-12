@@ -55,7 +55,6 @@ body {
 }
 
 .form-group {
-  margin-bottom: 20px; /* Adjusted to 20px */
   align-items: center; /* Align items vertically */
   margin-right: 20px;
   justify-content: center;
@@ -64,16 +63,16 @@ body {
 label {
   display: block;
   margin-right: 10px; /* Adjust spacing between label and input */
-  font-size: 30px;
+  font-size: 25px;
 }
 
 input[type="text"],
 input[type="number"] {
-  padding: 10px;
-  width: 400px; /* Increased width */
-  border-radius: 10px;
+  padding: 8px; /* Reduce padding */
+  width: 400px; /* Decrease width */
+  border-radius: 5px; /* Smaller border radius */
   border: 1px solid #ccc;
-  font-size: 30px;
+  font-size: 20px; /* Reduce font size */
 }
 
 button {
