@@ -1,6 +1,7 @@
 class Player {
-  constructor(name, rows, cols) {
+  constructor(name,color, rows, cols) {
     this.name = name;
+    this.color = color;
     this.regionMatrix = this.initializeRegionMatrix(rows, cols);
   }
 
@@ -11,6 +12,10 @@ class Player {
       matrix[i] = new Array(cols).fill(null);
     }
     return matrix;
+  }
+
+  getColor(){
+    return this.color;
   }
 
   getName(){
