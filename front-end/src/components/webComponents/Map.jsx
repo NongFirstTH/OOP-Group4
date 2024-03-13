@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Canvas from "./Canvas";
-import CanvasTemp from "./CanvasTemp";
 import "./styles/App.css";
 import { useAppSelector} from "../../store/hooks.ts";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";

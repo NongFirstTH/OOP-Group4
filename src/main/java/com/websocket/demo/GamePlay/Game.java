@@ -1,16 +1,14 @@
 package com.websocket.demo.GamePlay;
 
 import com.websocket.demo.GamePlay.Wrapper.InitGame;
+import com.websocket.demo.GamePlay.Wrapper.TerritoryWrap;
 import com.websocket.demo.Grammar.Expression.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
 import com.websocket.demo.Grammar.Plan.Plan;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 interface GameI {
     Player getPlayer();
@@ -32,6 +30,8 @@ interface GameI {
     void playerLost(Player player);
 
     long getBaseInterest();
+
+    TerritoryWrap getTerritory(String name);
 }
 
 public class Game implements GameI {
@@ -45,6 +45,7 @@ public class Game implements GameI {
     private final long max_dep;
     private final long interest_pct;
 
+    private final Map<String, Player> playerNames = new HashMap<>();
     private final List<Player> players = new LinkedList<>();
     private int turn;
     private int time;
@@ -119,6 +120,12 @@ public class Game implements GameI {
     }
 
     @Override
+    public TerritoryWrap getTerritory(String name) {
+        Player p = playerNames.get(name);
+        return new TerritoryWrap(t.wrap(), p.getRow(), p.getCol(), p.getCurrow(), p.getCurcol());
+    }
+
+    @Override
     public long getMaxDeposit(){return max_dep;}
 
     private int[] getUniqueCityCenter() {
@@ -144,6 +151,7 @@ public class Game implements GameI {
         int[] cityCenter = getUniqueCityCenter();
         Player p = new Player(name, init_budget, cityCenter[0], cityCenter[1], init_center_dep, t);
         players.add(p);
+        playerNames.put(name,p);
     }
 
     @Override
@@ -151,6 +159,7 @@ public class Game implements GameI {
         Player p = new Player(name, init_budget, row, col, init_center_dep, t);
         p.setPlan(plan, 0);
         players.add(p);
+        playerNames.put(name,p);
     }
 
     @Override
@@ -183,7 +192,6 @@ public class Game implements GameI {
         int lost = players.indexOf(player);
         players.remove(player);
         turn = lost<turn ? turn-1 : turn;
-
 //        System.out.println("\t"+player.getName()+" lost");
     }
 }

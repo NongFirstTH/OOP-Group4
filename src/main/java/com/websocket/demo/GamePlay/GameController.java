@@ -59,8 +59,8 @@ public class GameController {
 
     @MessageMapping("/game.getTerritory")
     @SendTo("/topic/territory")
-    public RegionWrap[][] getTerritory() {
-        return g.getTerritory().wrap();
+    public TerritoryWrap getTerritory(StringWrap name) {
+        return g.getTerritory(name.getText());
     }
 
     public void regionMutate(int row, int col, int player, long deposit) {
