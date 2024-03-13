@@ -31,11 +31,11 @@ function AddPlayer() {
         console.log(players);
     }, [usernameState.usernames]);
 
-//   const territoryState = useAppSelector((state) => state.territory.territory);
+  const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
-    getTerritory();
-//     console.log(territoryState);
+    // getTerritory();
+    console.log(territoryState);
     dispatch(setGameState('DEVISE'));
   };
 
@@ -60,8 +60,9 @@ function AddPlayer() {
     } else {
       dispatch(setUsername(player));
       setIsConfirmed(true);
-      console.log(player);
+      // console.log(player);
       addPlayer(player);
+      getTerritory();
     }
   };
 
