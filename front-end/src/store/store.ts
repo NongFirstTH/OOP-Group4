@@ -3,6 +3,7 @@ import webSocketReducer from './Slices/webSocketSlice'
 import configReducer from './Slices/configSlice'
 import territoryReducer from './Slices/territorySlice';
 import usernameReducer from './Slices/usernameSlice';
+import planReducer from './Slices/planSlice';
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         config : configReducer,
         territory: territoryReducer,
         username: usernameReducer,
+        plan: planReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,

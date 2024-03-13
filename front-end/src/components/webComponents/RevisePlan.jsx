@@ -10,15 +10,15 @@ import {
 } from "../../store/Slices/planSlice.ts";
 import Plan from './Plan.jsx';
 
-function DevisePlan() {
+function RevisePlan() {
     const dispatch = useDispatch();
     const planState = useAppSelector(selectPlan);
     const [plan, setPlan] = useState(planState.plan || '');
-    const { devisePlan } = useWebSocket();
+    const { revisePlan } = useWebSocket();
 
     const onSubmit = () => {
         dispatch(sliceSetPlan(plan));
-        devisePlan(plan);
+        revisePlan(plan);
     };
 
     return (
@@ -41,4 +41,4 @@ function DevisePlan() {
     );
 }
 
-export default DevisePlan;
+export default RevisePlan;

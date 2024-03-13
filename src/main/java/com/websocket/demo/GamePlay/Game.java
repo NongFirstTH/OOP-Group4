@@ -23,7 +23,7 @@ interface GameI {
 
     void nextTurn();
 
-    void devisePlan(int p, Plan plan);
+    void devisePlan(String name, Plan plan);
 
     void revisePlan(Plan plan);
 
@@ -182,8 +182,8 @@ public class Game implements GameI {
     }
 
     @Override
-    public void devisePlan(int p, Plan plan) {
-        players.get(p).setPlan(plan, 0);
+    public void devisePlan(String name, Plan plan) {
+        playerNames.get(name).setPlan(plan, 0);
     }
 
     @Override

@@ -96,7 +96,7 @@ public class GameTest {
         Plan p2 = new PlanParser(new PlanTokenizer(s2)).parse();
 
         g.addPlayer("first");
-        g.devisePlan(0, p1);
+        g.devisePlan("first", p1);
 
         assertEquals("first", g.getPlayer().getName());
         int row1 = g.getPlayer().getRow();
@@ -104,7 +104,7 @@ public class GameTest {
 
 
         g.addPlayer("knack");
-        g.devisePlan(1, p2);
+        g.devisePlan("knack", p2);
 //        g.addPlayer("knack", p1);
 
         assertEquals("first", g.getPlayer().getName());
@@ -218,7 +218,7 @@ public class GameTest {
 
         for (int i=0;i<50;i++) {
             g.addPlayer("p"+i);
-            g.devisePlan(i, p1);
+            g.devisePlan("p"+i, p1);
         }
 
         System.out.println(g.getPlayer().getName()+" turn");

@@ -13,22 +13,27 @@ export default function Canvas(props) {
   const configState = useAppSelector(selectConfig);
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
- 
-  const [currow,setCurrow] = useState(0);
-  const [curcol,setCurcol] = useState(0);
-  const [cityCenterRow,setCityCenterRow] = useState(0);
-  const [cityCenterCol,setCityCenterCOl] = useState(0);
+//   const [currow,setCurrow] = useState(0);
+//   const [curcol,setCurcol] = useState(0);
+//   const [cityCenterRow,setCityCenterRow] = useState(0);
+//   const [cityCenterCol,setCityCenterCOl] = useState(0);
+    const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
+    const currow = thisPlayer.currow;
+    const curcol = thisPlayer.curcol;
+    const cityCenterRow = thisPlayer.row;
+    const cityCenterCol = thisPlayer.col;
   const [playerName, setPlayerName] = useState(usernameState.username);
   const canvasRef = createRef();
   const { width, height } = calculateCanvasSize();
 
   useEffect(() => {
     if (props.mapArray) {
-        const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
-        setCurrow(thisPlayer.currow)
-        setCurcol(thisPlayer.curcol)
-        setCityCenterRow(thisPlayer.row)
-        setCityCenterCOl(thisPlayer.col)
+        console.log(territoryState)
+//         const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
+//         setCurrow(thisPlayer.currow)
+//         setCurcol(thisPlayer.curcol)
+//         setCityCenterRow(thisPlayer.row)
+//         setCityCenterCOl(thisPlayer.col)
       const canvasHex = canvasRef.current;
       drawHexes(canvasHex);
     }
@@ -71,7 +76,7 @@ export default function Canvas(props) {
     }
 
     function fillCityCenter(canvasID, center, map) {
-      if (map.element.player === playerName) {
+      if (map.i+1 === cityCenterRow && map.j+1 === cityCenterCol) {
         fillHex(canvasID, center, "#1D8348");
         const ctx = canvasID.getContext("2d");
         const img = new Image();
@@ -83,7 +88,7 @@ export default function Canvas(props) {
     }
 
     function fillPlayer(start, end, canvasID, center, map) {
-      if (map.element.player === playerName ) {
+      if (map.i+1 === currow && map.j+1 === curcol) {
         drawCrew(canvasID, center, "#59CC8A");
       } else if (map.element.player !== null) {
         fillHex(canvasID, center, "gray");
