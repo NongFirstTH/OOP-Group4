@@ -6,20 +6,22 @@ interface Territory {
     deposit: number;
 }
 
-interface TerritoryState {
-    territory: Territory[][];
+interface Player {
+    name: string;
     row: number;
     col: number;
     currow: number;
     curcol: number;
 }
 
+interface TerritoryState {
+    territory: Territory[][];
+    players: Player[];
+}
+
 const initialState: TerritoryState = {
     territory: [],
-    row: 0,
-    col: 0,
-    currow: 0,
-    curcol: 0,
+    players: [],
 };
 
 export const territorySlice = createSlice({
@@ -28,10 +30,7 @@ export const territorySlice = createSlice({
     reducers: {
         setTerritory: (state, action: PayloadAction<TerritoryState>) => {
             state.territory = action.payload.territory;
-            state.row = action.payload.row;
-            state.col = action.payload.col;
-            state.currow = action.payload.currow;
-            state.curcol = action.payload.curcol;
+            state.players = action.payload.players;
         },
     },
 });

@@ -1,6 +1,7 @@
 package com.websocket.demo.GamePlay;
 
 import com.websocket.demo.GamePlay.Wrapper.InitGame;
+import com.websocket.demo.GamePlay.Wrapper.PlayerWrap;
 import com.websocket.demo.GamePlay.Wrapper.TerritoryWrap;
 import com.websocket.demo.Grammar.Expression.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
@@ -32,7 +33,7 @@ interface GameI {
 
     long getBaseInterest();
 
-    TerritoryWrap getTerritory(String name);
+    TerritoryWrap getMap();
 }
 
 public class Game implements GameI {
@@ -126,9 +127,13 @@ public class Game implements GameI {
     }
 
     @Override
-    public TerritoryWrap getTerritory(String name) {
-        Player p = playerNames.get(name);
-        return new TerritoryWrap(t.wrap(), p.getRow(), p.getCol(), p.getCurrow(), p.getCurcol());
+    public TerritoryWrap getMap() {
+        PlayerWrap[] array = new PlayerWrap[players.size()];
+        int i = 0;
+        for (Player p:players) {
+            array[i++] = new PlayerWrap(p.getName(), p.getRow(), p.getCol(), p.getCurrow(), p.getCurcol());
+        }
+        return new TerritoryWrap(t.wrap(), array);
     }
 
     @Override

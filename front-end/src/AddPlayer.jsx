@@ -34,7 +34,7 @@ function AddPlayer() {
 //   const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
-    getTerritory("a");
+    getTerritory();
 //     console.log(territoryState);
     dispatch(setGameState('DEVISE'));
   };
