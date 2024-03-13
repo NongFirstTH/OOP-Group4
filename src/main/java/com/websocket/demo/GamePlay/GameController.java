@@ -53,12 +53,12 @@ public class GameController {
 //        messageSendingOperations.convertAndSend("/topic/gameState", "\"START\"");
     }
 
-    @MessageMapping("/game.revise")
-    @SendTo("/topic/public")
-    public ChatMessage revise(Wrapper plan) throws SyntaxError {
-        g.revisePlan(parsePlan(plan.getText()));
-        return ChatMessage.x("revise success?");
-    }
+//    @MessageMapping("/game.revise")
+//    @SendTo("/topic/public")
+//    public ChatMessage revise(Wrapper plan) throws SyntaxError {
+//        g.revisePlan(parsePlan(plan.getText()));
+//        return ChatMessage.x("revise success?");
+//    }
 
     @MessageMapping("/game.execute")
     @SendTo("/topic/public")
@@ -77,7 +77,7 @@ public class GameController {
     @MessageMapping("/game.getTerritory")
     @SendTo("/topic/territory")
     public TerritoryWrap getTerritory(StringWrap name) {
-        return g.getTerritory(name.getText());
+        return g.getMap();
     }
 
     public void regionMutate(int row, int col, int player, long deposit) {

@@ -115,12 +115,9 @@ function useWebSocket(){
     }
 
 
-    function getTerritory (name : string){
+    function getTerritory (){
         if (webSocket.stompClient && webSocket.stompClient.connected) {
-            const wrapper = {
-                text: name
-            };
-            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify(wrapper));
+            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify({}));
         }
     }
 
