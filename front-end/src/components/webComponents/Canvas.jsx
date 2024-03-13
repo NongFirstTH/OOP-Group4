@@ -61,7 +61,6 @@ export default function Canvas(props) {
           drawHexCoordinates(canvas, center, Hex(q + 1, r + 1), element);
       });
     });
-
   };
 
   const drawHex = (canvasID, center, hex, map) => {
