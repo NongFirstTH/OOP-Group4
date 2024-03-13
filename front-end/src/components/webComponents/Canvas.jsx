@@ -6,7 +6,6 @@ import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 
 export default function Canvas(props) {
     const territoryState = useAppSelector(selectTerritory);
-
     const [hexSize, setHexSize] = useState(40);
     const configState = useAppSelector(selectConfig);
     const [rows, setRows] = useState(configState.m);
@@ -14,6 +13,21 @@ export default function Canvas(props) {
     const [playerName, setPlayerName] = useState("a");
     const canvasRef = createRef();
     const { width, height } = calculateCanvasSize();
+    const [initTime,setInitTime] = useState(configState.init_plan_min*60 + configState.init_plan_sec)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setInitTime(prevTime => {
+            if (prevTime === 0) {
+              clearInterval(interval); // Stop the interval if initTime reaches 0
+              return 0; // Return 0 to prevent negative values
+            }
+            return prevTime - 1;
+          });
+        }, 1000);
+        // Clean up function to clear the interval when component unmounts or when initTime changes
+        return () => clearInterval(interval);
+      }, [configState]);
 
   useEffect(() => {
       if (props.mapArray) {
@@ -43,54 +57,64 @@ export default function Canvas(props) {
         let center = hexToPixel(axialCoord);
 
         drawHex(canvas, center, Hex(q + 1, r + 1), element);
-        // if (element.element.player !== null)
+        if (element.element.player !== null)
           drawHexCoordinates(canvas, center, Hex(q + 1, r + 1), element);
       });
     });
-
   };
 
   const drawHex = (canvasID, center, hex, map) => {
     for (let i = 0; i <= 5; i++) {
       let start = getHexCornorCoord(center, i);
       let end = getHexCornorCoord(center, i + 1);
-      checkPlayer(start,end,canvasID, center, hex, map)
-      checkCityCenter(canvasID, center, map)
+      fillMap(start,end,canvasID, center, map)
+      fillCityCenter(canvasID, center, map)
+      fillPlayer(start,end,canvasID, center, map)
   };
 
-  function checkCityCenter(canvasID, center,map){
+  function fillCityCenter(canvasID, center,map){
     if (map.i === territoryState.row-1 && map.j === territoryState.col-1) {
         fillHex(canvasID, center, "#1D8348");
       }
   }
 
-  function checkPlayer(start,end,canvasID, center, hex, map){
+  function fillPlayer(start,end,canvasID, center, map){
     if (map.i === territoryState.currow-1 && map.j === territoryState.curcol-1 && map.element.player === playerName) {
-        // drawLine(
-        //   canvasID,
-        //   { x: start.x, y: start.y },
-        //   { x: end.x, y: end.y },
-        //   "black",
-        //   9
-        // );
-        fillHex(canvasID, center, "#59CC8A");
+        drawCrew(canvasID, center, "#59CC8A");
       } 
     //   else if (map.element.player !== null) {
       else if (props.player.p1.getRegion(map.i,map.j)!== null) {
-      fillHex(canvasID, center, props.player.p1.getColor());
+        fillHex(canvasID, center, props.player.p1.getColor());
       }else if(props.player.p2.getRegion(map.i,map.j)!== null) fillHex(canvasID, center, props.player.p2.getColor());
      
-      else {
-        drawLine(
-          canvasID,
-          { x: start.x, y: start.y },
-          { x: end.x, y: end.y },
-          "#07192E",
-          2
-        );
-        fillHex(canvasID, center, "#DEFFFC");
-      }
     }
+  }
+
+  function fillMap(start,end,canvasID, center, map){
+    drawLine(
+        canvasID,
+        { x: start.x, y: start.y },
+        { x: end.x, y: end.y },
+        "#07192E",
+        2
+      );
+      fillHex(canvasID, center, "#DEFFFC");
+  }
+  
+
+  const drawCrew = (canvasID, center, fillColor) => {
+    const ctx = canvasID.getContext("2d");
+    const crewRadius = hexSize / 2;
+    ctx.fillStyle = fillColor;
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, crewRadius, 0, 2 * Math.PI);
+    ctx.fill();
+
+    const img = new Image(); 
+    img.src = 'img/crew.png'; 
+    img.onload = function() { 
+        ctx.drawImage(img, center.x-71, center.y-70,142,130);
+    };
   }
 
   const fillHex = (canvasID, center, fillColor) => {
@@ -160,6 +184,7 @@ export default function Canvas(props) {
 
     return (
     <div>
+        <h1 style={{ color: "white" }}>{initTime}</h1>
       <canvas ref={canvasRef} width={width} height={height}></canvas>
     </div>
   );
