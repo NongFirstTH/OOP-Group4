@@ -7,13 +7,14 @@ import Map from "./components/webComponents/Map.jsx";
 import DevisePlan from "./components/webComponents/DevisePlan.jsx";
 import { useAppSelector } from "./store/hooks.ts";
 import { selectWebSocket } from "./store/Slices/webSocketSlice.ts";
+import { selectConfig } from "./store/Slices/configSlice.ts";
 
 
 const Index = () => {
 
 
  const webSocketState = useAppSelector(selectWebSocket);
-
+ const configState = useAppSelector(selectConfig);
 
 //   const [startGame, setStartGame] = useState(false);
 
@@ -34,7 +35,9 @@ const Index = () => {
       case 'START':
         return <Start />;
       case 'INIT':
-        return <Init />;
+        return configState.init?<AddPlayer />:<Init />;
+//       case 'INIT':
+//         return <Init />;
       case 'ADD':
         return <AddPlayer />;
       case 'DEVISE':

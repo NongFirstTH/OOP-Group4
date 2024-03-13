@@ -3,10 +3,12 @@ import {RootState} from "../store.ts";
 
 interface usernameState {
     username: string;
+    usernames: string[];
 }
 
 const initialState: usernameState = {
     username: '',
+    usernames: [],
 };
 
 export const usernameSlice = createSlice({
@@ -16,9 +18,12 @@ export const usernameSlice = createSlice({
         setUsername: (state, action: PayloadAction<string>) => {
             state.username = action.payload;
         },
+        setUsernames: (state, action: PayloadAction<string[]>) => {
+            state.usernames = action.payload;
+        },
     },
 });
 
-export const {setUsername} = usernameSlice.actions;
+export const {setUsername, setUsernames} = usernameSlice.actions;
 export default usernameSlice.reducer;
-export const selectUsername = (state: RootState) => state.username.username;
+export const selectUsername = (state: RootState) => state.username;
