@@ -6,6 +6,9 @@ import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import {setIsConnected, appendMessage,setStompClient} from "../store/Slices/webSocketSlice.ts";
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
+//import {setGameState as sliceSetGameState} from "../store/Slices/webSocketSlice.ts";
+import {setInit as sliceSetInit} from "../store/Slices/configSlice.ts";
+import {setUsernames as sliceSetUsernames} from "../store/Slices/usernameSlice.ts";
 
 function useWebSocket(){
     const dispatch = useAppDispatch()
@@ -21,6 +24,15 @@ function useWebSocket(){
         } catch (e) {
             console.log(e);
         }
+    }
+
+    function start(){
+        console.log("start not");
+        if (webSocket.stompClient && webSocket.stompClient.connected) {
+            console.log("not");
+            webSocket.stompClient.send("/app/game.start", {}, JSON.stringify(""));
+        }
+        console.log("called");
     }
 
     function gameConfig(
@@ -53,13 +65,19 @@ function useWebSocket(){
         }
     }
 
+    function getPlayers(){
+        if (webSocket.stompClient && webSocket.stompClient.connected) {
+            webSocket.stompClient.send("/app/game.getPlayers", {}, JSON.stringify(""));
+        }
+    }
+
     function devisePlan(player: number, plan: string) {
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             const wrapper = {
                 player: player,
                 plan: plan
             };
-            webSocket.stompClient.send("/app/game.devise", {}, JSON.stringify(wrapper));
+            webSocket.stompClient.send("/app/game.devise", {}, JSON.stringify({}));
         }
     }
 
@@ -111,6 +129,9 @@ function useWebSocket(){
         stompClient.subscribe('/topic/region', onRegionMutate);
         stompClient.subscribe('/topic/territory', onGetTerritory);
         stompClient.subscribe('/topic/status');
+//        stompClient.subscribe('/topic/gameState', onGetGameState);
+        stompClient.subscribe('/topic/init', onGetInit);
+        stompClient.subscribe('/topic/addPlayer', onAddPlayer);
         dispatch(setIsConnected(true))
         dispatch(setStompClient(stompClient))
     }
@@ -123,13 +144,22 @@ function useWebSocket(){
     const onGetTerritory = (payload : Stomp.Message) => {
         dispatch(sliceSetTerritory(JSON.parse(payload.body)))
     }
+//    const onGetGameState = (payload : Stomp.Message) => {
+//        dispatch(sliceSetGameState(JSON.parse(payload.body)))
+//    }
+    const onGetInit = (payload : Stomp.Message) => {
+        dispatch(sliceSetInit())
+    }
+    const onAddPlayer = (payload : Stomp.Message) => {
+        dispatch(sliceSetUsernames(JSON.parse(payload.body)))
+    }
 //     const count = (count : String) => {
 //         stompClient.subscribe('/topic/public', onMessageReceived);
 //         stompClient.send("/app/chat.getCount", {}, JSON.stringify({count : getCount}));
 //         dispatch(setCount(count))
 //     }
 
-    return {gameConfig,addPlayer,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage,getTerritory}
+    return {gameConfig,addPlayer,getPlayers,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage,getTerritory,start}
 }
 
 export default useWebSocket;

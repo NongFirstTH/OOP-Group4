@@ -12,28 +12,44 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RequiredArgsConstructor
 @Controller
 public class GameController {
     Game g;
     private final SimpMessageSendingOperations messageSendingOperations;
 
+
+    @MessageMapping("/game.start")
+    public void start() throws SyntaxError, EvalError {
+        if(g!=null) {
+            messageSendingOperations.convertAndSend("/topic/init", "");
+        }
+    }
+
     @MessageMapping("/game.new")
     public void newGame(InitGame init) throws SyntaxError, EvalError {
         g = new Game(init);
-        messageSendingOperations.convertAndSend("/topic/status", "create Game success");
+        messageSendingOperations.convertAndSend("/topic/init", "");
     }
 
     @MessageMapping("/game.addPlayer")
     public void addPlayer(StringWrap name) {
         g.addPlayer(name.getText());
-        messageSendingOperations.convertAndSend("/topic/status", "add "+name.getText());
+    }
+
+    @MessageMapping("/game.getPlayers")
+    @SendTo("/topic/addPlayer")
+    public Set<String> getPlayers() {
+        return g==null?new HashSet<>():g.getPlayers();
     }
 
     @MessageMapping("/game.devise")
     public void devise(PlanWrap plan) throws SyntaxError {
         g.devisePlan(plan.getPlayer(), parsePlan(plan.getPlan()));
-        messageSendingOperations.convertAndSend("/topic/status", "devise success???");
+//        messageSendingOperations.convertAndSend("/topic/gameState", "\"START\"");
     }
 
     @MessageMapping("/game.revise")

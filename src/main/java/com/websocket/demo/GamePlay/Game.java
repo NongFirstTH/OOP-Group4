@@ -12,6 +12,7 @@ import java.util.*;
 
 interface GameI {
     Player getPlayer();
+    Set<String> getPlayers();
     Territory getTerritory();
     long getMaxDeposit();
 
@@ -110,6 +111,11 @@ public class Game implements GameI {
 
     @Override
     public Player getPlayer(){return players.get(turn);}
+
+    @Override
+    public Set<String> getPlayers() {
+        return playerNames.keySet();
+    }
 
     @Override
     public Territory getTerritory(){return t;}

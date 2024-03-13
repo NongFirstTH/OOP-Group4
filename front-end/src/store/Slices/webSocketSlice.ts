@@ -13,6 +13,7 @@ export enum gameStateType {
     INIT = 'INIT',
     ADD = 'ADD',
     DEVISE = 'DEVISE',
+    TURN = 'TURN',
     GAME = 'GAME'
 }
 

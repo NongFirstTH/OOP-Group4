@@ -88,3 +88,14 @@ button {
 button:hover {
   background-color: #0056b3; /* Adjusted hover background color */
 }
+
+input:disabled {
+  background-color: #f4f4f4; /* Light gray background */
+  color: #000; /* Black text color */
+}
+
+button:disabled {
+  background-color: #ccc; /* Light gray background */
+  color: #666; /* Dark gray text color */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}

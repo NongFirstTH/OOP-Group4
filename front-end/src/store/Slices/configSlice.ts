@@ -13,6 +13,7 @@ interface configState {
     rev_cost: number;
     max_dep: number;
     interest_pct: number;
+    init: boolean;
 }
 
 const initialState: configState = {
@@ -26,7 +27,8 @@ const initialState: configState = {
     plan_rev_sec: 0,
     rev_cost: 100,
     max_dep: 1000000,
-    interest_pct: 5
+    interest_pct: 5,
+    init: false
 };
 
 export const gameConfigSlice = createSlice({
@@ -66,6 +68,9 @@ export const gameConfigSlice = createSlice({
         setInterestPct: (state, action: PayloadAction<number>) => {
             state.interest_pct = action.payload;
         },
+        setInit: (state) => {
+            state.init = true;
+        },
     },
 });
 
@@ -80,7 +85,8 @@ export const {
     setPlanRevSec,
     setRevCost,
     setMaxDep,
-    setInterestPct
+    setInterestPct,
+    setInit
 } = gameConfigSlice.actions;
 
 export default gameConfigSlice.reducer;

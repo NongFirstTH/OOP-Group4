@@ -1,14 +1,21 @@
+import React, { useEffect } from "react";
 import {setGameState} from "../../store/Slices/webSocketSlice.ts";
 import {useDispatch} from "react-redux";
 import useWebSocket from "../../customHook/useWebSocket.ts";
 
 export default function Start() {
     const dispatch = useDispatch();
-    const {connect} = useWebSocket();
+    const {connect,start,getPlayers} = useWebSocket();
     const onClickStart = () => {
         dispatch(setGameState('INIT'));
-        connect();
+        start();
+        getPlayers();
     };
+
+    useEffect(() => {
+        connect();
+    }, []);
+
     return (<div className="app-container flex flex-col items-center justify-center h-screen">
       <img src="/img/newlogo.png" alt="Game" className="mb-8" />{" "}
       {/* Added photo */}
