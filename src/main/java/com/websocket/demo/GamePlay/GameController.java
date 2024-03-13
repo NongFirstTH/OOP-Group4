@@ -20,6 +20,7 @@ import java.util.Set;
 public class GameController {
     Game g;
     private final SimpMessageSendingOperations messageSendingOperations;
+    private int ready=0;
 
 
     @MessageMapping("/game.start")
@@ -39,6 +40,7 @@ public class GameController {
     public void addPlayer(StringWrap name) {
         g.addPlayer(name.getText());
         messageSendingOperations.convertAndSend("/topic/addPlayer", g.getPlayers());
+        getTerritory();
     }
 
     @MessageMapping("/game.getPlayers")
@@ -50,34 +52,39 @@ public class GameController {
     @MessageMapping("/game.devise")
     public void devise(PlanWrap plan) throws SyntaxError {
         g.devisePlan(plan.getPlayer(), parsePlan(plan.getPlan()));
-//        messageSendingOperations.convertAndSend("/topic/gameState", "\"START\"");
+        if(++ready>=g.getPlayers().size()) {
+            messageSendingOperations.convertAndSend("/topic/turn", "\""+g.getPlayer().getName()+"\"");
+            messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+        }
     }
 
-//    @MessageMapping("/game.revise")
-//    @SendTo("/topic/public")
-//    public ChatMessage revise(Wrapper plan) throws SyntaxError {
-//        g.revisePlan(parsePlan(plan.getText()));
-//        return ChatMessage.x("revise success?");
-//    }
+    @MessageMapping("/game.revise")
+    @SendTo("/topic/territory")
+    public TerritoryWrap revise(StringWrap plan) throws SyntaxError, EvalError {
+        g.revisePlan(parsePlan(plan.getText()));
+        g.executePlan();
+        nextTurn();
+        messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+        return g.getMap();
+    }
 
     @MessageMapping("/game.execute")
-    @SendTo("/topic/public")
-    public ChatMessage execute() throws EvalError {
-        g.executePlan();
-        return ChatMessage.x("execute success?");
-    }
-
-    @MessageMapping("/game.nextTurn")
-    @SendTo("/topic/public")
-    public ChatMessage nextTurn() {
-        g.nextTurn();
-        return ChatMessage.x("next turn success?");
-    }
-
-    @MessageMapping("/game.getTerritory")
     @SendTo("/topic/territory")
-    public TerritoryWrap getTerritory(StringWrap name) {
+    public TerritoryWrap execute() throws EvalError {
+        g.executePlan();
+        nextTurn();
         return g.getMap();
+    }
+
+    public void nextTurn() {
+        g.nextTurn();
+        messageSendingOperations.convertAndSend("/topic/turn", "\""+g.getPlayer().getName()+"\"");
+    }
+
+//    @MessageMapping("/game.getTerritory")
+//    @SendTo("/topic/territory")
+    public void getTerritory() {
+        messageSendingOperations.convertAndSend("/topic/territory", g.getMap());
     }
 
     public void regionMutate(int row, int col, int player, long deposit) {

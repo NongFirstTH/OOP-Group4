@@ -14,6 +14,7 @@ export enum gameStateType {
     ADD = 'ADD',
     DEVISE = 'DEVISE',
     TURN = 'TURN',
+    REVISE = 'REVISE',
     GAME = 'GAME'
 }
 
@@ -28,7 +29,8 @@ interface webSocketState {
     stompClient: Stomp.Client | undefined;
     messages: webSocketMessage[] | undefined;
     count: string;
-    gameState: gameStateType;
+    gameState: string;
+    turn: string|null;
 }
 
 const initialState: webSocketState = {
@@ -36,7 +38,8 @@ const initialState: webSocketState = {
     stompClient: undefined,
     messages: [],
     count: 0,
-    gameState: 'START'
+    gameState: 'START',
+    turn: null,
 };
 
 export const webSocketSlice = createSlice({
@@ -55,10 +58,13 @@ export const webSocketSlice = createSlice({
         },
         setGameState: (state, action : PayloadAction<gameStateType>) => {
             state.gameState = action.payload;
+        },
+        setTurn: (state, action : PayloadAction<String>) => {
+            state.turn = action.payload;
         }
     },
 });
 
-export const {setIsConnected, appendMessage,setStompClient,setGameState} = webSocketSlice.actions;
+export const {setIsConnected, appendMessage,setStompClient,setGameState,setTurn} = webSocketSlice.actions;
 export default webSocketSlice.reducer;
 export const selectWebSocket = (state: RootState) => state.webSocket;

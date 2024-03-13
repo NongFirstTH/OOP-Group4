@@ -19,7 +19,7 @@ function AddPlayer() {
   const [player, setPlayer] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
   const dispatch = useDispatch();
-  const {addPlayer,getPlayers,getTerritory} = useWebSocket();
+  const {addPlayer,getPlayers} = useWebSocket();
 
       useEffect(() => {
         getPlayers();
@@ -27,15 +27,15 @@ function AddPlayer() {
 
     useEffect(() => {
       setPlayers(usernameState.usernames);
-        console.log(usernameState.usernames);
-        console.log(players);
+//         console.log(usernameState.usernames);
+//         console.log(players);
     }, [usernameState.usernames]);
 
   const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
     // getTerritory();
-    console.log(territoryState);
+//     console.log(territoryState);
     dispatch(setGameState('DEVISE'));
   };
 
@@ -62,7 +62,6 @@ function AddPlayer() {
       setIsConfirmed(true);
       // console.log(player);
       addPlayer(player);
-      getTerritory();
     }
   };
 

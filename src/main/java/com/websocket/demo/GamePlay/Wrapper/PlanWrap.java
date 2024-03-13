@@ -7,11 +7,11 @@ import lombok.Getter;
 
 @Getter
 public class PlanWrap {
-    private final int player;
+    private final String player;
     private final String plan;
 
     @JsonCreator
-    public PlanWrap(@JsonProperty("player") int player,
+    public PlanWrap(@JsonProperty("player") String player,
                     @JsonProperty("plan") String plan) {
         this.player = player;
         this.plan = plan;
