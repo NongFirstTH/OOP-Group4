@@ -53,7 +53,7 @@ function AddPlayer() {
       return;
     }
 
-    const existingPlayer = players.find((p) => p.name === player);
+    const existingPlayer = players.find((p) => p === player);
 
     if (existingPlayer) {
       alert("This name is already taken. Please choose a different name.");
@@ -62,7 +62,6 @@ function AddPlayer() {
       setIsConfirmed(true);
       console.log(player);
       addPlayer(player);
-      getPlayers();
     }
   };
 

@@ -38,6 +38,7 @@ public class GameController {
     @MessageMapping("/game.addPlayer")
     public void addPlayer(StringWrap name) {
         g.addPlayer(name.getText());
+        messageSendingOperations.convertAndSend("/topic/addPlayer", g.getPlayers());
     }
 
     @MessageMapping("/game.getPlayers")
