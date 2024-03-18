@@ -4,6 +4,7 @@ import { useAppSelector } from "../../store/hooks";
 import { selectConfig } from "../../store/Slices/configSlice";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import { selectUsername } from "../../store/Slices/usernameSlice.ts";
+import useWebSocket from "../../customHook/useWebSocket.ts";
 
 export default function Canvas(props) {
   const territoryState = useAppSelector(selectTerritory);
@@ -13,15 +14,22 @@ export default function Canvas(props) {
   const configState = useAppSelector(selectConfig);
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
+  const {getTerritory} = useWebSocket();
 //   const [currow,setCurrow] = useState(0);
 //   const [curcol,setCurcol] = useState(0);
 //   const [cityCenterRow,setCityCenterRow] = useState(0);
 //   const [cityCenterCol,setCityCenterCOl] = useState(0);
-    const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
-    const currow = thisPlayer.currow;
-    const curcol = thisPlayer.curcol;
-    const cityCenterRow = thisPlayer.row;
-    const cityCenterCol = thisPlayer.col;
+//     const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
+    let currow = 0;
+    let curcol = 0;
+    let cityCenterRow = 0;
+    let cityCenterCol = 0;
+//     if (thisPlayer) {
+//         currow = thisPlayer.currow;
+//         curcol = thisPlayer.curcol;
+//         cityCenterRow = thisPlayer.row;
+//         cityCenterCol = thisPlayer.col;
+//     }
   const [playerName, setPlayerName] = useState(usernameState.username);
   const canvasRef = createRef();
   const { width, height } = calculateCanvasSize();
@@ -29,11 +37,13 @@ export default function Canvas(props) {
   useEffect(() => {
     if (props.mapArray) {
         console.log(territoryState)
-//         const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
-//         setCurrow(thisPlayer.currow)
-//         setCurcol(thisPlayer.curcol)
-//         setCityCenterRow(thisPlayer.row)
-//         setCityCenterCOl(thisPlayer.col)
+        const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
+    if (thisPlayer) {
+        currow = thisPlayer.currow;
+        curcol = thisPlayer.curcol;
+        cityCenterRow = thisPlayer.row;
+        cityCenterCol = thisPlayer.col;
+    }
       const canvasHex = canvasRef.current;
       drawHexes(canvasHex);
     }
