@@ -6,11 +6,12 @@ import Map from "./components/webComponents/Map.jsx";
 import {useDispatch} from "react-redux";
 import useWebSocket from "./customHook/useWebSocket.ts";
 import {setUsername} from "./store/Slices/usernameSlice.ts";
-import {setGameState} from "./store/Slices/webSocketSlice.ts";
+import {setGameState, selectWebSocket} from "./store/Slices/webSocketSlice.ts";
 
 import {selectUsername} from "./store/Slices/usernameSlice.ts";
 
 import {  useAppSelector } from "./store/hooks.ts";
+
 
 function AddPlayer() {
 
@@ -19,7 +20,9 @@ function AddPlayer() {
   const [player, setPlayer] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
   const dispatch = useDispatch();
-  const {addPlayer,getPlayers} = useWebSocket();
+  const {addPlayer,getPlayers,setState} = useWebSocket();
+
+  const webSocketState = useAppSelector(selectWebSocket);
 
       useEffect(() => {
         getPlayers();
@@ -31,19 +34,11 @@ function AddPlayer() {
 //         console.log(players);
     }, [usernameState.usernames]);
 
-  const territoryState = useAppSelector((state) => state.territory.territory);
+//   const territoryState = useAppSelector((state) => state.territory.territory);
 
   const onClickStart = () => {
-    // getTerritory();
-//     console.log(territoryState);
-    dispatch(setGameState('DEVISE'));
+    setState("DEVISE");
   };
-
-    const onBack = () => {
-  //     getTerritory();
-  //     console.log(territoryState);
-      dispatch(setGameState('INIT'));
-    };
 
   const handleCharacterCreation = (event) => {
     event.preventDefault();
@@ -102,8 +97,7 @@ function AddPlayer() {
             </div>
             <div className="button-container fixed bottom-0 flex justify-between w-full">
                 <div className="button">
-                    <button onClick={onBack}>Back</button>
-                    <button onClick={onClickStart}>Start</button>
+                    {webSocketState.isHead&&<button onClick={onClickStart} disabled={!usernameState.username}>Start</button>}
                 </div>
             </div>
         </div>)

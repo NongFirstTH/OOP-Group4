@@ -3,22 +3,26 @@ import Stomp from "stompjs";
 // @ts-expect-error
 import SockJS from "sockjs-client/dist/sockjs";
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
-import {setIsConnected, appendMessage,setStompClient} from "../store/Slices/webSocketSlice.ts";
+import {setIsConnected, appendMessage,setStompClient, setHead as sliceSetHead} from "../store/Slices/webSocketSlice.ts";
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
-import {setTurn as sliceSetTurn, setGameState as sliceSetGameState} from "../store/Slices/webSocketSlice.ts";
+import {setTurn as sliceSetTurn, setGameState as sliceSetGameState, addSub} from "../store/Slices/webSocketSlice.ts";
 import {setInit as sliceSetInit} from "../store/Slices/configSlice.ts";
 import {setUsernames as sliceSetUsernames, selectUsername} from "../store/Slices/usernameSlice.ts";
+import {setOK as sliceSetOK, reset as sliceReset} from "../store/Slices/planSlice.ts";
+//import React, { useState } from 'react';
 
 function useWebSocket(){
     const dispatch = useAppDispatch()
     const webSocket = useAppSelector(selectWebSocket)
     const usernameState = useAppSelector(selectUsername)
+//    const {stompClient1, setStompClient1} = useState();
 
     function connect(username : string){
         try {
             const socket: WebSocket = new SockJS(`http://localhost:8080/ws`);
             const stompClient: Stomp.Client = Stomp.over(socket);
+//            setStompClient1(stompClient);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             stompClient.connect({}, () =>onConnected(stompClient,username), onError);
@@ -28,12 +32,9 @@ function useWebSocket(){
     }
 
     function start(){
-        console.log("start not");
         if (webSocket.stompClient && webSocket.stompClient.connected) {
-            console.log("not");
             webSocket.stompClient.send("/app/game.start", {}, JSON.stringify(""));
         }
-        console.log("called");
     }
 
     function gameConfig(
@@ -57,12 +58,16 @@ function useWebSocket(){
         }
     }
 
-    function addPlayer(username : string){
+    function addPlayer(username: string) {
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             const wrapper = {
                 text: username
             };
             webSocket.stompClient.send("/app/game.addPlayer", {}, JSON.stringify(wrapper));
+
+            if (webSocket.sub>7) webSocket.stompClient.unsubscribe("sub-"+webSocket.sub);
+            dispatch(addSub());
+            webSocket.stompClient.subscribe('/topic/plan.' + username, onDevisePlan);
         }
     }
 
@@ -100,6 +105,12 @@ function useWebSocket(){
     function nextTurn() {
         if (webSocket.stompClient && webSocket.stompClient.connected) {
             webSocket.stompClient.send("/app/game.nextTurn", {}, JSON.stringify({}));
+        }
+    }
+
+    function setState(stateSet: string) {
+        if (webSocket.stompClient && webSocket.stompClient.connected) {
+            webSocket.stompClient.send("/app/game.setState", {}, stateSet);
         }
     }
 
@@ -147,13 +158,21 @@ function useWebSocket(){
         dispatch(sliceSetTurn(JSON.parse(payload.body)))
     }
     const onSetState = (payload : Stomp.Message) => {
-        dispatch(sliceSetGameState(JSON.parse(payload.body)))
+        dispatch(sliceSetGameState(JSON.parse(payload.body)));
+        if (JSON.parse(payload.body) === 'INIT') {
+            dispatch(sliceSetInit(false));
+            dispatch(sliceSetHead(false));
+            dispatch(sliceReset());
+        }
     }
     const onGetInit = (payload : Stomp.Message) => {
-        dispatch(sliceSetInit())
+        dispatch(sliceSetInit(true))
     }
     const onAddPlayer = (payload : Stomp.Message) => {
         dispatch(sliceSetUsernames(JSON.parse(payload.body)))
+    }
+    const onDevisePlan = (payload : Stomp.Message) => {
+        dispatch(sliceSetOK(JSON.parse(payload.body)))
     }
 //     const count = (count : String) => {
 //         stompClient.subscribe('/topic/public', onMessageReceived);
@@ -161,7 +180,7 @@ function useWebSocket(){
 //         dispatch(setCount(count))
 //     }
 
-    return {gameConfig,addPlayer,getPlayers,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage,start}
+    return {gameConfig,addPlayer,getPlayers,devisePlan,revisePlan,executePlan,nextTurn,connect,sendMessage,start,setState}
 }
 
 export default useWebSocket;

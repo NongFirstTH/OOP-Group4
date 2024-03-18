@@ -32,10 +32,10 @@ function DevisePlan() {
                 <form>
                     <div className="form-group">
                         <label htmlFor="plan" className="form-label">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={false}/>
+                        <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
                     </div>
                 </form>
-                <button type="submit" onClick={onSubmit}>Submit Plan</button>
+                <button type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
             </div>
         </div>
     );

@@ -68,8 +68,8 @@ export const gameConfigSlice = createSlice({
         setInterestPct: (state, action: PayloadAction<number>) => {
             state.interest_pct = action.payload;
         },
-        setInit: (state) => {
-            state.init = true;
+        setInit: (state, action: PayloadAction<boolean>) => {
+            state.init = action.payload;
         },
     },
 });

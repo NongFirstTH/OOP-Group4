@@ -10,15 +10,18 @@ import {
 } from "../../store/Slices/planSlice.ts";
 import Plan from './Plan.jsx';
 
-function RevisePlan() {
+function Turn() {
     const dispatch = useDispatch();
     const planState = useAppSelector(selectPlan);
     const [plan, setPlan] = useState(planState.plan || '');
-    const { revisePlan } = useWebSocket();
+    const { devisePlan, executePlan ,setState } = useWebSocket();
 
-    const onSubmit = () => {
-        revisePlan(plan);
-        dispatch(sliceSetPlan(plan));
+    const onRevise = () => {
+        setState('REVISE');
+    };
+
+    const onExecute = () => {
+        executePlan();
     };
 
     return (
@@ -32,13 +35,14 @@ function RevisePlan() {
                 <form>
                     <div className="form-group">
                         <label htmlFor="plan" className="form-label">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={false}/>
+                        <Plan plan={plan} setPlan={setPlan} isDisable={true}/>
                     </div>
                 </form>
-                <button type="submit" onClick={onSubmit}>Submit Plan</button>
+                <button type="submit" onClick={onRevise}>Revise Plan</button>
+                <button type="submit" onClick={onExecute}>Execute Plan</button>
             </div>
         </div>
     );
 }
 
-export default RevisePlan;
+export default Turn;

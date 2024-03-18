@@ -13,34 +13,38 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
 public class GameController {
-    Game g;
+    private Game g;
     private final SimpMessageSendingOperations messageSendingOperations;
     private int ready=0;
-
+    private String state = "\"START\"";
 
     @MessageMapping("/game.start")
     public void start() throws SyntaxError, EvalError {
         if(g!=null) {
             messageSendingOperations.convertAndSend("/topic/init", "");
+            messageSendingOperations.convertAndSend("/topic/setState", state);
         }
     }
 
     @MessageMapping("/game.new")
     public void newGame(InitGame init) throws SyntaxError, EvalError {
         g = new Game(init);
+        state = "\"ADD\"";
         messageSendingOperations.convertAndSend("/topic/init", "");
+//        messageSendingOperations.convertAndSend("/topic/setState", state);
     }
 
     @MessageMapping("/game.addPlayer")
     public void addPlayer(StringWrap name) {
         g.addPlayer(name.getText());
         messageSendingOperations.convertAndSend("/topic/addPlayer", g.getPlayers());
-        getTerritory();
     }
 
     @MessageMapping("/game.getPlayers")
@@ -50,28 +54,58 @@ public class GameController {
     }
 
     @MessageMapping("/game.devise")
-    public void devise(PlanWrap plan) throws SyntaxError {
-        g.devisePlan(plan.getPlayer(), parsePlan(plan.getPlan()));
-        if(++ready>=g.getPlayers().size()) {
-            messageSendingOperations.convertAndSend("/topic/turn", "\""+g.getPlayer().getName()+"\"");
-            messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+    public void devise(PlanWrap plan) {
+        try {
+            g.devisePlan(plan.getPlayer(), parsePlan(plan.getPlan()));
+            if (++ready >= g.getPlayers().size()) {
+                messageSendingOperations.convertAndSend("/topic/turn", "\"" + g.getPlayer().getName() + "\"");
+                state = "\"TURN\"";
+                messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+            }
+            messageSendingOperations.convertAndSend("/topic/plan." + plan.getPlayer(), "true");
+        } catch (SyntaxError | NoSuchElementException e) {
+            messageSendingOperations.convertAndSend("/topic/plan." + plan.getPlayer(), "false");
         }
+    }
+
+    @MessageMapping("/game.setState")
+    @SendTo("/topic/setState")
+    public String setState(String plan) {
+        state = "\""+plan+"\"";
+        if (plan.equals("INIT")) {
+            g = null;
+            ready = 0;
+        }
+        if(plan.equals("DEVISE")||plan.equals("REVISE")||plan.equals("TURN")) getTerritory();
+        return state;
     }
 
     @MessageMapping("/game.revise")
     @SendTo("/topic/territory")
-    public TerritoryWrap revise(StringWrap plan) throws SyntaxError, EvalError {
-        g.revisePlan(parsePlan(plan.getText()));
-        g.executePlan();
-        nextTurn();
-        messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+    public TerritoryWrap revise(StringWrap plan) {
+        try {
+            g.revisePlan(parsePlan(plan.getText()));
+            if (!g.executePlan()) {
+                state = "\"END\"";
+                messageSendingOperations.convertAndSend("/topic/setState", "\"END\"");
+            }
+            nextTurn();
+            state = "\"TURN\"";
+            messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
+            messageSendingOperations.convertAndSend("/topic/plan." + g.getPlayer().getName(), "true");
+        } catch (SyntaxError | NoSuchElementException | EvalError e) {
+            messageSendingOperations.convertAndSend("/topic/plan." + g.getPlayer().getName(), "false");
+        }
         return g.getMap();
     }
 
     @MessageMapping("/game.execute")
     @SendTo("/topic/territory")
     public TerritoryWrap execute() throws EvalError {
-        g.executePlan();
+        if (!g.executePlan()) {
+            state = "\"END\"";
+            messageSendingOperations.convertAndSend("/topic/setState", "\"END\"");
+        }
         nextTurn();
         return g.getMap();
     }
@@ -81,7 +115,7 @@ public class GameController {
         messageSendingOperations.convertAndSend("/topic/turn", "\""+g.getPlayer().getName()+"\"");
     }
 
-//    @MessageMapping("/game.getTerritory")
+    @MessageMapping("/game.getTerritory")
 //    @SendTo("/topic/territory")
     public void getTerritory() {
         messageSendingOperations.convertAndSend("/topic/territory", g.getMap());

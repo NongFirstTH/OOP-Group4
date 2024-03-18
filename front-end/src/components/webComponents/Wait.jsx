@@ -10,15 +10,18 @@ import {
 } from "../../store/Slices/planSlice.ts";
 import Plan from './Plan.jsx';
 
-function RevisePlan() {
+function Wait() {
     const dispatch = useDispatch();
     const planState = useAppSelector(selectPlan);
     const [plan, setPlan] = useState(planState.plan || '');
-    const { revisePlan } = useWebSocket();
+    const { devisePlan, executePlan } = useWebSocket();
 
-    const onSubmit = () => {
-        revisePlan(plan);
-        dispatch(sliceSetPlan(plan));
+    const onRevise = () => {
+        dispatch(setGameState('REVISE'));
+    };
+
+    const onExecute = () => {
+        executePlan();
     };
 
     return (
@@ -29,16 +32,11 @@ function RevisePlan() {
             minHeight: '100vh'
         }}>
             <div className="app-container">
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="plan" className="form-label">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={false}/>
-                    </div>
-                </form>
-                <button type="submit" onClick={onSubmit}>Submit Plan</button>
+                <label htmlFor="plan" className="form-label">Plan:</label>
+                <Plan plan={plan} setPlan={setPlan} isDisable={true}/>
             </div>
         </div>
     );
 }
 
-export default RevisePlan;
+export default Wait;

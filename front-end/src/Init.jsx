@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './forApp.css';
 import {useDispatch} from "react-redux";
-import {setGameState} from "./store/Slices/webSocketSlice.ts";
+import {setGameState, setHead} from "./store/Slices/webSocketSlice.ts";
 import {  useAppSelector } from "./store/hooks.ts";
 import useWebSocket from "./customHook/useWebSocket.ts";
 import {
@@ -48,6 +48,7 @@ function Init() {
         dispatch(sliceSetRevCost(revCost));
         dispatch(sliceSetMaxDep(maxDep));
         dispatch(sliceSetInterestPct(interestPct));
+        dispatch(setHead(true));
         gameConfig(
             m,
             n,

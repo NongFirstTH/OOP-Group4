@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {setGameState} from "../../store/Slices/webSocketSlice.ts";
+import {setGameState, setStart} from "../../store/Slices/webSocketSlice.ts";
 import {useDispatch} from "react-redux";
 import useWebSocket from "../../customHook/useWebSocket.ts";
 
@@ -7,6 +7,7 @@ export default function Start() {
     const dispatch = useDispatch();
     const {connect,start,getPlayers} = useWebSocket();
     const onClickStart = () => {
+        dispatch(setStart());
         dispatch(setGameState('INIT'));
         start();
         getPlayers();

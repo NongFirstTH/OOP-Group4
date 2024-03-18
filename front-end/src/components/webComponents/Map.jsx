@@ -5,11 +5,13 @@ import "./styles/App.css";
 import { useAppSelector} from "../../store/hooks.ts";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import { selectConfig } from "../../store/Slices/configSlice.ts";
+import useWebSocket from "../../customHook/useWebSocket.ts";
 
 
 const Map = () => {
 
   const territoryState = useAppSelector(selectTerritory);
+  const {getTerritory} = useWebSocket();
   // const configState = useAppSelector(selectConfig);
   // const [initTime,setInitTime] = useState(configState.init_plan_min*60 + configState.init_plan_sec)
 
@@ -27,10 +29,10 @@ const Map = () => {
   //     return () => clearInterval(interval);
   //   }, [configState]);
 
-  useEffect(() => {
-      // console.log(territoryState);
-      // console.log(territoryState.territory[0].length);
-  }, [territoryState]);
+//   useEffect(() => {
+//       // console.(territologryState);
+//       // console.log(territoryState.territory[0].length);
+//   }, [territoryState]);
 
   // const [player1] = useState(new Player("b","red", 20, 15));
   // player1.setRegion(0,0,"b")
