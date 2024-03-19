@@ -15,21 +15,10 @@ export default function Canvas(props) {
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
   const {getTerritory} = useWebSocket();
-//   const [currow,setCurrow] = useState(0);
-//   const [curcol,setCurcol] = useState(0);
-//   const [cityCenterRow,setCityCenterRow] = useState(0);
-//   const [cityCenterCol,setCityCenterCOl] = useState(0);
-//     const thisPlayer = territoryState.players.find( arr => arr.name === usernameState.username)
-    let currow = 0;
-    let curcol = 0;
-    let cityCenterRow = 0;
-    let cityCenterCol = 0;
-//     if (thisPlayer) {
-//         currow = thisPlayer.currow;
-//         curcol = thisPlayer.curcol;
-//         cityCenterRow = thisPlayer.row;
-//         cityCenterCol = thisPlayer.col;
-//     }
+  let currow = 0;
+  let curcol = 0;
+  let cityCenterRow = 0;
+  let cityCenterCol = 0;
   const [playerName, setPlayerName] = useState(usernameState.username);
   const canvasRef = createRef();
   const { width, height } = calculateCanvasSize();
@@ -45,9 +34,11 @@ export default function Canvas(props) {
         cityCenterCol = thisPlayer.col;
     }
       const canvasHex = canvasRef.current;
+      const ctx = canvasHex.getContext("2d");
+      ctx.clearRect(0, 0, canvasHex.width, canvasHex.height);
       drawHexes(canvasHex);
     }
-  }, [props.mapArray, territoryState]);
+  }, [props.mapArray,territoryState,currow,curcol,cityCenterRow,cityCenterCol]);
 
   function calculateCanvasSize() {
     const { hexWidth, hexHeight, vertDist, horizDist } = getHexParameters();
@@ -81,9 +72,11 @@ export default function Canvas(props) {
       let start = getHexCornorCoord(center, i);
       let end = getHexCornorCoord(center, i + 1);
       fillMap(start, end, canvasID, center, map);
+      fillRegion(canvasID, center, map);
       fillCityCenter(canvasID, center, map);
-      fillPlayer(start, end, canvasID, center, map);
+      fillCrew(canvasID, center, map);
     }
+  }
 
     function fillCityCenter(canvasID, center, map) {
       if (map.i+1 === cityCenterRow && map.j+1 === cityCenterCol) {
@@ -97,17 +90,24 @@ export default function Canvas(props) {
       }
     }
 
-    function fillPlayer(start, end, canvasID, center, map) {
+     function fillCrew(canvasID, center, map) {
       if (map.i+1 === currow && map.j+1 === curcol) {
         drawCrew(canvasID, center, "#59CC8A");
-      } else if (map.element.player !== null) {
-        fillHex(canvasID, center, "gray");
       }
       //   else if (props.player.p1.getRegion(map.i,map.j)!== null) {
       //     fillHex(canvasID, center, props.player.p1.getColor());
       //   }else if(props.player.p2.getRegion(map.i,map.j)!== null) fillHex(canvasID, center, props.player.p2.getColor());
-    }
-  };
+    };
+
+    function fillRegion(canvasID, center, map) {
+      if (map.element.player == playerName && !(map.i+1 === cityCenterRow && map.j+1 === cityCenterCol)) {
+        fillHex(canvasID, center, "#59CC8A");
+      } else if (map.element.player !== null) {
+        fillHex(canvasID, center, "gray");
+      } else if(map.element.deposit == 0){
+        fillHex(canvasID, center, "#C4B29D");
+      }
+    };
 
   function fillMap(start, end, canvasID, center, map) {
     drawLine(
