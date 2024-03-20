@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useEffect, useMemo, useState } from "react";
 import "./styles/App.css";
 import { useAppSelector } from "../../store/hooks";
 import { selectConfig } from "../../store/Slices/configSlice";
@@ -7,21 +7,41 @@ import { selectUsername } from "../../store/Slices/usernameSlice.ts";
 import useWebSocket from "../../customHook/useWebSocket.ts";
 
 export default function Canvas(props) {
+  const [hexSize, setHexSize] = useState(40);
   const territoryState = useAppSelector(selectTerritory);
   const usernameState = useAppSelector(selectUsername);
-
-  const [hexSize, setHexSize] = useState(40);
   const configState = useAppSelector(selectConfig);
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
-  const {getTerritory} = useWebSocket();
+  const [playerName, setPlayerName] = useState(usernameState.username);
+  
   let currow = 0;
   let curcol = 0;
   let cityCenterRow = 0;
   let cityCenterCol = 0;
-  const [playerName, setPlayerName] = useState(usernameState.username);
   const canvasRef = createRef();
   const { width, height } = calculateCanvasSize();
+
+  // Pre-loaded images
+  const [cityCenterImage, setCityCenterImage] = useState(null);
+  const [crewImage, setCrewImage] = useState(null);
+
+  useEffect(() => {
+    const loadCityCenterImage = () => {
+        const img = new Image();
+        img.src = "img/citycenter.png";
+      setCityCenterImage(img);
+    };
+    const loadCrewImage = () => {
+      const img = new Image();
+      img.src = "img/crew.png";
+      setCrewImage(img);
+    };
+    
+    loadCityCenterImage();
+    loadCrewImage();
+  }, []);
+
 
   useEffect(() => {
     if (props.mapArray) {
@@ -34,8 +54,6 @@ export default function Canvas(props) {
         cityCenterCol = thisPlayer.col;
     }
       const canvasHex = canvasRef.current;
-      const ctx = canvasHex.getContext("2d");
-      ctx.clearRect(0, 0, canvasHex.width, canvasHex.height);
       drawHexes(canvasHex);
     }
   }, [props.mapArray,territoryState,currow,curcol,cityCenterRow,cityCenterCol]);
@@ -82,11 +100,14 @@ export default function Canvas(props) {
       if (map.i+1 === cityCenterRow && map.j+1 === cityCenterCol) {
         fillHex(canvasID, center, "#1D8348");
         const ctx = canvasID.getContext("2d");
-        const img = new Image();
-        img.src = "img/citycenter.png";
-        img.onload = function () {
-          ctx.drawImage(img, center.x - 40, center.y - 40, 80, 70);
-        };
+
+          if(cityCenterImage){
+            ctx.drawImage(cityCenterImage, center.x - 40, center.y - 40, 80, 70);
+          }else{
+            const img = new Image();
+            img.src = "img/citycenter.png";
+            ctx.drawImage(img, center.x - 40, center.y - 40, 80, 70);
+          }
       }
     }
 
@@ -94,17 +115,15 @@ export default function Canvas(props) {
       if (map.i+1 === currow && map.j+1 === curcol) {
         drawCrew(canvasID, center, "#59CC8A");
       }
-      //   else if (props.player.p1.getRegion(map.i,map.j)!== null) {
-      //     fillHex(canvasID, center, props.player.p1.getColor());
-      //   }else if(props.player.p2.getRegion(map.i,map.j)!== null) fillHex(canvasID, center, props.player.p2.getColor());
     };
 
     function fillRegion(canvasID, center, map) {
-      if (map.element.player == playerName && !(map.i+1 === cityCenterRow && map.j+1 === cityCenterCol)) {
+      //my regions
+      if (map.element.player == playerName && !(map.i+1 === cityCenterRow && map.j+1 === cityCenterCol) && map.element.deposit !== 0) {
         fillHex(canvasID, center, "#59CC8A");
-      } else if (map.element.player !== null) {
+      } else if (map.element.player !== null && map.element.deposit !== 0) {//other player regions
         fillHex(canvasID, center, "gray");
-      } else if(map.element.deposit == 0){
+      } else{ //fill map color 
         fillHex(canvasID, center, "#C4B29D");
       }
     };
@@ -121,18 +140,20 @@ export default function Canvas(props) {
   }
 
   const drawCrew = (canvasID, center, fillColor) => {
-    const ctx = canvasID.getContext("2d");
-    const crewRadius = hexSize / 2;
-    ctx.fillStyle = fillColor;
-    ctx.beginPath();
-    ctx.arc(center.x, center.y, crewRadius, 0, 2 * Math.PI);
-    ctx.fill();
-
-    const img = new Image();
-    img.src = "img/crew.png";
-    img.onload = function () {
-      ctx.drawImage(img, center.x - 71, center.y - 70, 142, 130);
-    };
+      const ctx = canvasID.getContext("2d");
+      const crewRadius = hexSize / 2;
+      ctx.fillStyle = fillColor;
+      ctx.beginPath();
+      ctx.arc(center.x, center.y, crewRadius, 0, 2 * Math.PI);
+      ctx.fill();
+      
+        if (crewImage) {
+          ctx.drawImage(crewImage, center.x - 71, center.y - 70, 142, 130);
+        }else{
+          const img = new Image();
+          img.src = "img/crew.png";
+          ctx.drawImage(img, center.x - 71, center.y - 70, 142, 130);
+        }
   };
 
   const fillHex = (canvasID, center, fillColor) => {
