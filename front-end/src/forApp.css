@@ -72,7 +72,7 @@ input[type="number"] {
   width: 400px; /* Decrease width */
   border-radius: 5px; /* Smaller border radius */
   border: 1px solid #ccc;
-  font-size: 20px; /* Reduce font size */
+  font-size: 25px; /* Reduce font size */
 }
 
 button {
@@ -98,4 +98,7 @@ button:disabled {
   background-color: #ccc; /* Light gray background */
   color: #666; /* Dark gray text color */
   cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+.creation-section label {
+  margin-top: 17px;
 }

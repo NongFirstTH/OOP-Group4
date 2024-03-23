@@ -224,8 +224,8 @@ function Init() {
                             type="number"
                             id="interest_pct"
                             name="interest_pct"
-                            className="form-input"
-                            style={{ width: '850px' }}
+                            className="form-input"  
+                            style={{ width: '841px' }}
                             placeholder='Interest Percentage'
                             value={interestPct}
                             onChange={(e) => handleChange(e, setInterestPct)}
