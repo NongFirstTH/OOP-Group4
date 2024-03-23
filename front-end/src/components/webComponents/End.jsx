@@ -1,10 +1,10 @@
 import useWebSocket from "../../customHook/useWebSocket.ts";
 
 function End() {
-    const { setState } = useWebSocket();
+    const { restart } = useWebSocket();
 
     const onRestart= () => {
-        setState('INIT');
+        restart();
     };
 
     return (

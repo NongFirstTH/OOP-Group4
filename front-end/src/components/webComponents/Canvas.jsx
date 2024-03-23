@@ -6,7 +6,7 @@ import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import { selectUsername } from "../../store/Slices/usernameSlice.ts";
 
 export default function Canvas(props) {
-  const [hexSize, setHexSize] = useState(40);
+  const [hexSize, setHexSize] = useState(40*props.zoomLevel);
   const territoryState = useAppSelector(selectTerritory);
   const usernameState = useAppSelector(selectUsername);
   const configState = useAppSelector(selectConfig);
@@ -21,6 +21,10 @@ export default function Canvas(props) {
   const { width, height } = calculateCanvasSize();
   const [cityCenterImage, setCityCenterImage] = useState(null);
   const [crewImage, setCrewImage] = useState(null);
+
+  useEffect(() => {
+    setHexSize(40 * props.zoomLevel);
+  }, [props.zoomLevel]);
 
   useEffect(() => {
     const loadCityCenterImage = () => {
@@ -54,7 +58,7 @@ export default function Canvas(props) {
       ctx.clearRect(0, 0, canvasHex.width, canvasHex.height);
       drawHexes(canvasHex);
     }
-  }, [props.mapArray,territoryState,currow,curcol,cityCenterRow,cityCenterCol]);
+  }, [hexSize,props.mapArray,territoryState,currow,curcol,cityCenterRow,cityCenterCol]);
 
   function calculateCanvasSize() {
     const { hexWidth, hexHeight, vertDist, horizDist } = getHexParameters();

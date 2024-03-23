@@ -5,7 +5,6 @@ import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
 import com.websocket.demo.Grammar.Plan.Plan;
-import com.websocket.demo.Chat.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 
 import java.util.HashSet;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -74,13 +72,9 @@ public class GameController {
 
     @MessageMapping("/game.setState")
     @SendTo("/topic/setState")
-    public String setState(String plan) {
-        state = "\""+plan+"\"";
-        if (plan.equals("INIT")) {
-            g = null;
-            ready = 0;
-        }
-        if(plan.equals("DEVISE")||plan.equals("REVISE")||plan.equals("TURN")) getTerritory();
+    public String setState(String s) {
+        state = "\""+s+"\"";
+        if(s.equals("DEVISE")||s.equals("REVISE")||s.equals("TURN")) getTerritory();
         return state;
     }
 
@@ -120,25 +114,19 @@ public class GameController {
     }
 
     @MessageMapping("/game.getTerritory")
-//    @SendTo("/topic/territory")
     public void getTerritory() {
         messageSendingOperations.convertAndSend("/topic/territory", g.getMap());
     }
 
-    public void regionMutate(int row, int col, int player, long deposit) {
-//        messageSendingOperations.convertAndSend("/topic/region", new RegionWrap(row, col, player, deposit));
+    @MessageMapping("/game.restart")
+    @SendTo("/topic/restart")
+    public String restart() {
+        state = "\"INIT\"";
+        g = null;
+        ready = 0;
+        config = null;
+        return "";
     }
-
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(String s) {
-        return ChatMessage.x(s);
-    }
-//    @MessageMapping("/chat.addUser")
-//    @SendTo("/topic/public")
-//    public ChatMessage addUser(ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-//        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-//        return chatMessage;
-//    }
 
     private Plan parsePlan(String plan) throws SyntaxError {
         return new PlanParser(new PlanTokenizer(plan)).parse();
