@@ -8,31 +8,7 @@ import { selectWebSocket } from "../../store/Slices/webSocketSlice.ts";
 const Map = () => {
   const webSocketState = useAppSelector(selectWebSocket);
   const territoryState = useAppSelector(selectTerritory);
-
-//   useEffect(() => {
-//     let intervalId;
-//     function countDown(setGameTime, initialTime) {
-//       intervalId = setInterval(() => {
-//         setGameTime((prevTime) => {
-//           if (prevTime === 0) {
-//             clearInterval(intervalId); // Stop the interval when time reaches 0
-//             return 0;
-//           }
-//           return prevTime - 1;
-//         });
-//       }, 1000);
-//     }
-//
-//
-//     if (webSocketState.gameState === "DEVISE") {
-//       countDown(setInitTime, initTime); // Start DEVISE countdown
-//       return () => clearInterval(intervalId); // Clear interval on component unmount
-//     }else{
-//       setReviseTime(10)
-//       countDown(setReviseTime, reviseTime); // Start REVISE countdown
-//       return () => clearInterval(intervalId); // Clear interval on component unmount
-//     }
-//   }, [webSocketState]);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const mappedArray = territoryState.territory.map((innerArray, i) => {
     return innerArray.map((element, j) => {
@@ -40,8 +16,31 @@ const Map = () => {
     });
   });
 
+  const handleZoomIn = () => {
+    setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.1);
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prevZoomLevel) => Math.max(0.1, prevZoomLevel - 0.1));
+  };
+
   return (
-      <Canvas mapArray={mappedArray} />
+  <>
+      <div className="zoom-buttons">
+        <button onClick={handleZoomIn}>Zoom In</button>
+        <button onClick={handleZoomOut}>Zoom Out</button>
+      </div>
+    <div
+      style={{
+        width: "800px", // Set your desired width
+        height: "600px", // Set your desired height
+        overflow: "auto", // Enable scrolling
+        border: "1px solid #ccc", // Add a border for visualization
+      }}
+    >
+      <Canvas mapArray={mappedArray} zoomLevel={zoomLevel} />
+    </div>
+    </>
   );
 };
 
