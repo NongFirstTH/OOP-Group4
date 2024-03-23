@@ -1,67 +1,60 @@
-import React, {useState} from 'react';
+// Init.tsx
+import React, { useState } from 'react';
 import './forApp.css';
-import {useDispatch} from "react-redux";
-import {setGameState, setHead} from "./store/Slices/webSocketSlice.ts";
-import {  useAppSelector } from "./store/hooks.ts";
+import { useDispatch } from "react-redux";
+import { setGameState, setHead } from "./store/Slices/webSocketSlice.ts";
+import { useAppSelector } from "./store/hooks.ts";
 import useWebSocket from "./customHook/useWebSocket.ts";
-import {
-    selectConfig,
-    setM as sliceSetM,
-    setN as sliceSetN,
-    setInitPlanMin as sliceSetInitPlanMin,
-    setInitPlanSec as sliceSetInitPlanSec,
-    setInitBudget as sliceSetInitBudget,
-    setInitCenterDep as sliceSetInitCenterDep,
-    setPlanRevMin as sliceSetPlanRevMin,
-    setPlanRevSec as sliceSetPlanRevSec,
-    setRevCost as sliceSetRevCost,
-    setMaxDep as sliceSetMaxDep,
-    setInterestPct as sliceSetInterestPct
-} from "./store/Slices/configSlice.ts";
+import { selectConfig, setConfig } from "./store/Slices/configSlice.ts";
 
 function Init() {
     const dispatch = useDispatch();
     const configState = useAppSelector(selectConfig);
     const [m, setM] = useState(configState.m);
     const [n, setN] = useState(configState.n);
-    const [initPlanMin, setInitPlanMin] = useState(configState.init_plan_min);
-    const [initPlanSec, setInitPlanSec] = useState(configState.init_plan_sec);
+    const [initPlanMin, setInitPlanMin] = useState(configState.init_plan_sec/60);
+    const [initPlanSec, setInitPlanSec] = useState(configState.init_plan_sec%60);
     const [initBudget, setInitBudget] = useState(configState.init_budget);
     const [initCenterDep, setInitCenterDep] = useState(configState.init_center_dep);
-    const [planRevMin, setPlanRevMin] = useState(configState.plan_rev_min);
-    const [planRevSec, setPlanRevSec] = useState(configState.plan_rev_sec);
+    const [planRevMin, setPlanRevMin] = useState(configState.plan_rev_sec/60);
+    const [planRevSec, setPlanRevSec] = useState(configState.plan_rev_sec%60);
     const [revCost, setRevCost] = useState(configState.rev_cost);
     const [maxDep, setMaxDep] = useState(configState.max_dep);
     const [interestPct, setInterestPct] = useState(configState.interest_pct);
     const {gameConfig} = useWebSocket()
 
-    const onSubmit = () => {
-        dispatch(setGameState('ADD'));
-        dispatch(sliceSetN(n));
-        dispatch(sliceSetM(m));
-        dispatch(sliceSetInitPlanMin(initPlanMin));
-        dispatch(sliceSetInitPlanSec(initPlanSec));
-        dispatch(sliceSetPlanRevMin(planRevMin));
-        dispatch(sliceSetPlanRevSec(planRevSec));
-        dispatch(sliceSetInitBudget(initBudget));
-        dispatch(sliceSetInitCenterDep(initCenterDep));
-        dispatch(sliceSetRevCost(revCost));
-        dispatch(sliceSetMaxDep(maxDep));
-        dispatch(sliceSetInterestPct(interestPct));
-        dispatch(setHead(true));
-        gameConfig(
+    const onSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        const config = {
             m,
             n,
-            initPlanMin,
-            initPlanSec,
-            initBudget,
-            initCenterDep,
-            planRevMin,
-            planRevSec,
-            revCost,
-            maxDep,
-            interestPct
-        );
+            init_plan_sec: initPlanSec+60*initPlanMin,
+            init_budget: initBudget,
+            init_center_dep: initCenterDep,
+            plan_rev_sec: planRevSec+60*planRevMin,
+            rev_cost: revCost,
+            max_dep: maxDep,
+            interest_pct: interestPct,
+            init: true,
+        };
+
+        dispatch(setConfig(config)); // Update the Redux store with the new config
+        dispatch(setGameState('ADD')); // Assuming you're also dispatching this action
+        dispatch(setHead(true)); // Assuming you're also dispatching this action
+         gameConfig(
+                    m,
+                    n,
+                    initPlanMin,
+                    initPlanSec,
+                    initBudget,
+                    initCenterDep,
+                    planRevMin,
+                    planRevSec,
+                    revCost,
+                    maxDep,
+                    interestPct
+                );
     };
 
     const handleChange = (e, setter) => {

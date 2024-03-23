@@ -48,7 +48,7 @@ const Index = () => {
                   case 'TURN':
                     return webSocketState.turn === usernameState.username ? <Turn /> : <Wait />;
                   case 'REVISE':
-                    return webSocketState.turn === usernameState.username ? <RevisePlan /> : <Wait />;
+                    return webSocketState.turn === usernameState.username ? <Turn /> : <Wait />;
                   default:
                     return null;
                 }
