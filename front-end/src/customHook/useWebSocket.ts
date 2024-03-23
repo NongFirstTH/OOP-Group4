@@ -7,7 +7,7 @@ import {setIsConnected, appendMessage,setStompClient, setHead as sliceSetHead} f
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
 import {setTurn as sliceSetTurn, setGameState as sliceSetGameState, addSub} from "../store/Slices/webSocketSlice.ts";
-import {setInit as sliceSetInit} from "../store/Slices/configSlice.ts";
+import {setInit as sliceSetInit, setConfig as sliceSetConfig} from "../store/Slices/configSlice.ts";
 import {setUsernames as sliceSetUsernames, selectUsername} from "../store/Slices/usernameSlice.ts";
 import {setOK as sliceSetOK, reset as sliceReset} from "../store/Slices/planSlice.ts";
 //import React, { useState } from 'react';
@@ -135,7 +135,7 @@ function useWebSocket(){
 
     const onConnected = (stompClient : Stomp.Client) => {
         stompClient.subscribe('/topic/public', onMessageReceived);
-        stompClient.subscribe('/topic/region', onRegionMutate);
+        stompClient.subscribe('/topic/config', onConfig);
         stompClient.subscribe('/topic/territory', onGetTerritory);
         stompClient.subscribe('/topic/status');
         stompClient.subscribe('/topic/turn', onGetTurn);
@@ -148,8 +148,8 @@ function useWebSocket(){
     const onMessageReceived = (payload : Stomp.Message) => {
         dispatch(appendMessage(JSON.parse(payload.body)))
     }
-    const onRegionMutate = (payload : Stomp.Message) => {
-        console.log(JSON.parse(payload.body))
+    const onConfig = (payload : Stomp.Message) => {
+        dispatch(sliceSetConfig(JSON.parse(payload.body)))
     }
     const onGetTerritory = (payload : Stomp.Message) => {
         dispatch(sliceSetTerritory(JSON.parse(payload.body)))

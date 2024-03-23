@@ -1,6 +1,8 @@
+// Turn.jsx
 import React, { useState } from 'react';
 import '../../forApp.css';
 import { useDispatch } from "react-redux";
+import { selectConfig } from "../../store/Slices/configSlice.ts";
 import { setGameState } from "../../store/Slices/webSocketSlice.ts";
 import { useAppSelector } from "../../store/hooks.ts";
 import useWebSocket from "../../customHook/useWebSocket.ts";
@@ -9,19 +11,33 @@ import {
     setPlan as sliceSetPlan,
 } from "../../store/Slices/planSlice.ts";
 import Plan from './Plan.jsx';
+import Timer from './Timer.jsx';
 
 function Turn() {
     const dispatch = useDispatch();
+    const configState = useAppSelector(selectConfig);
     const planState = useAppSelector(selectPlan);
     const [plan, setPlan] = useState(planState.plan || '');
-    const { devisePlan, executePlan ,setState } = useWebSocket();
+    const { executePlan, setState, revisePlan } = useWebSocket();
+    const [isRevise, setIsRevise] = useState(false);
 
     const onRevise = () => {
-        setState('REVISE');
+        setIsRevise(true);
     };
 
     const onExecute = () => {
         executePlan();
+        setIsRevise(false);
+    };
+
+    const onSubmitPlan = () => {
+        revisePlan(plan);
+        dispatch(sliceSetPlan(plan));
+        setIsRevise(false);
+    };
+
+    const onTimeOut = () => {
+        onExecute(); // Call onExecute when the timer runs out
     };
 
     return (
@@ -32,14 +48,24 @@ function Turn() {
             minHeight: '100vh'
         }}>
             <div className="app-container">
+                <Timer initialTime={
+                configState.plan_rev_sec
+                } onTimeOut={onTimeOut} />
                 <form>
                     <div className="form-group">
                         <label htmlFor="plan" className="form-label">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={true}/>
+                        <Plan plan={plan} setPlan={setPlan} isDisable={!isRevise} />
                     </div>
                 </form>
-                <button type="submit" onClick={onRevise}>Revise Plan</button>
-                <button type="submit" onClick={onExecute}>Execute Plan</button>
+                {!isRevise && (
+                    <>
+                        <button type="button" onClick={onRevise}>Revise Plan</button>
+                        <button type="button" onClick={onExecute}>Execute Plan</button>
+                    </>
+                )}
+                {isRevise && (
+                    <button type="button" onClick={onSubmitPlan}>Submit Plan</button>
+                )}
             </div>
         </div>
     );

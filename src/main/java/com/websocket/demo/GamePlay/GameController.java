@@ -24,20 +24,24 @@ public class GameController {
     private final SimpMessageSendingOperations messageSendingOperations;
     private int ready=0;
     private String state = "\"START\"";
+    private InitGame config;
 
     @MessageMapping("/game.start")
     public void start() throws SyntaxError, EvalError {
         if(g!=null) {
             messageSendingOperations.convertAndSend("/topic/init", "");
             messageSendingOperations.convertAndSend("/topic/setState", state);
+            messageSendingOperations.convertAndSend("/topic/config", config);
         }
     }
 
     @MessageMapping("/game.new")
     public void newGame(InitGame init) throws SyntaxError, EvalError {
-        g = new Game(init);
+        config = init;
+        g = new Game(config);
         state = "\"ADD\"";
         messageSendingOperations.convertAndSend("/topic/init", "");
+        messageSendingOperations.convertAndSend("/topic/config", config);
 //        messageSendingOperations.convertAndSend("/topic/setState", state);
     }
 
