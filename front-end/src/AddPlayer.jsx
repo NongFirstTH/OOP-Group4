@@ -63,7 +63,7 @@ function AddPlayer() {
   return (
     <div>
         <div className="app-container h-screen bg-[#070F2B] flex flex-col justify-between">
-            <div className="centered-image">
+            <div>
                 <img src="/img/newlogo.png" alt="Game" className="mb-8" />
             </div>
             <h1>Create City Crew</h1>
@@ -79,10 +79,10 @@ function AddPlayer() {
                             disabled={isConfirmed}
                             onChange={(e) => setPlayer(e.target.value)}
                         />
-                        <button type="submit" disabled={isConfirmed}>confirm name</button>
+                        <button type="submit" disabled={isConfirmed}>Create Player</button>
                     </form>
                 </div>
-                <div className="players-section">
+                {/* <div className="players-section">
                     <h2>Players:</h2>
                     {players.length > 0 ? (
                           <ul>
@@ -93,7 +93,7 @@ function AddPlayer() {
                         ) : (
                         <p>No players yet. Be the first to join!</p>
                     )}
-                </div>
+                </div> */}
             </div>
             <div className="button-container fixed bottom-0 flex justify-between w-full">
                 <div className="button">
