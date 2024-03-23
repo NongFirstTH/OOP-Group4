@@ -79,17 +79,35 @@ input[type="number"] {
 }
 
 button {
-  padding: 15px 30px; /* Adjusted padding */
+  padding: 10px 20px; /* Adjusted padding for smaller button */
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 25px;
-  font-size: 30px;
+  font-size: 25px;
+  /* Adding gradient */
+  background-image: linear-gradient(to bottom, #007bff, #0056b3);
+  /* Adding box-shadow */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  /* Adding transition for smoother hover effect */
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background-color: #0056b3; /* Adjusted hover background color */
+  /* Adding hover effect for box-shadow */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+  background-color: #ccc; /* Light gray background (original) */
+  color: #666; /* Dark gray text color (original) */
+  cursor: not-allowed; /* Change cursor to indicate disabled state (original) */
+
+  /* New styles for disabled button */
+  background-image: none; /* Remove gradient for disabled button */
+  box-shadow: none; /* Remove box-shadow for disabled button */
 }
 
 input:disabled {
@@ -103,9 +121,8 @@ button:disabled {
   cursor: not-allowed; /* Change cursor to indicate disabled state */
 }
 .creation-section label {
-  margin-top: 17px;
+  margin-top: 8px;
 }
-
 .centered-button {
   display: flex; /* Enable flexbox layout */
   justify-content: center; /* Horizontally center content */

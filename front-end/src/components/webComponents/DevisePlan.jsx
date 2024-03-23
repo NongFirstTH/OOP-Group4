@@ -18,6 +18,7 @@ function DevisePlan() {
     const planState = useAppSelector(selectPlan);
     const [plan, setPlan] = useState(planState.plan || '');
     const { devisePlan } = useWebSocket();
+    const [isPlanVisible, setIsPlanVisible] = useState(true);
 
     const onSubmit = () => {
         dispatch(sliceSetPlan(plan));
@@ -28,6 +29,10 @@ function DevisePlan() {
         devisePlan('{}');
     };
 
+    const togglePlanVisibility = () => {
+        setIsPlanVisible(!isPlanVisible);
+    };
+
     return (
         <div style={{
             display: 'flex',
@@ -36,16 +41,23 @@ function DevisePlan() {
             minHeight: '100vh'
         }}>
             <div className="app-container">
-                <Timer initialTime={
-                configState.init_plan_sec
-                } onTimeOut={onTimeOut} />
+                <Timer initialTime={configState.init_plan_sec} onTimeOut={onTimeOut} />
                 <form>
-                    <div className="form-group">
-                        <label htmlFor="plan">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
-                    </div>
+                    {isPlanVisible && (
+                        <div className="form-group">
+                            <label htmlFor="plan">Plan:</label>
+                            <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
+                        </div>
+                    )}
                 </form>
-                <button type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
+                {isPlanVisible && (
+                    <div style={{ marginTop: '10px' }}> {/* Added space */}
+                        <button type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
+                    </div>
+                )}
+                <div style={{ marginTop: '10px' }}> {/* Added space */}
+                    <button onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                </div>
             </div>
         </div>
     );
