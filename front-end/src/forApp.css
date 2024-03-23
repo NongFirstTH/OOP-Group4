@@ -123,4 +123,14 @@ button:disabled {
 .creation-section label {
   margin-top: 8px;
 }
+.centered-button {
+  display: flex; /* Enable flexbox layout */
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content (optional) */
+}
 
+.slider-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
