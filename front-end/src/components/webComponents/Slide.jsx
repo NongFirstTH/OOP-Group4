@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Slider = ({ min, max, value, onChange }) => {
-  const [sliderValue, setSliderValue] = useState(0); // Initialize slider value
+  const [sliderValue, setSliderValue] = useState((value - min) * 100 / (max - min)); // Initialize slider value
 
   const handleChange = (event) => {
     const newValue = parseFloat(event.target.value); // Parse slider value to float
@@ -15,13 +15,13 @@ const Slider = ({ min, max, value, onChange }) => {
   const handleZoomIn = () => {
     const newZoomLevel = Math.min(value + 0.1, max); // Increase zoom level by 0.1 (adjust as needed)
     onChange(newZoomLevel);
-    setSliderValue(newZoomLevel*100/(max - min)-min);
+    setSliderValue((newZoomLevel - min) * 100 / (max - min));
   };
 
   const handleZoomOut = () => {
     const newZoomLevel = Math.max(value - 0.1, min); // Decrease zoom level by 0.1 (adjust as needed)
     onChange(newZoomLevel);
-    setSliderValue(newZoomLevel*100/(max - min)-min);
+    setSliderValue((newZoomLevel - min) * 100 / (max - min));
   };
 
   return (
