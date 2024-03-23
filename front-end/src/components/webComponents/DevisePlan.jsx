@@ -41,7 +41,7 @@ function DevisePlan() {
                 } onTimeOut={onTimeOut} />
                 <form>
                     <div className="form-group">
-                        <label htmlFor="plan" className="form-label">Plan:</label>
+                        <label htmlFor="plan">Plan:</label>
                         <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
                     </div>
                 </form>
