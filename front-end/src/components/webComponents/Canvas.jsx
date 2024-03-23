@@ -1,10 +1,9 @@
-import React, { createRef, useEffect, useMemo, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import "./styles/App.css";
 import { useAppSelector } from "../../store/hooks";
 import { selectConfig } from "../../store/Slices/configSlice";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import { selectUsername } from "../../store/Slices/usernameSlice.ts";
-import useWebSocket from "../../customHook/useWebSocket.ts";
 
 export default function Canvas(props) {
   const [hexSize, setHexSize] = useState(40);
@@ -14,15 +13,12 @@ export default function Canvas(props) {
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
   const [playerName, setPlayerName] = useState(usernameState.username);
-  
   let currow = 0;
   let curcol = 0;
   let cityCenterRow = 0;
   let cityCenterCol = 0;
   const canvasRef = createRef();
   const { width, height } = calculateCanvasSize();
-
-  // Pre-loaded images
   const [cityCenterImage, setCityCenterImage] = useState(null);
   const [crewImage, setCrewImage] = useState(null);
 
@@ -54,6 +50,8 @@ export default function Canvas(props) {
         cityCenterCol = thisPlayer.col;
     }
       const canvasHex = canvasRef.current;
+      const ctx = canvasHex.getContext("2d");
+      ctx.clearRect(0, 0, canvasHex.width, canvasHex.height);
       drawHexes(canvasHex);
     }
   }, [props.mapArray,territoryState,currow,curcol,cityCenterRow,cityCenterCol]);
@@ -79,8 +77,8 @@ export default function Canvas(props) {
         let center = hexToPixel(axialCoord);
         console.log(playerName);
         drawHex(canvas, center, element);
-        //     if (element.element.player !== null)
-        //       drawHexCoordinates(canvas, center, Hex(q + 1, r + 1), element);
+            // if (element.element.player !== null)
+            //   drawHexCoordinates(canvas, center,element);
       });
     });
   };
@@ -101,12 +99,14 @@ export default function Canvas(props) {
         fillHex(canvasID, center, "#1D8348");
         const ctx = canvasID.getContext("2d");
 
-          if(cityCenterImage){
+          if(cityCenterImage  && cityCenterImage.complete){
             ctx.drawImage(cityCenterImage, center.x - 40, center.y - 40, 80, 70);
           }else{
-            const img = new Image();
-            img.src = "img/citycenter.png";
+          const img = new Image();
+          img.src = "img/citycenter.png";
+          img.onload = () => {
             ctx.drawImage(img, center.x - 40, center.y - 40, 80, 70);
+          }
           }
       }
     }
@@ -146,13 +146,14 @@ export default function Canvas(props) {
       ctx.beginPath();
       ctx.arc(center.x, center.y, crewRadius, 0, 2 * Math.PI);
       ctx.fill();
-      
-        if (crewImage) {
-          ctx.drawImage(crewImage, center.x - 71, center.y - 70, 142, 130);
-        }else{
+      if (crewImage  && crewImage.complete) {
+        ctx.drawImage(crewImage, center.x - 71, center.y - 70, 142, 130);
+      }else{
           const img = new Image();
           img.src = "img/crew.png";
-          ctx.drawImage(img, center.x - 71, center.y - 70, 142, 130);
+          img.onload = () => {
+            ctx.drawImage(img, center.x - 71, center.y - 70, 142, 130);
+          };
         }
   };
 
@@ -213,14 +214,15 @@ export default function Canvas(props) {
     ctx.closePath();
   };
 
-  const drawHexCoordinates = (canvasID, center, h, map) => {
+  const drawHexCoordinates = (canvasID, center,map) => {
     const ctx = canvasID.getContext("2d");
     ctx.fillStyle = "black";
-    ctx.fillText(map.element.deposit, center.x - 5, center.y + 20);
-    ctx.fillText(h.r, center.x - 10, center.y);
-    ctx.fillText(h.q, center.x + 7, center.y);
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(map.element.deposit, center.x, center.y);
+    // ctx.fillText(h.r, center.x - 10, center.y);
+    // ctx.fillText(h.q, center.x + 7, center.y);
   };
-
   return (
     <div>
       <canvas ref={canvasRef} width={width} height={height}></canvas>
