@@ -112,7 +112,7 @@ export default function Canvas(props) {
             const img = new Image();
             img.src = "img/citycenter.png";
             img.onload = () => {
-            ctx.drawImage(cityCenterImage, imageX, imageY, imageWidth, imageHeight);
+            ctx.drawImage(img, imageX, imageY, imageWidth, imageHeight);
           }
           }
       }
@@ -163,7 +163,7 @@ export default function Canvas(props) {
         const img = new Image();
         img.src = "img/crew.png";
         img.onload = () => {
-            ctx.drawImage(crewImage, imageX, imageY-17, imageWidth, imageHeight);
+            ctx.drawImage(img, imageX, imageY-17, imageWidth, imageHeight);
           };
         }
   };
