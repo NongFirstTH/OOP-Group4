@@ -111,3 +111,9 @@ button:disabled {
   justify-content: center; /* Horizontally center content */
   align-items: center; /* Vertically center content (optional) */
 }
+
+.slider-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
