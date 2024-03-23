@@ -1,4 +1,3 @@
-// Turn.jsx
 import React, { useState } from 'react';
 import '../../forApp.css';
 import { useDispatch } from "react-redux";
@@ -20,6 +19,7 @@ function Turn() {
     const [plan, setPlan] = useState(planState.plan || '');
     const { executePlan, setState, revisePlan } = useWebSocket();
     const [isRevise, setIsRevise] = useState(false);
+    const [isPlanVisible, setIsPlanVisible] = useState(true);
 
     const onRevise = () => {
         setIsRevise(true);
@@ -40,6 +40,10 @@ function Turn() {
         onExecute(); // Call onExecute when the timer runs out
     };
 
+    const togglePlanVisibility = () => {
+        setIsPlanVisible(!isPlanVisible);
+    };
+
     return (
         <div style={{
             display: 'flex',
@@ -48,24 +52,29 @@ function Turn() {
             minHeight: '100vh'
         }}>
             <div className="app-container">
-                <Timer initialTime={
-                configState.plan_rev_sec
-                } onTimeOut={onTimeOut} />
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="plan" className="form-label">Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={!isRevise} />
-                    </div>
-                </form>
-                {!isRevise && (
-                    <>
+                <Timer initialTime={configState.plan_rev_sec} onTimeOut={onTimeOut} />
+                {isPlanVisible && (
+                    <form>
+                        <div className="form-group">
+                            <label htmlFor="plan" className="form-label">Plan:</label>
+                            <Plan plan={plan} setPlan={setPlan} isDisable={!isRevise} />
+                        </div>
+                    </form>
+                )}
+                {!isRevise && isPlanVisible && (
                         <button type="button" onClick={onRevise}>Revise Plan</button>
+                )}
+                {!isRevise && isPlanVisible && (
                         <button type="button" onClick={onExecute}>Execute Plan</button>
-                    </>
                 )}
-                {isRevise && (
-                    <button type="button" onClick={onSubmitPlan}>Submit Plan</button>
+                {isRevise && isPlanVisible && (
+                    <div style={{ marginTop: '10px' }}> {/* Added space */}
+                        <button type="button" onClick={onSubmitPlan}>Execute Plan</button>
+                    </div>
                 )}
+                <div style={{ marginTop: '10px' }}> {/* Added space */}
+                    <button onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                </div>
             </div>
         </div>
     );
