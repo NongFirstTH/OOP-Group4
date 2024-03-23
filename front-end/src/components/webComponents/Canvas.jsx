@@ -102,14 +102,17 @@ export default function Canvas(props) {
       if (map.i+1 === cityCenterRow && map.j+1 === cityCenterCol) {
         fillHex(canvasID, center, "#1D8348");
         const ctx = canvasID.getContext("2d");
-
+        const imageWidth = 80 * props.zoomLevel;
+        const imageHeight = 70 * props.zoomLevel;
+        const imageX = center.x - imageWidth / 2;
+        const imageY = center.y - imageHeight / 2;
           if(cityCenterImage  && cityCenterImage.complete){
-            ctx.drawImage(cityCenterImage, center.x - 40, center.y - 40, 80, 70);
+            ctx.drawImage(cityCenterImage, imageX, imageY, imageWidth, imageHeight);
           }else{
-          const img = new Image();
-          img.src = "img/citycenter.png";
-          img.onload = () => {
-            ctx.drawImage(img, center.x - 40, center.y - 40, 80, 70);
+            const img = new Image();
+            img.src = "img/citycenter.png";
+            img.onload = () => {
+            ctx.drawImage(cityCenterImage, imageX, imageY, imageWidth, imageHeight);
           }
           }
       }
@@ -144,19 +147,23 @@ export default function Canvas(props) {
   }
 
   const drawCrew = (canvasID, center, fillColor) => {
+    const imageWidth = 120 * props.zoomLevel;
+    const imageHeight = 120 * props.zoomLevel;
+    const imageX = center.x - imageWidth / 2;
+    const imageY = center.y - imageHeight / 2;
       const ctx = canvasID.getContext("2d");
-      const crewRadius = hexSize / 2;
+      const crewRadius = hexSize / 2.5;
       ctx.fillStyle = fillColor;
       ctx.beginPath();
-      ctx.arc(center.x, center.y, crewRadius, 0, 2 * Math.PI);
+      ctx.arc(center.x, center.y-14, crewRadius, 0, 2 * Math.PI);
       ctx.fill();
       if (crewImage  && crewImage.complete) {
-        ctx.drawImage(crewImage, center.x - 71, center.y - 70, 142, 130);
+        ctx.drawImage(crewImage, imageX, imageY-17, imageWidth, imageHeight);
       }else{
-          const img = new Image();
-          img.src = "img/crew.png";
-          img.onload = () => {
-            ctx.drawImage(img, center.x - 71, center.y - 70, 142, 130);
+        const img = new Image();
+        img.src = "img/crew.png";
+        img.onload = () => {
+            ctx.drawImage(crewImage, imageX, imageY-17, imageWidth, imageHeight);
           };
         }
   };
