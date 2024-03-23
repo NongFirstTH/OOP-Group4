@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="Make Canvas suitable with Map &amp;&amp; Fill Color on current Cell &amp;&amp; Make UseEffect re render when currow curcol change">
+    <list default="true" id="fbd8237e-5e59-4bc5-9bde-dc1312108574" name="Changes" comment="Change AddPlayer.jsx &#10;Change default value in init row and col&#10;Change some css for AddPlayer.jsx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/websocket/demo/Lec17ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/DevisePlan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/DevisePlan.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/Plan.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/Plan.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/Start.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/webComponents/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/webComponents/styles/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/forApp.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/forApp.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +47,8 @@
     </option>
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="4ece3931-be99-4609-a123-6a3a56ab7cc8" />
-        <option name="url" value="https://github.com/NongFirstTH/OOP-Group4" />
+        <option name="accountId" value="7056a99d-f73f-45ab-af65-50796c58983e" />
+        <option name="url" value="https://github.com/NongFirstTH/OOP-Group4.git" />
       </UrlAndAccount>
     </option>
   </component>
@@ -60,14 +64,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "FirstV3",
-    "last_opened_file_path": "D:/work/OOP-Group4"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Knack&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/work/OOP-Group4&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.websocket.demo.GamePlay" />
@@ -162,7 +166,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709273472727</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix init page can't scroll now">
+      <option name="closed" value="true" />
+      <created>1710251760083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710251760083</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Change AddPlayer.jsx &#10;Change default value in init row and col&#10;Change some css for AddPlayer.jsx">
+      <option name="closed" value="true" />
+      <created>1711179924945</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711179924945</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -170,7 +190,9 @@
     <MESSAGE value="Fix AddPlayer.jsx addPlayer function &amp;&amp; change new logo" />
     <MESSAGE value="change new logo size" />
     <MESSAGE value="make onChange button for Init" />
-    <option name="LAST_COMMIT_MESSAGE" value="make onChange button for Init" />
+    <MESSAGE value="Fix init page can't scroll now" />
+    <MESSAGE value="Change AddPlayer.jsx &#10;Change default value in init row and col&#10;Change some css for AddPlayer.jsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change AddPlayer.jsx &#10;Change default value in init row and col&#10;Change some css for AddPlayer.jsx" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/OOP_Group4$AssignmentStatementTest.ic" NAME="AssignmentStatementTest Coverage Results" MODIFIED="1708188447764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
