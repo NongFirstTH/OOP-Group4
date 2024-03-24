@@ -233,7 +233,13 @@ function Init() {
                         />
                     </div>
                 </form>
-                <button type="submit" onClick={onSubmit}>Submit</button>
+                <button
+                    type="submit"
+                    onClick={onSubmit}
+                    class = "green-button"
+                    >
+                    Submit
+                </button>
             </div>
         </div>
     );

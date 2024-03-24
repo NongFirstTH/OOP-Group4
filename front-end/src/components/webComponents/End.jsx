@@ -15,10 +15,12 @@ function End() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: '100vh'
         }}>
-            player {webSocketState.winner} win
-            <button type="submit" onClick={onRestart}>Restart</button>
+            <img src="../../img/congratulation.png" alt="Game" className="mb-8" />{" "}
+            <h1>
+                The winner is {webSocketState.winner} !!!!
+            </h1>
+            <button class="blue-button" type="submit" onClick={onRestart}>Restart</button>
         </div>
     );
 }

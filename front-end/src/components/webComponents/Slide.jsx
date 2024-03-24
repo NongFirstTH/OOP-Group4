@@ -26,16 +26,16 @@ const Slider = ({ min, max, value, onChange }) => {
 
   return (
     <div className="slider-container" style={{ display: "flex", alignItems: "center" }}>
-      <button onClick={handleZoomOut}>-</button>
+      <button class="blue-button" onClick={handleZoomOut}>-</button>
       <input
         type="range"
         min="0"
         max="100"
         value={sliderValue}
         onChange={handleChange}
-        style={{ width: "30%", height: "20px"}}
+        style={{ width: "50%", height: "20px"}}
       />
-      <button onClick={handleZoomIn}>+</button>
+      <button class="blue-button" onClick={handleZoomIn}>+</button>
     </div>
   );
 };

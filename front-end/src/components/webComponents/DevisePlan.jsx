@@ -45,11 +45,11 @@ function DevisePlan() {
                 </form>
                 {isPlanVisible && (
                     <div style={{ marginTop: '10px' }}> {/* Added space */}
-                        <button type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
+                        <button class="green-button" type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
                     </div>
                 )}
                 <div style={{ marginTop: '10px' }}> {/* Added space */}
-                    <button onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                    <button class="gray-button" onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
                 </div>
         </>
     );
