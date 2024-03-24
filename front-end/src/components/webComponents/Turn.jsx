@@ -46,10 +46,9 @@ function Turn() {
 
     return (
         <div style={{
-            display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: '100vh'
+            Height: '100%'
         }}>
             <div className="app-container">
                 <Timer initialTime={configState.plan_rev_sec} onTimeOut={onTimeOut} />

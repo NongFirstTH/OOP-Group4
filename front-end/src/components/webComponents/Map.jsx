@@ -30,12 +30,11 @@ const Map = () => {
   };
 
   return (
-    <>
       <div className="map-container">
         <div
               style={{
                 width: "800px", // Set your desired width
-                height: "600px", // Set your desired height
+                height: "645px", // Set your desired height
                 overflow: "auto", // Enable scrolling
                 border: "1px solid #ccc", // Add a border for visualization
               }}
@@ -46,7 +45,6 @@ const Map = () => {
           <Slider min={0.1} max={1.5} value={zoomLevel} onChange={handleZoomChange} />
         </div>
       </div>
-    </>
   );
 };
 
