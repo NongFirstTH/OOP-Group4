@@ -33,6 +33,7 @@ interface webSocketState {
     turn: string|null;
     isHead: boolean;
     isStart: boolean;
+    winner: string;
 }
 
 const initialState: webSocketState = {
@@ -44,6 +45,7 @@ const initialState: webSocketState = {
     turn: null,
     isHead: false,
     isStart: false,
+    winner: null,
 };
 
 export const webSocketSlice = createSlice({
@@ -75,9 +77,12 @@ export const webSocketSlice = createSlice({
         setStart: (state) => {
             state.isStart = true;
         },
+        setWinner: (state, action : PayloadAction<boolean>) => {
+            state.winner = action.payload;
+        },
     },
 });
 
-export const {setIsConnected, appendMessage,setStompClient,setGameState,setTurn,setHead,setStart} = webSocketSlice.actions;
+export const {setIsConnected, appendMessage,setStompClient,setGameState,setTurn,setHead,setStart,setWinner} = webSocketSlice.actions;
 export default webSocketSlice.reducer;
 export const selectWebSocket = (state: RootState) => state.webSocket;

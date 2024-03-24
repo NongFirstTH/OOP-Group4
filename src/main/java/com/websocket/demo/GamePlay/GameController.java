@@ -86,10 +86,9 @@ public class GameController {
             if (!g.executePlan()) {
                 state = "\"END\"";
                 messageSendingOperations.convertAndSend("/topic/setState", "\"END\"");
+                messageSendingOperations.convertAndSend("/topic/winner", "\""+g.getPlayer().getName()+"\"");
             } else {
                 nextTurn();
-                state = "\"TURN\"";
-                messageSendingOperations.convertAndSend("/topic/setState", "\"TURN\"");
                 messageSendingOperations.convertAndSend("/topic/plan." + g.getPlayer().getName(), "true");
             }
         } catch (SyntaxError | NoSuchElementException | EvalError e) {
@@ -104,6 +103,7 @@ public class GameController {
         if (!g.executePlan()) {
             state = "\"END\"";
             messageSendingOperations.convertAndSend("/topic/setState", "\"END\"");
+            messageSendingOperations.convertAndSend("/topic/winner", "\""+g.getPlayer().getName()+"\"");
         }
         nextTurn();
         return g.getMap();

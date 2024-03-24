@@ -131,7 +131,7 @@ public class Game implements GameI {
         PlayerWrap[] array = new PlayerWrap[players.size()];
         int i = 0;
         for (Player p:players) {
-            array[i++] = new PlayerWrap(p.getName(), p.getRow(), p.getCol(), p.getCurrow(), p.getCurcol());
+            array[i++] = new PlayerWrap(p.getName(), p.getBudget(), p.getRow(), p.getCol(), p.getCurrow(), p.getCurcol());
         }
         return new TerritoryWrap(t.wrap(), array);
     }

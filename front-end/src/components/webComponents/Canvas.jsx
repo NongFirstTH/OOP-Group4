@@ -12,7 +12,7 @@ export default function Canvas(props) {
   const configState = useAppSelector(selectConfig);
   const [rows, setRows] = useState(configState.m);
   const [cols, setCols] = useState(configState.n);
-  const [playerName, setPlayerName] = useState(usernameState.username);
+  const playerName = usernameState.username;
   let currow = 0;
   let curcol = 0;
   let cityCenterRow = 0;
@@ -81,8 +81,8 @@ export default function Canvas(props) {
         let center = hexToPixel(axialCoord);
         console.log(playerName);
         drawHex(canvas, center, element);
-            // if (element.element.player !== null)
-            //   drawHexCoordinates(canvas, center,element);
+            if (element.element.player === playerName)
+              drawHexCoordinates(canvas, center,element);
       });
     });
   };

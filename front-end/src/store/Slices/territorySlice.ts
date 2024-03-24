@@ -8,6 +8,7 @@ interface Territory {
 
 interface Player {
     name: string;
+    budget: number;
     row: number;
     col: number;
     currow: number;
