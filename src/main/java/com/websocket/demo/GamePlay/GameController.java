@@ -66,7 +66,7 @@ public class GameController {
             }
             messageSendingOperations.convertAndSend("/topic/plan." + plan.getPlayer(), "null");
         } catch (SyntaxError | NoSuchElementException e) {
-            messageSendingOperations.convertAndSend("/topic/plan." + plan.getPlayer(), "\"" + e.fillInStackTrace() + "\"");
+            messageSendingOperations.convertAndSend("/topic/plan." + plan.getPlayer(), "\"" + e.getMessage() + "\"");
         }
     }
 
@@ -80,7 +80,7 @@ public class GameController {
 
     @MessageMapping("/game.revise")
     @SendTo("/topic/territory")
-    public void revise(StringWrap plan) {
+    public void revise(StringWrap plan) throws EvalError {
         try {
             g.revisePlan(parsePlan(plan.getText()));
             if (!g.executePlan()) {
@@ -92,8 +92,8 @@ public class GameController {
                 getTerritory();
                 nextTurn();
             }
-        } catch (SyntaxError | NoSuchElementException | EvalError e) {
-            messageSendingOperations.convertAndSend("/topic/plan." + g.getPlayer().getName(), "\"" + e.fillInStackTrace() + "\"");
+        } catch (SyntaxError | NoSuchElementException e) {
+            messageSendingOperations.convertAndSend("/topic/plan." + g.getPlayer().getName(), "\"" + e.getMessage() + "\"");
         }
     }
 

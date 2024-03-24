@@ -46,6 +46,7 @@ function Game({ isDevise, isTurn, turn }) {
 
     const onBack = () => {
         setIsRevise(false);
+        setPlan(planState.prev);
         dispatch(sliceSetPlan(planState.prev));
         dispatch(setOK(null));
     };
