@@ -9,7 +9,7 @@ import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.
 import {setTurn as sliceSetTurn, setGameState as sliceSetGameState, setWinner as sliceSetWinner} from "../store/Slices/webSocketSlice.ts";
 import {setInit as sliceSetInit, setConfig as sliceSetConfig} from "../store/Slices/configSlice.ts";
 import {setUsernames as sliceSetUsernames, selectUsername} from "../store/Slices/usernameSlice.ts";
-import {setOK as sliceSetOK, reset as sliceReset} from "../store/Slices/planSlice.ts";
+import {setOK as sliceSetOK} from "../store/Slices/planSlice.ts";
 //import React, { useState } from 'react';
 
 function useWebSocket(){
@@ -145,11 +145,6 @@ function useWebSocket(){
     }
     const onSetState = (payload : Stomp.Message) => {
         dispatch(sliceSetGameState(JSON.parse(payload.body)));
-        if (JSON.parse(payload.body) === 'INIT') {
-            dispatch(sliceSetInit(false));
-            dispatch(sliceSetHead(false));
-            dispatch(sliceReset());
-        }
     }
     const onGetInit = (payload : Stomp.Message) => {
         dispatch(sliceSetInit(true))

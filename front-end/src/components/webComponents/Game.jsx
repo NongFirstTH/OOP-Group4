@@ -7,6 +7,7 @@ import useWebSocket from "../../customHook/useWebSocket.ts";
 import {
     selectPlan,
     setPlan as sliceSetPlan,
+    setOK
 } from "../../store/Slices/planSlice.ts";
 import Plan from './Plan.jsx';
 import Timer from './Timer.jsx';
@@ -43,6 +44,12 @@ function Game({ isDevise, isTurn, turn }) {
         setIsRevise(false);
     };
 
+    const onBack = () => {
+        setIsRevise(false);
+        dispatch(sliceSetPlan(planState.prev));
+        dispatch(setOK(null));
+    };
+
     const onTimeOut = () => {
         onExecute(); // Call onExecute when the timer runs out
     };
@@ -50,6 +57,8 @@ function Game({ isDevise, isTurn, turn }) {
     const togglePlanVisibility = () => {
         setIsPlanVisible(!isPlanVisible);
     };
+
+    const showRevise = isRevise?true:planState.state;
 
     return (
         <div style={{ display: 'flex' }}>
@@ -71,13 +80,13 @@ function Game({ isDevise, isTurn, turn }) {
                                     <form>
                                         <div className="form-group">
                                             <label htmlFor="plan" className="form-label" style={{ fontSize: "25px", fontWeight: "bold" }}>Plan:</label>
-                                            <Plan plan={plan} setPlan={setPlan} isDisable={!isRevise} />
+                                            <Plan plan={plan} setPlan={setPlan} isDisable={!showRevise} state={planState.state} />
                                         </div>
                                     </form>
                                     {isTurn && (
                                         <>
-                                            {!isRevise && <Turn onExecute={onExecute} onRevise={onRevise}/>}
-                                            {isRevise && <Revise onSubmitPlan={onSubmitPlan}/>}
+                                            {!showRevise && <Turn onExecute={onExecute} onRevise={onRevise}/>}
+                                            {showRevise && <Revise onSubmitPlan={onSubmitPlan} onBack={onBack}/>}
                                         </>
                                     )}
                                 </>

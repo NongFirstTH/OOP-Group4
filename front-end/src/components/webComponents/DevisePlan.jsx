@@ -18,8 +18,13 @@ function DevisePlan() {
     const [plan, setPlan] = useState(planState.plan || '');
     const { devisePlan } = useWebSocket();
     const [isPlanVisible, setIsPlanVisible] = useState(true);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const onSubmit = () => {
+        if (!planState.state) {
+            setAlertMessage('Plan is not valid. Please revise and try again.');
+            return;
+        }
         dispatch(sliceSetPlan(plan));
         devisePlan(plan);
     };
@@ -39,13 +44,13 @@ function DevisePlan() {
                 {isPlanVisible && (
                     <div className="form-group">
                         <label htmlFor="plan" style={{ fontSize: "25px", fontWeight: "bold" }}>Plan:</label>
-                        <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
+                        <Plan plan={plan} setPlan={setPlan} isDisable={!planState.state} state={planState.state}/>
                     </div>
                 )}
             </form>
             {isPlanVisible && (
                 <div style={{ marginTop: '10px' }}> {/* Added space */}
-                    <button className="green-button" type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
+                    <button className="green-button" type="submit" onClick={onSubmit} disabled={!planState.state}>Submit Plan</button>
                 </div>
             )}
             <div style={{ marginTop: '10px' }}> {/* Added space */}
