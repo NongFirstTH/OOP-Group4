@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import {setIsConnected, appendMessage,setStompClient, setHead as sliceSetHead} from "../store/Slices/webSocketSlice.ts";
 import {selectWebSocket} from "../store/Slices/webSocketSlice.ts";
 import {setTerritory as sliceSetTerritory} from "../store/Slices/territorySlice.ts";
-import {setTurn as sliceSetTurn, setGameState as sliceSetGameState} from "../store/Slices/webSocketSlice.ts";
+import {setTurn as sliceSetTurn, setGameState as sliceSetGameState, setWinner as sliceSetWinner} from "../store/Slices/webSocketSlice.ts";
 import {setInit as sliceSetInit, setConfig as sliceSetConfig} from "../store/Slices/configSlice.ts";
 import {setUsernames as sliceSetUsernames, selectUsername} from "../store/Slices/usernameSlice.ts";
 import {setOK as sliceSetOK, reset as sliceReset} from "../store/Slices/planSlice.ts";
@@ -118,12 +118,6 @@ function useWebSocket(){
         }
     }
 
-//    function getTerritory (){
-//        if (webSocket.stompClient && webSocket.stompClient.connected) {
-//            webSocket.stompClient.send("/app/game.getTerritory", {}, JSON.stringify({}));
-//        }
-//    }
-
     const onConnected = (stompClient : Stomp.Client) => {
         stompClient.subscribe('/topic/config', onConfig);
         stompClient.subscribe('/topic/territory', onGetTerritory);
@@ -133,6 +127,7 @@ function useWebSocket(){
         stompClient.subscribe('/topic/init', onGetInit);
         stompClient.subscribe('/topic/addPlayer', onAddPlayer);
         stompClient.subscribe('/topic/restart', onRestart);
+        stompClient.subscribe('/topic/winner', onWinner);
         dispatch(setIsConnected(true))
         dispatch(setStompClient(stompClient))
     }
@@ -168,11 +163,9 @@ function useWebSocket(){
     const onRestart = (payload : Stomp.Message) => {
         window.location.reload();
     }
-//     const count = (count : String) => {
-//         stompClient.subscribe('/topic/public', onMessageReceived);
-//         stompClient.send("/app/chat.getCount", {}, JSON.stringify({count : getCount}));
-//         dispatch(setCount(count))
-//     }
+    const onWinner = (payload : Stomp.Message) => {
+        dispatch(sliceSetWinner(JSON.parse(payload.body)))
+    }
 
     return {gameConfig,addPlayer,getPlayers,devisePlan,revisePlan,executePlan,nextTurn,connect,start,setState,restart}
 }

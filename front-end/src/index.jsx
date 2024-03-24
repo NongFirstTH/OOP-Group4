@@ -5,9 +5,9 @@ import AddPlayer from "./AddPlayer.jsx";
 import Start from "./components/webComponents/Start.tsx";
 import Map from "./components/webComponents/Map.jsx";
 import DevisePlan from "./components/webComponents/DevisePlan.jsx";
-import Wait from "./components/webComponents/Wait.jsx";
-import Turn from "./components/webComponents/Turn.jsx";
+import Game from "./components/webComponents/Game.jsx";
 import End from "./components/webComponents/End.jsx";
+import NotIn from "./components/webComponents/NotIn.jsx";
 import { useAppSelector } from "./store/hooks.ts";
 import { selectWebSocket } from "./store/Slices/webSocketSlice.ts";
 import { selectConfig } from "./store/Slices/configSlice.ts";
@@ -18,57 +18,28 @@ const Index = () => {
   const configState = useAppSelector(selectConfig);
   const usernameState = useAppSelector(selectUsername);
 
-  let content;
-
   if (!webSocketState.isStart) {
-    content = <Start />;
+    return <Start />;
   } else {
     switch (webSocketState.gameState) {
       case 'START':
-        content = <Start />;
-        break;
+        return <Start />;
       case 'INIT':
-        content = configState.init ? <AddPlayer /> : <Init />;
-        break;
+        return configState.init ? <AddPlayer /> : <Init />;
       case 'ADD':
-        content = <AddPlayer />;
-        break;
+        return <AddPlayer />;
       case 'END' :
-        content = <End />;
-        break
+        return <End />;
       default:
-        content = (
-          <div style={{ display: 'flex' }}>
-            <div style={{
-                width: "100%", // Set your desired width
-                height: "100%", // Set your desired height
-              }}>
-              {(() => {
-                switch (webSocketState.gameState) {
-                  case 'DEVISE':
-                    return usernameState.username ? <DevisePlan /> : <></>;
-                  case 'TURN':
-                    return webSocketState.turn === usernameState.username ? <Turn /> : <Wait />;
-                  case 'REVISE':
-                    return webSocketState.turn === usernameState.username ? <Turn /> : <Wait />;
-                  default:
-                    return null;
-                }
-              })()}
-            </div>
-            <div style={{
-                width: "100%", // Set your desired width
-                height: "100%", // Set your desired height
-              }}>
-               <Map />
-            </div>
-          </div>
+        return (
+            usernameState.username ? (
+                <Game isDevise={webSocketState.gameState === 'DEVISE'} isTurn={webSocketState.turn === usernameState.username} turn={webSocketState.turn} />
+            ) : (
+                <NotIn/>
+            )
         );
-        break;
     }
   }
-
-  return content;
 };
 
 export default Index;

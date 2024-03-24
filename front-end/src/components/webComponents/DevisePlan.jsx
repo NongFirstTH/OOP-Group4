@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../../forApp.css';
 import { useDispatch } from "react-redux";
-import { setGameState } from "../../store/Slices/webSocketSlice.ts";
 import { selectConfig } from "../../store/Slices/configSlice.ts";
 import { useAppSelector } from "../../store/hooks.ts";
 import useWebSocket from "../../customHook/useWebSocket.ts";
@@ -34,12 +33,7 @@ function DevisePlan() {
     };
 
     return (
-        <div style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            Height: '100%'
-        }}>
-            <div className="app-container">
+        <>
                 <Timer initialTime={configState.init_plan_sec} onTimeOut={onTimeOut} />
                 <form>
                     {isPlanVisible && (
@@ -57,8 +51,7 @@ function DevisePlan() {
                 <div style={{ marginTop: '10px' }}> {/* Added space */}
                     <button onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
                 </div>
-            </div>
-        </div>
+        </>
     );
 }
 

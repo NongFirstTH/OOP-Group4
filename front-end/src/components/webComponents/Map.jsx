@@ -8,10 +8,12 @@ import "./styles/App.css";
 import { useAppSelector } from "../../store/hooks.ts";
 import { selectTerritory } from "../../store/Slices/territorySlice.ts";
 import { selectWebSocket } from "../../store/Slices/webSocketSlice.ts";
+import { selectUsername } from "../../store/Slices/usernameSlice.ts";
 
 const Map = () => {
   const webSocketState = useAppSelector(selectWebSocket);
   const territoryState = useAppSelector(selectTerritory);
+  const usernameState = useAppSelector(selectUsername);
   const [zoomLevel, setZoomLevel] = useState(1);
 
   const mappedArray = territoryState.territory.map((innerArray, i) => {
@@ -24,9 +26,11 @@ const Map = () => {
     setZoomLevel(newZoomLevel);
   };
 
+  const budget = territoryState.players.find(arr => arr.name === usernameState.username).budget
+
   return (
     <div className="map-container">
-      <Status playerName="Player 1" budget={1000} deposit={500} />
+      <Status playerName={usernameState.username} budget={budget} deposit={500} />
       <div className="canvas-slider-container">
         <div
           className="canvas-container"
