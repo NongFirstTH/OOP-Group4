@@ -19,7 +19,23 @@ function Timer({ initialTime, onTimeOut }) {
     }
   }, [time, onTimeOut, timeOutCalled]);
 
-  return <div>{time} sec</div>;
+  return (
+    <div className="timer-container" style={{ 
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      
+    }}>
+      <div style={{ 
+        fontSize: "25px", 
+        backgroundColor: "#891652", 
+        padding: "5px 20px", 
+        borderRadius: "20px" 
+      }}>
+        {time} sec
+      </div>
+    </div>
+  );
 }
 
 export default Timer;

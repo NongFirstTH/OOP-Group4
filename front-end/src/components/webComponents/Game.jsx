@@ -27,7 +27,7 @@ function Game({ isDevise, isTurn, turn }) {
 
     useEffect(() => {
         setPlan(planState.plan);
-      }, [planState.plan]);
+    }, [planState.plan]);
 
     const onRevise = () => {
         setIsRevise(true);
@@ -79,7 +79,7 @@ function Game({ isDevise, isTurn, turn }) {
                                 <>
                                     <form>
                                         <div className="form-group">
-                                            <label htmlFor="plan" className="form-label">Plan:</label>
+                                            <label htmlFor="plan" className="form-label" style={{ fontSize: "25px", fontWeight: "bold" }}>Plan:</label>
                                             <Plan plan={plan} setPlan={setPlan} isDisable={!showRevise} state={planState.state} />
                                         </div>
                                     </form>
@@ -92,7 +92,7 @@ function Game({ isDevise, isTurn, turn }) {
                                 </>
                             )}
                             <div style={{ marginTop: '10px' }}> {/* Added space */}
-                                <button class="gray-button"onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                                <button className="gray-button" onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
                             </div>
                         </>
                     )}

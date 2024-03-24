@@ -43,7 +43,7 @@ function DevisePlan() {
             <form>
                 {isPlanVisible && (
                     <div className="form-group">
-                        <label htmlFor="plan">Plan:</label>
+                        <label htmlFor="plan" style={{ fontSize: "25px", fontWeight: "bold" }}>Plan:</label>
                         <Plan plan={plan} setPlan={setPlan} isDisable={!planState.state} state={planState.state}/>
                     </div>
                 )}

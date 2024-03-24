@@ -14,7 +14,7 @@ function Plan({ plan, setPlan, isDisable, state }) {
                 required
                 rows={12}
                 disabled={isDisable}
-                style={{width:"400px", height:"500px",minWidth: '400px',fontSize: '28px', minHeight:"300px"}}
+                style={{width:"400px", height:"490px",minWidth: '400px',fontSize: '20px', minHeight:"300px"}}
             />
             <div style={{ marginTop: '10px', minHeight: '2px' }}>
                 {state && state.trim() !== '' && <div className={`alert active`}>{state}</div>}
