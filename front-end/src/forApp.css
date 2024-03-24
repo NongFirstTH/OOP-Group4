@@ -210,32 +210,3 @@ button:disabled {
   display: inline-block;
   margin-right: 20px;
 }
-
-.confetti-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Prevent confetti from blocking clicks */
-}
-
-.confetti {
-  width: 10px;
-  height: 10px;
-  background-color: #f00; /* Adjust color as desired */
-  position: absolute;
-  border-radius: 50%;
-  animation: confetti-fall 2s ease-out infinite;
-}
-
-@keyframes confetti-fall {
-  0% {
-      transform: translateY(0) rotate(45deg);
-      opacity: 1;
-  }
-  100% {
-      transform: translateY(100vh) rotate(45deg);
-      opacity: 0;
-  }
-}
