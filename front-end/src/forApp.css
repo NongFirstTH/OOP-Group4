@@ -239,3 +239,12 @@ button:disabled {
       opacity: 0;
   }
 }
+.alert {
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.alert.active {
+    background-color: #f44336; /* Red background color */
+}

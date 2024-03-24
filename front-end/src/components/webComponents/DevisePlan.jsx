@@ -18,8 +18,13 @@ function DevisePlan() {
     const [plan, setPlan] = useState(planState.plan || '');
     const { devisePlan } = useWebSocket();
     const [isPlanVisible, setIsPlanVisible] = useState(true);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const onSubmit = () => {
+        if (!planState.state) {
+            setAlertMessage('Plan is not valid. Please revise and try again.');
+            return;
+        }
         dispatch(sliceSetPlan(plan));
         devisePlan(plan);
     };
@@ -34,23 +39,23 @@ function DevisePlan() {
 
     return (
         <>
-                <Timer initialTime={configState.init_plan_sec} onTimeOut={onTimeOut} />
-                <form>
-                    {isPlanVisible && (
-                        <div className="form-group">
-                            <label htmlFor="plan">Plan:</label>
-                            <Plan plan={plan} setPlan={setPlan} isDisable={planState.isOK}/>
-                        </div>
-                    )}
-                </form>
+            <Timer initialTime={configState.init_plan_sec} onTimeOut={onTimeOut} />
+            <form>
                 {isPlanVisible && (
-                    <div style={{ marginTop: '10px' }}> {/* Added space */}
-                        <button class="green-button" type="submit" onClick={onSubmit} disabled={planState.isOK}>Submit Plan</button>
+                    <div className="form-group">
+                        <label htmlFor="plan">Plan:</label>
+                        <Plan plan={plan} setPlan={setPlan} isDisable={!planState.state} state={planState.state}/>
                     </div>
                 )}
+            </form>
+            {isPlanVisible && (
                 <div style={{ marginTop: '10px' }}> {/* Added space */}
-                    <button class="gray-button" onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                    <button className="green-button" type="submit" onClick={onSubmit} disabled={!planState.state}>Submit Plan</button>
                 </div>
+            )}
+            <div style={{ marginTop: '10px' }}> {/* Added space */}
+                <button className="gray-button" onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+            </div>
         </>
     );
 }
