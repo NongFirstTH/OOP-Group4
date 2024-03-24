@@ -1,6 +1,7 @@
 package com.websocket.demo.Grammar.Parse;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 interface Tokenizer {
     /**
@@ -41,6 +42,7 @@ interface Tokenizer {
 
 public class PlanTokenizer implements Tokenizer{
     private final String src;
+    private String prev;
     private String next;
     private int pos;
 
@@ -83,11 +85,14 @@ public class PlanTokenizer implements Tokenizer{
     public void consume(String s) throws SyntaxError {
         if (peek(s))
             consume();
+        else if (s.equals("="))
+            throw new SyntaxError("wrong command: "+prev);
         else
-            throw new SyntaxError(s + " expected");
+            throw new SyntaxError(s + " expected: "+prev);
     }
 
     private void computeNext() throws SyntaxError {
+        prev = next;
         StringBuilder s = new StringBuilder();
 
         while (pos < src.length() && isIgnore(src.charAt(pos))) pos++;  // ignore whitespace
