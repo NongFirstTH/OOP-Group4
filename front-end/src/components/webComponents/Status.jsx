@@ -2,9 +2,7 @@ import "../../forApp.css";
 import React from 'react';
 
 function Status({ playerName, budget, deposit }) {
-    // Calculate the width percentage for each status item
-    const itemWidth = 100 / 3; // Assuming there are 3 items
-
+    const itemWidth = 100 / 3;
     return (
         <div className="status app-container" style={{ whiteSpace: "nowrap", width: "100%" }}>
             <div className="status-item" style={{ backgroundColor: "#1B1A55", display: "inline-block", width: `${itemWidth}%`, marginRight: "0" }}>
