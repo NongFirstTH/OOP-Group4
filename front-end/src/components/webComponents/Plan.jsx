@@ -12,7 +12,7 @@ function Plan({ plan, setPlan, isDisable }) {
             required
             rows={12}
             disabled={isDisable}
-            style={{width:"400px", height:"500px",minWidth: '400px',fontSize: '28px', minHeight:"300px"}}
+            style={{width:"400px", height:"490px",minWidth: '400px',fontSize: '20px', minHeight:"300px"}}
         />
     );
 }
