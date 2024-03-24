@@ -5,7 +5,6 @@ import AddPlayer from "./AddPlayer.jsx";
 import Start from "./components/webComponents/Start.tsx";
 import Map from "./components/webComponents/Map.jsx";
 import DevisePlan from "./components/webComponents/DevisePlan.jsx";
-import RevisePlan from "./components/webComponents/RevisePlan.jsx";
 import Wait from "./components/webComponents/Wait.jsx";
 import Turn from "./components/webComponents/Turn.jsx";
 import End from "./components/webComponents/End.jsx";
@@ -40,7 +39,10 @@ const Index = () => {
       default:
         content = (
           <div style={{ display: 'flex' }}>
-            <div style={{ flex: 1 }}>
+            <div style={{
+                width: "100%", // Set your desired width
+                height: "100%", // Set your desired height
+              }}>
               {(() => {
                 switch (webSocketState.gameState) {
                   case 'DEVISE':
@@ -54,7 +56,10 @@ const Index = () => {
                 }
               })()}
             </div>
-            <div style={{ flex: 1 }}>
+            <div style={{
+                width: "100%", // Set your desired width
+                height: "100%", // Set your desired height
+              }}>
                <Map />
             </div>
           </div>

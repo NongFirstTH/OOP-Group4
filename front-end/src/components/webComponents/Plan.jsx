@@ -1,4 +1,4 @@
-                import React from 'react';
+import React from 'react';
 
 function Plan({ plan, setPlan, isDisable }) {
     return (
@@ -10,9 +10,9 @@ function Plan({ plan, setPlan, isDisable }) {
             value={plan}
             onChange={(e) => setPlan(e.target.value)}
             required
-            rows={15}
+            rows={12}
             disabled={isDisable}
-            style={{ width: '500px', fontSize: '28px' }}
+            style={{width:"400px", height:"500px",minWidth: '400px',fontSize: '28px', minHeight:"300px"}}
         />
     );
 }
