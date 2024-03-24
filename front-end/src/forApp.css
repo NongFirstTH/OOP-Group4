@@ -129,3 +129,22 @@ button:disabled {
   justify-content: center;
   align-items: center;
 }
+
+.parent-container {
+  display: flex; /* Enable flexbox layout */
+  flex-direction: row; /* Arrange elements horizontally */
+}
+
+.status-and-canvas-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-container {
+  width: 100%; /* Take up remaining width */
+}
+
+.status-item {
+  display: inline-block; /* or use inline-flex */
+  margin-right: 20px; /* Adjust margin as needed */
+}
