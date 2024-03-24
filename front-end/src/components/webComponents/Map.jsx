@@ -30,7 +30,7 @@ const Map = () => {
 
   return (
     <div className="map-container">
-      <Status playerName={usernameState.username} budget={budget} deposit={500} />
+      <Status playerName={usernameState.username} budget={budget}/>
       <div className="canvas-slider-container">
         <div
           className="canvas-container"

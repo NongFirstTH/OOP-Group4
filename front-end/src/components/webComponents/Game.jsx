@@ -83,7 +83,7 @@ function Game({ isDevise, isTurn, turn }) {
                                 </>
                             )}
                             <div style={{ marginTop: '10px' }}> {/* Added space */}
-                                <button onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
+                                <button class="gray-button"onClick={togglePlanVisibility}>{isPlanVisible ? "Hide Plan" : "Show Plan"}</button>
                             </div>
                         </>
                     )}

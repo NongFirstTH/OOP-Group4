@@ -66,11 +66,11 @@ function AddPlayer() {
             <div>
                 <img src="/img/newlogo.png" alt="Game" className="mb-8" />
             </div>
-            <h1>Create City Crew</h1>
+            <h1>Welcome to UPBEAT</h1>
             <div className="container flex flex-cols">
                 <div className="creation-section">
                     <form onSubmit={handleCharacterCreation}>
-                        <label htmlFor="name">Character Name: </label>
+                        <label htmlFor="name">Name:</label>
                         <input
                             type="text"
                             id="name"
@@ -79,7 +79,7 @@ function AddPlayer() {
                             disabled={isConfirmed}
                             onChange={(e) => setPlayer(e.target.value)}
                         />
-                        <button type="submit" disabled={isConfirmed}>Create Player</button>
+                        <button class="blue-button" type="submit" disabled={isConfirmed}>Confirm</button>
                     </form>
                 </div>
                 {/* <div className="players-section">
@@ -97,7 +97,7 @@ function AddPlayer() {
             </div>
             <div className="button-container fixed bottom-0 flex justify-between w-full">
                 <div className="button">
-                    {webSocketState.isHead&&<button onClick={onClickStart} disabled={!usernameState.username}>Start</button>}
+                    {webSocketState.isHead&&<button onClick={onClickStart} disabled={!usernameState.username} class="green-button">Start</button>}
                 </div>
             </div>
         </div>)
