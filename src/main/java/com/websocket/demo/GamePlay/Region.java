@@ -38,7 +38,7 @@ public class Region implements RegionI {
         return deposit * (calculatedInterestRate / 100.0);
     }
 
-    private double interestRateCal(double baseInterestRate, int currentTurn) {
+    double interestRateCal(double baseInterestRate, int currentTurn) {
         return baseInterestRate * Math.log10(deposit) * Math.log(currentTurn);
     }
 
