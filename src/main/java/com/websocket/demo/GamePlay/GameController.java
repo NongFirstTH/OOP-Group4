@@ -1,6 +1,6 @@
 package com.websocket.demo.GamePlay;
 import com.websocket.demo.GamePlay.Wrapper.*;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;

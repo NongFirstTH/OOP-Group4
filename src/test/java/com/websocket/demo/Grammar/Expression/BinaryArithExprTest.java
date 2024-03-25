@@ -2,7 +2,7 @@ package com.websocket.demo.Grammar.Expression;
 
 import com.websocket.demo.GamePlay.Game;
 import com.websocket.demo.GamePlay.GameFactory;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.ExpressionParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;

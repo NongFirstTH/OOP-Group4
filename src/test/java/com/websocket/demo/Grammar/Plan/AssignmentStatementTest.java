@@ -3,13 +3,12 @@ package com.websocket.demo.Grammar.Plan;
 import com.websocket.demo.GamePlay.Game;
 import com.websocket.demo.GamePlay.GameFactory;
 import com.websocket.demo.GamePlay.Player;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Expression.Expression;
 import com.websocket.demo.Grammar.Expression.Variable;
 import com.websocket.demo.Grammar.Parse.ExpressionParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
-import com.websocket.demo.Grammar.Plan.AssignmentStatement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

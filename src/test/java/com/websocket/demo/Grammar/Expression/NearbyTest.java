@@ -1,7 +1,6 @@
 package com.websocket.demo.Grammar.Expression;
 import com.websocket.demo.GamePlay.Game;
-import com.websocket.demo.Grammar.Expression.EvalError;
-import com.websocket.demo.Grammar.Expression.Nearby;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
 import com.websocket.demo.Grammar.Plan.Direction;
 import org.junit.jupiter.api.Test;

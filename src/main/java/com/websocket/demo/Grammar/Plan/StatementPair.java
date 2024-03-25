@@ -1,7 +1,7 @@
 package com.websocket.demo.Grammar.Plan;
 
 import com.websocket.demo.GamePlay.Game;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 
 public record StatementPair(Plan p1, Plan p2) implements Plan {
     @Override

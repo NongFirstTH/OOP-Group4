@@ -4,9 +4,8 @@ import com.websocket.demo.GamePlay.Game;
 import com.websocket.demo.GamePlay.GameFactory;
 import com.websocket.demo.GamePlay.Player;
 import com.websocket.demo.GamePlay.Territory;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
-import com.websocket.demo.Grammar.Plan.MoveCommand;
 import org.junit.jupiter.api.Test;
 
 import static com.websocket.demo.Grammar.Plan.Direction.*;

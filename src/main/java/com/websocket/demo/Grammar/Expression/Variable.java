@@ -1,6 +1,7 @@
 package com.websocket.demo.Grammar.Expression;
 
 import com.websocket.demo.GamePlay.Game;
+import com.websocket.demo.Grammar.EvalError;
 
 import java.util.Random;
 

@@ -1,10 +1,7 @@
 package com.websocket.demo.GamePlay;
 
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
-import com.websocket.demo.GamePlay.Player;
-import com.websocket.demo.GamePlay.Region;
-import com.websocket.demo.GamePlay.Territory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,5 +1,5 @@
 package com.websocket.demo.GamePlay;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Plan.Direction;
 
 interface CityCrewI {

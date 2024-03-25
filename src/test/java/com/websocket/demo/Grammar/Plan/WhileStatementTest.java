@@ -2,16 +2,13 @@ package com.websocket.demo.Grammar.Plan;
 
 import com.websocket.demo.GamePlay.Game;
 import com.websocket.demo.GamePlay.GameFactory;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Expression.Expression;
 import com.websocket.demo.Grammar.Expression.IntLit;
 import com.websocket.demo.Grammar.Expression.Variable;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
-import com.websocket.demo.Grammar.Plan.NoStatement;
-import com.websocket.demo.Grammar.Plan.Plan;
-import com.websocket.demo.Grammar.Plan.WhileStatement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

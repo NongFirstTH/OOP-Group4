@@ -1,6 +1,7 @@
 package com.websocket.demo.Grammar.Expression;
 
 import com.websocket.demo.GamePlay.Game;
+import com.websocket.demo.Grammar.EvalError;
 
 public record BinaryArithExpr(Expression left, String op, Expression right) implements Expression {
     @Override
