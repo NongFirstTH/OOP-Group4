@@ -235,6 +235,7 @@ export default function Canvas(props) {
     // ctx.fillText(h.r, center.x - 10, center.y);
     // ctx.fillText(h.q, center.x + 7, center.y);
   };
+  
   return (
     <div>
       <canvas ref={canvasRef} width={width} height={height}></canvas>
