@@ -3,7 +3,7 @@ package com.websocket.demo.GamePlay;
 import com.websocket.demo.GamePlay.Wrapper.InitGame;
 import com.websocket.demo.GamePlay.Wrapper.PlayerWrap;
 import com.websocket.demo.GamePlay.Wrapper.TerritoryWrap;
-import com.websocket.demo.Grammar.Expression.EvalError;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Parse.PlanParser;
 import com.websocket.demo.Grammar.Parse.PlanTokenizer;
 import com.websocket.demo.Grammar.Parse.SyntaxError;
@@ -12,29 +12,107 @@ import com.websocket.demo.Grammar.Plan.Plan;
 import java.util.*;
 
 interface GameI {
+
+    /**
+     * Returns the player in the current turn if there are more than 0 players, otherwise null.
+     *
+     * @return the player in the current turn, or null if there are no players
+     */
     Player getPlayer();
+
+    /**
+     * Returns a set of players' names.
+     *
+     * @return a set of players' names
+     */
     Set<String> getPlayers();
+
+    /**
+     * Returns the territory.
+     *
+     * @return the territory
+     */
     Territory getTerritory();
+
+    /**
+     * Returns the maximum deposit.
+     *
+     * @return the maximum deposit
+     */
     long getMaxDeposit();
 
+    /**
+     * Effects: Adds a player with the given name, creates a city center, sets budget, and city center deposit.
+     * The city center location is randomly generated within the game's territory, ensuring it is unique and not
+     * already occupied by another player's city center.
+     *
+     * @param name the name of the player being added
+     */
     void addPlayer(String name);
 
+    /**
+     * Effects: Adds a player with the given name, row, col, and plan (for testing purposes).
+     *
+     * @param name the name of the player being added
+     * @param row  the row of the player's city center
+     * @param col  the column of the player's city center
+     * @param plan the player's plan
+     */
     void addPlayerToTestOnly(String name, int row, int col, Plan plan);
 
+    /**
+     * Effects: Moves to the next turn.
+     */
     void nextTurn();
 
+    /**
+     * Effects: Sets a plan for the player with the given name.
+     *
+     * @param name the name of the player
+     * @param plan the player's plan
+     */
     void devisePlan(String name, Plan plan);
 
+    /**
+     * Sets a revised plan for the player's current turn and deducts the revise cost from the player's budget.
+     *
+     * @param plan the revised plan to be set
+     */
     void revisePlan(Plan plan);
 
+    /**
+     * Executes the current player's plan.
+     *
+     * @return true if there is more than one player remaining after execution, false otherwise
+     * @throws EvalError if there is an error evaluating the plan
+     */
     boolean executePlan() throws EvalError;
 
+    /**
+     * Handles a player losing the game.
+     *
+     * @param player the player who lost
+     */
     void playerLost(Player player);
 
+    /**
+     * Returns the base interest rate.
+     *
+     * @return the base interest rate
+     */
     long getBaseInterest();
 
+    /**
+     * Returns the game map along with the status of each player.
+     * The game map includes all regions in the territory, indicating the owner's name (if there is one) and the deposit.
+     * The status of each player includes their name, budget, current row and column position,
+     * as well as their city center's row and column position.
+     *
+     * @return the game map along with the status of each player
+     */
     TerritoryWrap getMap();
 }
+
 
 public class Game implements GameI {
     private final long row;
@@ -203,6 +281,5 @@ public class Game implements GameI {
         int lost = players.indexOf(player);
         players.remove(player);
         turn = lost<turn ? turn-1 : turn;
-//        System.out.println("\t"+player.getName()+" lost");
     }
 }

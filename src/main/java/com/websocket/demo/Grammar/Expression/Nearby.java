@@ -1,6 +1,7 @@
 package com.websocket.demo.Grammar.Expression;
 
 import com.websocket.demo.GamePlay.Game;
+import com.websocket.demo.Grammar.EvalError;
 import com.websocket.demo.Grammar.Plan.Direction;
 
 public record Nearby(Direction direction) implements Expression {

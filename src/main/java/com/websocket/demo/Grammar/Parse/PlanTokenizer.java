@@ -1,23 +1,22 @@
 package com.websocket.demo.Grammar.Parse;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 interface Tokenizer {
     /**
-     * Returns true if there is
+     * @return true if there is
      * more token
      */
     boolean hasNextToken();
 
     /**
-     * Returns the next token
+     * @return the next token
      * in the input stream.
      */
     String peek();
 
     /**
-     * Returns true if
+     * @return true if
      * the next token (if any) is s.
      */
     boolean peek(String s);
