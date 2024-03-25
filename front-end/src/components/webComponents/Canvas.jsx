@@ -228,14 +228,14 @@ export default function Canvas(props) {
   const drawHexCoordinates = (canvasID, center,map) => {
     const ctx = canvasID.getContext("2d");
     ctx.fillStyle = "red";
-    ctx.font = "normal 50px Verdana";
+    ctx.font = "normal 35px Verdana";
     ctx.textAlign = "center";
     ctx.strokeStyle = "yellow";
     ctx.strokeText(map.element.deposit, center.x, center.y+11,hexSize);
     // ctx.fillText(h.r, center.x - 10, center.y);
     // ctx.fillText(h.q, center.x + 7, center.y);
   };
-  
+
   return (
     <div>
       <canvas ref={canvasRef} width={width} height={height}></canvas>

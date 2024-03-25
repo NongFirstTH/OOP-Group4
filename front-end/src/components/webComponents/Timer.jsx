@@ -28,7 +28,7 @@ function Timer({ initialTime, onTimeOut }) {
     }}>
       <div style={{ 
         fontSize: "25px", 
-        backgroundColor: "#891652", 
+        backgroundColor: "#F3432E", 
         padding: "5px 20px", 
         borderRadius: "20px" 
       }}>

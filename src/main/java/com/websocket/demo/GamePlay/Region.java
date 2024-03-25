@@ -57,7 +57,8 @@ public class Region implements RegionI {
     public long beCollected(long amount, Game g) {
         if(amount <= deposit){
             deposit -= amount;
-            if(deposit == 0){
+            if(deposit < 1){
+                deposit = 0;
                 owner.lostRegion(this,g);
                 owner = null;
             }
@@ -70,7 +71,7 @@ public class Region implements RegionI {
     @Override
     public void beShot(long amount, Game g) {
         deposit -= amount;
-        if(deposit <= 0){
+        if(deposit < 1){
             deposit = 0;
             if(owner != null){
                 owner.lostRegion(this, g);

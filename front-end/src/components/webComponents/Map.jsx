@@ -38,7 +38,7 @@ const Map = () => {
             width: "800px", // Adjusted width considering the status bar
             height: "585px", // Set your desired height
             overflow: "auto", // Enable scrolling
-            border: "1px solid #ccc", // Add a border for visualization
+            // border: "1px solid #ccc", // Add a border for visualization
           }}
         >
           <Canvas mapArray={mappedArray} zoomLevel={zoomLevel} />
