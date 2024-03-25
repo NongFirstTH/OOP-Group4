@@ -227,13 +227,15 @@ export default function Canvas(props) {
 
   const drawHexCoordinates = (canvasID, center,map) => {
     const ctx = canvasID.getContext("2d");
-    ctx.fillStyle = "black";
-    ctx.font = "bold 20px Arial";
+    ctx.fillStyle = "red";
+    ctx.font = "normal 50px Verdana";
     ctx.textAlign = "center";
-    ctx.fillText(map.element.deposit, center.x, center.y);
+    ctx.strokeStyle = "yellow";
+    ctx.strokeText(map.element.deposit, center.x, center.y+11,hexSize);
     // ctx.fillText(h.r, center.x - 10, center.y);
     // ctx.fillText(h.q, center.x + 7, center.y);
   };
+  
   return (
     <div>
       <canvas ref={canvasRef} width={width} height={height}></canvas>
